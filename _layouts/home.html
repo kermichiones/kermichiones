@@ -1,0 +1,28 @@
+---
+layout: default
+---
+
+<div style="border: 2px solid #000; background: var(--acid-green); padding: 10px; margin-bottom: 20px; text-align: center; box-shadow: 5px 5px 0 #000;">
+    <b>⚠ DURUM GÜNCELLEMESİ ⚠</b><br>
+    {{ site.description | default: "Sistem Online. Yeni içerikler yükleniyor..." }}
+</div>
+
+{% for post in site.posts %}
+<article class="blog-entry">
+    <div class="entry-title">
+        <a href="{{ post.url }}" style="color: #000; text-decoration: none; border: none; background: transparent;">
+            <span>★ {{ post.title }}</span>
+        </a>
+        <span class="entry-date">{{ post.date | date: "%d %B %Y" }}</span>
+    </div>
+    <div class="entry-body">
+        {{ post.excerpt }}
+        
+        <div style="margin-top: 15px; text-align: right;">
+            <a href="{{ post.url }}" class="btn-88" style="background: var(--deep-purple); display: inline-flex; width: auto; padding: 0 10px;">
+                DEVAMINI OKU >>
+            </a>
+        </div>
+    </div>
+</article>
+{% endfor %}

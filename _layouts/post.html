@@ -2,27 +2,37 @@
 layout: default
 ---
 
-<!-- Bu şablon, tek bir blog yazısını (.md dosyasını) açtığında devreye girer.
-     Markdown içeriğini alır ve tasarımına uygun ".blog-entry" kutusu içine koyar. -->
-
 <article class="blog-entry">
     <div class="entry-title">
         <span>★ {{ page.title }}</span>
-        <span class="entry-date">{{ page.date | date: "%d.%m.%Y" }}</span>
+        <span class="entry-date">{{ page.date | date: "%d %B %Y" }}</span>
     </div>
     
-    <!-- "entry-body" class'ı sayesinde default.html'deki özel Markdown stillerini (h1, pre, code vb.) alır -->
     <div class="entry-body">
         {{ content }}
-    </div>
-    
-    <!-- Yazı sonu süsü -->
-    <div style="text-align: center; color: #ccc; margin-top: 20px;">
-        --- *** ---
-    </div>
-    
-    <!-- Geri dön butonu -->
-    <div style="padding: 10px; text-align: right;">
-        <a href="/" style="font-size: 12px;">[ ANA SAYFAYA DÖN ]</a>
+        
+        <hr style="border: 1px dashed #000; margin: 20px 0;">
+        
+        {% if page.music %}
+        <div style="background:#f0f0f0; border-left: 4px solid var(--hot-pink); padding: 5px; font-size: 12px;">
+            <i>Şu an dinliyorum: {{ page.music }}</i> 🎵
+        </div>
+        {% endif %}
     </div>
 </article>
+
+<div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+    {% if page.previous.url %}
+    <a href="{{ page.previous.url }}" class="btn-88" style="background: var(--border-color); width: auto; padding: 0 10px;">
+        << {{ page.previous.title | truncate: 15 }}
+    </a>
+    {% else %}
+    <span></span>
+    {% endif %}
+
+    {% if page.next.url %}
+    <a href="{{ page.next.url }}" class="btn-88" style="background: var(--border-color); width: auto; padding: 0 10px;">
+        {{ page.next.title | truncate: 15 }} >>
+    </a>
+    {% endif %}
+</div>

@@ -1,0 +1,31 @@
+---
+layout: default
+---
+
+<div class="blog-entry">
+    <div class="entry-title">
+        <span>★ PROJELERİM</span>
+        <span class="entry-date">WORK_LOG</span>
+    </div>
+    <div class="entry-body">
+        <p>Geliştirdiğim bazı oyunlar ve web projeleri:</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px;">
+            
+            {% for project in site.projects %} <div style="border: 2px solid #000; box-shadow: 4px 4px 0 var(--acid-green); background: #fff; padding: 5px; text-align: center;">
+                <div style="background: var(--border-color); height: 80px; display: flex; align-items: center; justify-content: center; color: #fff; margin-bottom: 5px; overflow: hidden;">
+                    {% if project.image %}
+                    <img src="{{ project.image }}" style="width: 100%; height: 100%; object-fit: cover; border: none; box-shadow: none; margin: 0;">
+                    {% else %}
+                    <span style="font-size: 30px;">⚡</span>
+                    {% endif %}
+                </div>
+                <h4 style="margin: 5px 0; font-size: 14px; border: none; background: none; padding: 0;">{{ project.title }}</h4>
+                <p style="font-size: 11px; margin: 0 0 10px 0;">{{ project.description }}</p>
+                <a href="{{ project.url }}" class="btn-88" style="width: 100%; background: var(--hot-pink);">İNCELE</a>
+            </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+</div>
