@@ -1,0 +1,8 @@
+title: Ahmet Arvas
+description: Rastgele Dusunceler
+baseurl: "" 
+url: "https://ahmetarvas.tr" # Burayı kendi kullanıcı adınla değiştir
+markdown: kramdown
+theme: minima # GitHub Pages varsayılanı, ama biz kendi layout'umuzu kullanıyoruz
+plugins:
+  - jekyll-feed

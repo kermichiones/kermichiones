@@ -1,0 +1,28 @@
+---
+layout: default
+---
+
+<!-- Bu şablon, tek bir blog yazısını (.md dosyasını) açtığında devreye girer.
+     Markdown içeriğini alır ve tasarımına uygun ".blog-entry" kutusu içine koyar. -->
+
+<article class="blog-entry">
+    <div class="entry-title">
+        <span>★ {{ page.title }}</span>
+        <span class="entry-date">{{ page.date | date: "%d.%m.%Y" }}</span>
+    </div>
+    
+    <!-- "entry-body" class'ı sayesinde default.html'deki özel Markdown stillerini (h1, pre, code vb.) alır -->
+    <div class="entry-body">
+        {{ content }}
+    </div>
+    
+    <!-- Yazı sonu süsü -->
+    <div style="text-align: center; color: #ccc; margin-top: 20px;">
+        --- *** ---
+    </div>
+    
+    <!-- Geri dön butonu -->
+    <div style="padding: 10px; text-align: right;">
+        <a href="/" style="font-size: 12px;">[ ANA SAYFAYA DÖN ]</a>
+    </div>
+</article>
