@@ -6,7 +6,7 @@ permalink: /hakkimda/
 
 <div class="blog-entry">
     <div class="entry-title">
-        <span>★ KİMLİK KARTI: USER_01</span>
+        <span>HAKKIMDA</span>
         <span class="entry-date">ID: AHMET_ARVAS</span>
     </div>
 
@@ -28,24 +28,18 @@ permalink: /hakkimda/
                 <p>
                     <b>Abdullah Gül Üniversitesi (AGÜ)</b><br>
                     Elektrik & Elektronik Mühendisliği (EEE) öğrencisi. <br>
-                    <span style="color: var(--hot-pink);">AESS</span> (Aviation and Space Systems Society) Yönetim Kurulu Başkanı.
                 </p>
-                <p>
-                    Merhaba Dünya! Ben Ahmet. Modern web'in sıkıcı beyaz sayfalarından kaçıp, kendi dijital mağaramı inşa ediyorum. Gömülü sistemler, C programlama ve eski donanımları hayata döndürmekle (evet, Nokia ekranları dahil) uğraşıyorum.
-                </p>
-                <p>
-                    <i>"Pembe rengi severim ama kodlarım siyahtır."</i>
-                </p>
+
             </div>
         </div>
 
         <hr style="border: 1px dashed #000; margin: 25px 0;">
 
         <h3 style="background: var(--acid-green); color: #000; padding: 5px; border: 2px solid #000; display: inline-block;">
-            :: TEKNİK YETENEKLER ::
+            :: TEKNİK ve OLMAYAN SEYLER HK. ::
         </h3>
 
-        <div style="margin-top: 15px; font-family: monospace;">
+        <div style="margin-top: 15px; font-family: monospace; display:none;">
             
             <div style="margin-bottom: 10px;">
                 <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 2px;">
@@ -86,20 +80,17 @@ permalink: /hakkimda/
             <div style="border: 2px solid #000; padding: 10px; box-shadow: 4px 4px 0 #ccc;">
                 <b style="background: #000; color: #fff; padding: 2px 5px;">DONANIM</b>
                 <ul class="pixel-list" style="margin-top: 10px; font-size: 13px;">
-                    <li>Raspberry Pi Pico</li>
-                    <li>nRF52840</li>
-                    <li>Eski LCD Ekranlar</li>
-                    <li>Anten Tasarımı</li>
+                    <li>Hm.. hepsinin yeri ayrı</li>
                 </ul>
             </div>
 
             <div style="border: 2px solid #000; padding: 10px; box-shadow: 4px 4px 0 #ccc;">
                 <b style="background: #000; color: #fff; padding: 2px 5px;">İLGİLER</b>
                 <ul class="pixel-list" style="margin-top: 10px; font-size: 13px;">
-                    <li>Mitoloji (Sümer)</li>
-                    <li>Felsefe (Platon)</li>
-                    <li>Doğal Tarım</li>
-                    <li>Clash Royale (Mega Knight!)</li>
+                    <li>Mitoloji</li>
+                    <li>Felsefe</li>
+                    <li>Doğa ve Tarım</li>
+                    <li>Mimari</li>
                 </ul>
             </div>
 
