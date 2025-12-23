@@ -1,4 +1,4 @@
 ---
 layout: home
-title: Basit Blog
+title: Ahmet Arvas's Blog
 ---
