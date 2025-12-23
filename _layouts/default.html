@@ -288,7 +288,7 @@
 
     <nav class="top-nav">
         <a href="/">ANA SAYFA</a>
-        <a href="/aylik/">Aylık</a>
+        <a href="/aylik/">AYLIK</a>
         <a href="/projeler/">PROJELERIM</a>
         <a href="/arsiv/">ARSIV</a>
         <a href="/hakkimda/">HAKKIMDA</a>
@@ -371,17 +371,20 @@
     }
     setInterval(() => {
         const counter = document.getElementById('counter');
-        if(Math.random() > 0.9) { let current = parseInt(counter.innerText); counter.innerText = String(current + 1).padStart(5, '0'); }
+        if(counter && Math.random() > 0.9) { 
+            let current = parseInt(counter.innerText); 
+            counter.innerText = String(current + 1).padStart(5, '0'); 
+        }
     }, 5000);
     setInterval(updateUI, 1000); updateUI();
 
-    // 2. Firebase Imports (CDN for GitHub Pages compatibility)
+    // 2. Firebase Imports
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
     import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
     import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-    // 3. Your Specific Firebase Config
+    // 3. Config
     const firebaseConfig = {
       apiKey: "AIzaSyDqRF27KZDPaqkfmL5twF_ZfhULarFGJmA",
       authDomain: "mywebsite-6c85a.firebaseapp.com",
@@ -392,9 +395,9 @@
       measurementId: "G-5LRBSW6C82"
     };
 
-    // 4. Initialize Firebase
+    // 4. Initialize
     const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app); // Added per your request
+    const analytics = getAnalytics(app);
     const db = getFirestore(app);
     const auth = getAuth(app);
 
@@ -404,42 +407,81 @@
     const sbName = document.getElementById('sb-name');
     const sbMsg = document.getElementById('sb-msg');
 
+    let allMessages = [];
+    let displayLimit = 20;
+
+    // --- SPAM KORUMASI İÇİN DEĞİŞKENLER ---
+    let lastSentTime = 0;        // Son mesaj atılan zaman
+    const SPAM_COOLDOWN = 5000;  // 5 Saniye bekleme süresi (Milisaniye)
+
     async function initFirebase() {
-        // Sign in anonymously to allow writing to Firestore
         await signInAnonymously(auth);
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // Listen to 'shoutbox_v2' collection
                 const q = collection(db, 'shoutbox_v2');
                 onSnapshot(q, (snapshot) => {
-                    const msgs = [];
-                    snapshot.forEach(doc => msgs.push(doc.data()));
-                    // Sort locally (Newest first)
-                    msgs.sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
-                    renderShoutbox(msgs);
+                    allMessages = [];
+                    snapshot.forEach(doc => allMessages.push(doc.data()));
+                    allMessages.sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
+                    renderShoutbox();
                 });
             }
         });
     }
 
-    function renderShoutbox(msgs) {
-        if (msgs.length === 0) { sbArea.innerHTML = '<span style="color:#666">Sessiz...</span>'; return; }
+    function renderShoutbox() {
+        if (allMessages.length === 0) { 
+            sbArea.innerHTML = '<span style="color:#666">Sessiz...</span>'; 
+            return; 
+        }
+
         sbArea.innerHTML = "";
-        msgs.forEach(m => {
+        const visibleMessages = allMessages.slice(0, displayLimit);
+
+        visibleMessages.forEach(m => {
             const div = document.createElement('div'); div.className = 'sb-msg';
-            // Simple XSS protection
             const name = (m.name || 'Anon').replace(/</g, "&lt;");
             const text = (m.text || '').replace(/</g, "&lt;");
             div.innerHTML = `<span class="sb-name">${name}:</span> <span class="sb-text">${text}</span>`;
             sbArea.appendChild(div);
         });
+
+        if (allMessages.length > displayLimit) {
+            const loadMoreBtn = document.createElement('button');
+            loadMoreBtn.innerText = "Devamını Göster ▼";
+            loadMoreBtn.style.cssText = "width: 100%; padding: 5px; background: #eee; border: 1px dashed #000; cursor: pointer; color: var(--hot-pink); font-family: inherit; font-size: 10px; margin-top: 5px; font-weight: bold;";
+            loadMoreBtn.onclick = () => {
+                displayLimit += 20;
+                renderShoutbox();
+            };
+            sbArea.appendChild(loadMoreBtn);
+        }
     }
 
     sbForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+        
+        // --- SPAM KONTROLÜ 1: ZAMAN ---
+        const now = Date.now();
+        const timeDiff = now - lastSentTime;
+        
+        if (timeDiff < SPAM_COOLDOWN) {
+            const remaining = Math.ceil((SPAM_COOLDOWN - timeDiff) / 1000);
+            alert(`Hop! Çok hızlısın. Lütfen ${remaining} saniye bekle.`);
+            return; // Fonksiyonu durdur
+        }
+
         const user = auth.currentUser;
         if(!user || !sbName.value || !sbMsg.value) return;
+        
+        // --- SPAM KONTROLÜ 2: BUTONU KİLİTLE ---
+        const btn = document.querySelector('.sb-btn');
+        const originalText = btn.innerText;
+        
+        btn.disabled = true;                // Tıklamayı kapat
+        btn.innerText = "Yollanıyor...";    // Yazıyı değiştir
+        btn.style.opacity = "0.6";          // Rengi soldur
         
         try {
             await addDoc(collection(db, 'shoutbox_v2'), {
@@ -448,57 +490,48 @@
                 timestamp: serverTimestamp(), 
                 uid: user.uid
             });
+            
             sbMsg.value = ''; 
+            sbArea.scrollTop = 0;
+            
+            // Son gönderim zamanını güncelle
+            lastSentTime = Date.now(); 
+
         } catch(err) { 
-            console.error("Mesaj gönderilemedi:", err); 
-            alert("Hata: Mesaj gönderilemedi. Firebase Kurallarını kontrol et.");
+            console.error("Hata:", err); 
+            alert("Hata: Mesaj gönderilemedi.");
+        } finally {
+            // İşlem bitince (başarılı veya hatalı) butonu 1 saniye sonra geri aç
+            // 1 saniye eklememizin sebebi "çift tıklama" refleksini tamamen engellemek
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.innerText = originalText;
+                btn.style.opacity = "1";
+            }, 1000);
         }
     });
+
     async function loadMarqueeQuote() {
         const marquee = document.getElementById('wikiquote-marquee');
-
         try {
-            // ---------------------------------------------------------
-            // 1. AŞAMA: ZENQUOTES (CORS Proxy ile)
-            // ---------------------------------------------------------
             const zenUrl = "https://corsproxy.io/?" + encodeURIComponent("https://zenquotes.io/api/random");
             const responseZen = await fetch(zenUrl);
-            
-            if (!responseZen.ok) throw new Error("ZenQuotes sunucusu yanıt vermedi.");
-            
+            if (!responseZen.ok) throw new Error("ZenQuotes hata");
             const dataZen = await responseZen.json();
-            // ZenQuotes formatı: [{q: "Söz", a: "Yazar"}]
             marquee.innerHTML = `★ "${dataZen[0].q}" — ${dataZen[0].a} ★`;
-
         } catch (errorZen) {
-            console.warn("ZenQuotes yüklenemedi, B Planı (Kanye) devreye giriyor...", errorZen);
-
             try {
-                // ---------------------------------------------------------
-                // 2. AŞAMA: KANYE REST
-                // ---------------------------------------------------------
                 const responseKanye = await fetch("https://api.kanye.rest/");
-                
-                if (!responseKanye.ok) throw new Error("Kanye sunucusu yanıt vermedi.");
-                
+                if (!responseKanye.ok) throw new Error("Kanye hata");
                 const dataKanye = await responseKanye.json();
-                // Kanye formatı: {quote: "Söz"} (Yazar adı yok, biz ekliyoruz)
                 marquee.innerHTML = `★ "${dataKanye.quote}" — Kanye West ★`;
-
             } catch (errorKanye) {
-                console.warn("Kanye de yüklenemedi, C Planı (Statik) devreye giriyor...", errorKanye);
-
-                // ---------------------------------------------------------
-                // 3. AŞAMA: STATİK MESAJ (GARANTİ)
-                // ---------------------------------------------------------
                 marquee.innerHTML = "★ There should be quote ★";
             }
         }
     }
 
-    // Fonksiyonu çalıştır
     loadMarqueeQuote();
-    // Start everything
     initFirebase();
 </script>
 </body>
