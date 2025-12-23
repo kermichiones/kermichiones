@@ -4,28 +4,47 @@ layout: default
 
 <div class="blog-entry">
     <div class="entry-title">
-        <span>★ PROJELERİM</span>
-        <span class="entry-date">WORK_LOG</span>
+        <span>★ TÜM KAYITLAR (TIMELINE)</span>
+        <span class="entry-date">ROOT/ALL_FILES</span>
     </div>
     <div class="entry-body">
-        <p>Geliştirdiğim bazı oyunlar ve web projeleri:</p>
         
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px;">
-            
-            {% for project in site.projects %} <div style="border: 2px solid #000; box-shadow: 4px 4px 0 var(--acid-green); background: #fff; padding: 5px; text-align: center;">
-                <div style="background: var(--border-color); height: 80px; display: flex; align-items: center; justify-content: center; color: #fff; margin-bottom: 5px; overflow: hidden;">
-                    {% if project.image %}
-                    <img src="{{ project.image }}" style="width: 100%; height: 100%; object-fit: cover; border: none; box-shadow: none; margin: 0;">
+        <p style="font-size: 12px; margin-bottom: 20px;">
+            Sisteme girilen tüm veriler (Yazılar ve Projeler) tarih sırasına göre listelenmektedir.
+        </p>
+
+        {% assign blog_posts = site.posts %}
+        {% assign projects = site.projects %}
+        
+        {% assign all_content = blog_posts | concat: projects | sort: 'date' | reverse %}
+
+        <ul class="pixel-list" style="font-family: monospace;">
+            {% for item in all_content %}
+            <li style="border-bottom: 1px dotted #ccc; padding: 5px 0; display: flex; justify-content: space-between; align-items: center;">
+                
+                <span>
+                    {% if item.collection == 'projects' %}
+                        <span style="color: #fff; background: var(--hot-pink); padding: 0 4px; font-size: 10px; margin-right: 5px;">[PROJE]</span>
                     {% else %}
-                    <span style="font-size: 30px;">⚡</span>
+                        <span style="color: #000; background: var(--electric-blue); padding: 0 4px; font-size: 10px; margin-right: 5px;">[BLOG]</span>
                     {% endif %}
-                </div>
-                <h4 style="margin: 5px 0; font-size: 14px; border: none; background: none; padding: 0;">{{ project.title }}</h4>
-                <p style="font-size: 11px; margin: 0 0 10px 0;">{{ project.description }}</p>
-                <a href="{{ project.url }}" class="btn-88" style="width: 100%; background: var(--hot-pink);">İNCELE</a>
-            </div>
+
+                    <a href="{{ item.url }}" style="border: none; background: transparent; font-weight: bold; color: #333;">
+                        {{ item.title }}
+                    </a>
+                </span>
+
+                <span style="color: #999; font-size: 11px; white-space: nowrap; margin-left: 10px;">
+                    {{ item.date | date: "%d.%m.%Y" }}
+                </span>
+
+            </li>
             {% endfor %}
-            
-        </div>
+        </ul>
+        
+        {% if all_content.size == 0 %}
+            <div style="text-align: center; color: red; margin-top: 20px;">[!] HİÇ VERİ BULUNAMADI</div>
+        {% endif %}
+
     </div>
 </div>

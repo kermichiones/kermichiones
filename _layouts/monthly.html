@@ -1,0 +1,69 @@
+---
+layout: default
+---
+
+<div class="blog-entry">
+    <div class="entry-title">
+        <span>★ AYLIK SİSTEM LOGLARI</span>
+        <span class="entry-date">ARCHIVE_MODE: MONTHLY</span>
+    </div>
+    
+    <div class="entry-body">
+        <p style="font-size: 12px; margin-bottom: 20px;">
+            Sisteme girilen verilerin aylık dökümü aşağıdadır.
+        </p>
+
+        {% for post in site.posts %}
+            
+            {% capture current_year %}{{ post.date | date: "%Y" }}{% endcapture %}
+            {% capture current_month %}{{ post.date | date: "%m" }}{% endcapture %}
+            
+            {% capture next_year %}{{ post.next.date | date: "%Y" }}{% endcapture %}
+            {% capture next_month %}{{ post.next.date | date: "%m" }}{% endcapture %}
+
+            {% if current_month != next_month or current_year != next_year %}
+                
+                <div class="box-header" style="background: var(--hot-pink); margin-top: 25px; text-align: left; padding-left: 10px;">
+                    📂 
+                    {% case current_month %}
+                        {% when '01' %}OCAK
+                        {% when '02' %}ŞUBAT
+                        {% when '03' %}MART
+                        {% when '04' %}NİSAN
+                        {% when '05' %}MAYIS
+                        {% when '06' %}HAZİRAN
+                        {% when '07' %}TEMMUZ
+                        {% when '08' %}AĞUSTOS
+                        {% when '09' %}EYLÜL
+                        {% when '10' %}EKİM
+                        {% when '11' %}KASIM
+                        {% when '12' %}ARALIK
+                    {% endcase %}
+                    {{ current_year }}
+                </div>
+                
+                <div class="side-box" style="margin-bottom: 0; border-top: none;">
+                    <ul class="pixel-list">
+            {% endif %}
+
+            <li style="margin-bottom: 8px;">
+                <span style="font-size: 10px; color: #999; margin-right: 5px;">
+                    [{{ post.date | date: "%d" }}]
+                </span>
+                <a href="{{ post.url }}" style="font-weight: bold; color: #333; text-decoration: none; border: none;">
+                    {{ post.title }}
+                </a>
+            </li>
+
+            {% capture prev_year %}{{ post.previous.date | date: "%Y" }}{% endcapture %}
+            {% capture prev_month %}{{ post.previous.date | date: "%m" }}{% endcapture %}
+            
+            {% if current_month != prev_month or current_year != prev_year %}
+                    </ul>
+                </div>
+            {% endif %}
+            
+        {% endfor %}
+
+    </div>
+</div>

@@ -4,5 +4,8 @@ baseurl: ""
 url: "https://ahmetarvas.tr" # Burayı kendi kullanıcı adınla değiştir
 markdown: kramdown
 theme: minima # GitHub Pages varsayılanı, ama biz kendi layout'umuzu kullanıyoruz
+collections:
+  projects:
+    output: true
 plugins:
   - jekyll-feed
