@@ -269,12 +269,12 @@
 
     <header>
         <h1 class="site-title">{{ site.title | default: "Ahmet Arvas" }}</h1>
-        <div class="subtitle">/// CODE. LINUX. LIFE. ///</div>
+        <div class="subtitle">Rastgele Düşünceler</div>
     </header>
 
     <div class="marquee-container">
-        <marquee scrollamount="5">
-            ★ SYSTEM ONLINE ★ WEB SİTESİ GÜNCELLENDİ ({{ site.time | date: "%d.%m.%Y" }}) ★ HOŞ GELDİNİZ! ★ VIBRANT STYLE LOADED... 100% ★
+        <marquee scrollamount="5" id="wikiquote-marquee">
+            ★ YÜKLENİYOR... ★
         </marquee>
     </div>
 
@@ -293,17 +293,23 @@
             <div class="side-box">
                 <div class="profile-pic">(¬_¬)</div>
                 <div style="text-align: center; font-weight: bold; margin-bottom: 5px;">Ahmet Arvas</div>
-                <div style="font-size: 11px; text-align: center; color: #666;">Developer & <br>Pixel Enthusiast</div>
+                <div style="font-size: 11px; text-align: center; color: #666;">Embedded Systems, Philosophia,<br> Fungi, Some programming languages <br> and Rocketry</div>
                 <hr style="border: 1px dashed #ccc;">
                 <p style="font-size: 11px;">Pastel renklerden sıkıldım, canlı renklere geçiş yaptım.</p>
             </div>
             <div class="box-header" style="background: var(--deep-purple);">:: NAV ::</div>
             <div class="side-box">
+                <div style="font-size: 11px; font-weight: bold; margin-bottom: 5px; color: #666;">SON GİRDİLER</div>
                 <ul class="pixel-list">
-                    <li><a href="#">C++ Snippets</a></li>
-                    <li><a href="#">Linux Config</a></li>
-                    <li><a href="#">My Setup</a></li>
+                    {% for post in site.posts limit:3 %}
+                        <li>
+                            <a href="{{ post.url }}">{{ post.title }}</a>
+                        </li>
+                    {% endfor %}
                 </ul>
+                {% if site.posts.size == 0 %}
+                    <div style="font-size: 10px; color: red;">[!] HİÇ VERİ YOK</div>
+                {% endif %}
             </div>
             <div class="side-box" style="text-align: center;">
                 <div style="font-size: 10px; font-weight: bold;">ZİYARETÇİ</div>
@@ -337,14 +343,13 @@
             <div class="box-header" style="background: var(--hot-pink);">:: BUTTONS ::</div>
             <div class="side-box" style="text-align: center;">
                 <div class="button-grid">
-                    <a href="#" class="btn-88" style="background: #ff0099;">AHMET</a>
-                    <a href="#" class="btn-88" style="background: #0000ff;">HTML5</a>
+                    <a href="https://simobot.com" class="btn-88" style="background: #ff0099;">My Startup</a>
                 </div>
             </div>
         </aside>
     </div>
 
-    <footer>&copy; 2025 Ahmet Arvas. Designed with energy.</footer>
+    <footer>&copy; 2026 Ahmet Arvas. Designed with <p>C<sub>10</sub>H<sub>16</sub>N<sub>5</sub>O<sub>13</sub>P<sub>3</sub></p>.</footer>
 </div>
 
 <!-- SCRIPTS & FIREBASE -->
@@ -440,7 +445,50 @@
             alert("Hata: Mesaj gönderilemedi. Firebase Kurallarını kontrol et.");
         }
     });
+    async function loadMarqueeQuote() {
+        const marquee = document.getElementById('wikiquote-marquee');
 
+        try {
+            // ---------------------------------------------------------
+            // 1. AŞAMA: ZENQUOTES (CORS Proxy ile)
+            // ---------------------------------------------------------
+            const zenUrl = "https://corsproxy.io/?" + encodeURIComponent("https://zenquotes.io/api/random");
+            const responseZen = await fetch(zenUrl);
+            
+            if (!responseZen.ok) throw new Error("ZenQuotes sunucusu yanıt vermedi.");
+            
+            const dataZen = await responseZen.json();
+            // ZenQuotes formatı: [{q: "Söz", a: "Yazar"}]
+            marquee.innerHTML = `★ "${dataZen[0].q}" — ${dataZen[0].a} ★`;
+
+        } catch (errorZen) {
+            console.warn("ZenQuotes yüklenemedi, B Planı (Kanye) devreye giriyor...", errorZen);
+
+            try {
+                // ---------------------------------------------------------
+                // 2. AŞAMA: KANYE REST
+                // ---------------------------------------------------------
+                const responseKanye = await fetch("https://api.kanye.rest/");
+                
+                if (!responseKanye.ok) throw new Error("Kanye sunucusu yanıt vermedi.");
+                
+                const dataKanye = await responseKanye.json();
+                // Kanye formatı: {quote: "Söz"} (Yazar adı yok, biz ekliyoruz)
+                marquee.innerHTML = `★ "${dataKanye.quote}" — Kanye West ★`;
+
+            } catch (errorKanye) {
+                console.warn("Kanye de yüklenemedi, C Planı (Statik) devreye giriyor...", errorKanye);
+
+                // ---------------------------------------------------------
+                // 3. AŞAMA: STATİK MESAJ (GARANTİ)
+                // ---------------------------------------------------------
+                marquee.innerHTML = "★ There should be quote ★";
+            }
+        }
+    }
+
+    // Fonksiyonu çalıştır
+    loadMarqueeQuote();
     // Start everything
     initFirebase();
 </script>
