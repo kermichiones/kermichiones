@@ -1,6 +1,6 @@
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+  "name": "Ahmet Arvas' Personal Blog",
+  "short_name": "ahmetarvas",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
