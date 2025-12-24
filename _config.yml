@@ -1,11 +1,27 @@
 title: Ahmet Arvas
-description: Kisisel blog'um cesitli yazılar paylasıyorum.
+description: >-
+  Gömülü sistemler, Linux, C programlama, felsefe ve roket teknolojileri üzerine kişisel blog ve proje arşivi.
 baseurl: "" 
-url: "https://ahmetarvas.tr" # Burayı kendi kullanıcı adınla değiştir
+url: "https://ahmetarvas.tr" 
+
 markdown: kramdown
-theme: minima # GitHub Pages varsayılanı, ama biz kendi layout'umuzu kullanıyoruz
+theme: minima 
+
+# --- SEO ve Sosyal Medya Bilgileri ---
+# Bu bilgiler Google ve Twitter kartları için kullanılır
+twitter_username: kermichiones # Varsa yaz, yoksa sil
+github_username: kermichiones   # GitHub kullanıcı adın
+author:
+  name: Ahmet Arvas
+  email: ahmet.arvas@agu.edu.tr
+
+# --- Koleksiyonlar ---
 collections:
   projects:
     output: true
+
+# --- Eklentiler (Plugins) ---
+# Buraya SEO ve Sitemap eklentilerini ekledik
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
