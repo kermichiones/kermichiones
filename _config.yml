@@ -4,6 +4,9 @@ baseurl: ""
 url: "https://ahmetarvas.tr" 
 
 markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: true
 theme: minima 
 
 # --- SEO ve Sosyal Medya Bilgileri ---
