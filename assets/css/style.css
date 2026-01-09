@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Zen+Maru+Gothic:wght@400;700&display=swap');
+
+/* =========================================
+   HEISEI DIGITAL DIARY (COOL-CUTE VER.)
+   ========================================= */
+
+:root {
+  --canvas: #FFFEF0; /* Ivory White */
+  --bar-bg: #FFFFA0; /* Pale Lemon Yellow */
+  --accent-pink: #FF85A2; /* Pastel Strawberry */
+  --accent-cool: #89CFF0; /* Baby Blue */
+  --text-main: #4A4A4A; /* Soft Black */
+  --white: #ffffff;
+  --black: #000000;
+  
+  --font-header: 'DotGothic16', 'Zen Maru Gothic', sans-serif;
+  --font-body: 'Verdana', 'Tahoma', sans-serif;
+  --font-code: 'Courier New', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--canvas);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* =========================================
+   LAYOUT ARCHITECTURE
+   ========================================= */
+
+/* The main grid wrapper */
+.site-wrapper {
+  display: grid;
+  grid-template-columns: 250px 1fr; /* Fixed Sidebar | Fluid Content */
+  min-height: 100vh;
+}
+
+/* Sidebar (Left) */
+.sidebar {
+  background-color: var(--canvas);
+  border-right: 1px dotted var(--accent-pink);
+  padding: 20px;
+  position: sticky; /* Or fixed logic if strictly requested, but sticky is better for scrolling sidebars */
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Main Content Area */
+.main-content {
+  padding: 0; /* Content touches edges or has its own padding */
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  min-width: 0; /* Prevent grid blowout */
+}
+
+/* Mobile Layout */
+@media (max-width: 768px) {
+  .site-wrapper {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px dotted var(--accent-pink);
+  }
+}
+
+/* =========================================
+   TYPOGRAPHY & DECORATIONS
+   ========================================= */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-header);
+  font-weight: normal;
+  margin: 0;
+}
+
+a {
+  color: var(--accent-cool);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--accent-cool);
+}
+
+a:hover {
+  background-color: var(--accent-pink);
+  color: var(--white);
+  border-bottom: none;
+}
+
+/* =========================================
+   GRAPHIC COMPONENTS
+   ========================================= */
+
+/* Full-width Yellow Bars */
+.section-bar {
+  background-color: var(--bar-bg);
+  width: 100%;
+  padding: 5px 15px;
+  border-top: 1px dotted var(--accent-pink);
+  border-bottom: 1px dotted var(--accent-pink);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.section-title {
+  font-family: var(--font-header);
+  font-size: 18px;
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Pixel Icon placeholder (using emoji or pseudo-element) */
+.pixel-icon::before {
+  content: '★'; /* Placeholder for 16px pixel art */
+  color: var(--accent-pink);
+  font-size: 16px;
+}
+
+/* "Paper Sheet" / "Window" Content Blocks */
+.content-block {
+  padding: 0 20px 20px 20px;
+  max-width: 900px; /* Optional constraint for readability on huge screens */
+}
+
+/* Buttons (Outset 3D Pastel) */
+.btn-retro {
+  display: inline-block;
+  background-color: var(--canvas);
+  border: 2px outset var(--accent-pink);
+  padding: 5px 10px;
+  font-family: var(--font-header);
+  color: var(--text-main);
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.1s;
+}
+
+.btn-retro:active {
+  border-style: inset;
+}
+
+.btn-retro:hover {
+  background-color: var(--accent-pink);
+  color: var(--white);
+}
+
+/* Marquee */
+.marquee-wrapper {
+  background-color: var(--accent-cool);
+  color: var(--white);
+  padding: 5px;
+  border-bottom: 1px dotted var(--accent-pink);
+  font-family: var(--font-header);
+  font-size: 14px;
+}
+
+/* Profile Section in Sidebar */
+.profile-card {
+  text-align: center;
+  border: 1px dotted var(--accent-pink);
+  padding: 10px;
+  background: var(--white);
+}
+
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  background-color: var(--bar-bg);
+  margin: 0 auto 10px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dotted var(--accent-pink);
+  font-family: var(--font-header);
+}
+
+/* Navigation Links */
+.nav-links {
+  list-style: none;
+  padding: 0;
+}
+
+.nav-links li {
+  margin-bottom: 8px;
+}
+
+.nav-links a {
+  display: block;
+  padding: 5px;
+  border-left: 3px solid transparent;
+}
+
+.nav-links a:hover {
+  border-left: 3px solid var(--accent-pink);
+  background-color: var(--bar-bg);
+  color: var(--text-main);
+}
+
+/* Footer */
+.site-footer {
+  background-color: var(--text-main);
+  color: var(--white);
+  padding: 20px;
+  text-align: center;
+  font-family: var(--font-code);
+  font-size: 12px;
+  margin-top: auto;
+}
+
+/* Blog Post Specifics */
+.post-header {
+  margin-bottom: 20px;
+}
+
+.post-meta {
+  font-family: var(--font-code);
+  font-size: 12px;
+  color: #888;
+}
+
+.post-content h2 {
+  background-color: var(--bar-bg);
+  padding: 5px 10px;
+  border-left: 5px solid var(--accent-pink);
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.post-content p {
+  margin-bottom: 15px;
+}
+
+.post-content img {
+  max-width: 100%;
+  border: 1px dotted var(--accent-pink);
+  padding: 5px;
+  background: var(--white);
+}

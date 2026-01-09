@@ -2,27 +2,42 @@
 layout: default
 ---
 
-<div style="border: 2px solid #000; background: var(--acid-green); padding: 10px; margin-bottom: 20px; text-align: center; box-shadow: 5px 5px 0 #000;">
-    <b>⚠ Hosgeldiniz ⚠</b><br>
-    {{ site.description | default: "Yeni icerikler yukleniyor..." }}
+<!-- Welcome / Intro Section -->
+<div class="section-bar">
+    <span class="pixel-icon"></span> <span data-i18n="welcome_message">MESSAGE</span>
+</div>
+<div class="content-block" style="background: #fff; border: 1px dotted var(--accent-pink); margin-bottom: 30px;">
+    <p><b>⚠ <span data-i18n="welcome_message">WELCOME (Hoşgeldiniz)</span> ⚠</b></p>
+    <p><span data-i18n="welcome_sub">{{ site.description | default: "Loading Heisei Retro Interface..." }}</span></p>
+</div>
+
+<!-- Blog Loop -->
+<div class="section-bar">
+    <span class="pixel-icon"></span> <span data-i18n="diary_entries">DIARY ENTRIES</span>
 </div>
 
 {% for post in site.posts %}
-<article class="blog-entry">
-    <div class="entry-title">
-        <a href="{{ post.url }}" style="color: #000; text-decoration: none; border: none; background: transparent;">
-            <span>★ {{ post.title }}</span>
-        </a>
-        <span class="entry-date">{{ post.date | date: "%d %B %Y" }}</span>
-    </div>
-    <div class="entry-body">
-        {{ post.excerpt }}
-        
-        <div style="margin-top: 15px; text-align: right;">
-            <a href="{{ post.url }}" class="btn-88" style="background: var(--deep-purple); display: inline-flex; width: auto; padding: 0 10px;">
-                DEVAMINI OKU >>
+<div class="content-block" style="margin-bottom: 20px;">
+    <!-- Post Header as a mini-bar or just header -->
+    <div style="border-bottom: 1px dotted var(--accent-pink); padding-bottom: 5px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: baseline;">
+        <h2 style="font-size: 18px; color: var(--text-main);">
+            <a href="{{ post.url }}" style="border-bottom: none; color: inherit;">
+                <span style="color: var(--accent-pink);">★</span> {{ post.title }}
             </a>
-        </div>
+        </h2>
+        <span style="font-family: var(--font-code); font-size: 12px; color: #888;">{{ post.date | date: "%Y-%m-%d" }}</span>
     </div>
-</article>
+
+    <!-- Excerpt -->
+    <div style="font-size: 14px; line-height: 1.5;">
+        {{ post.excerpt }}
+    </div>
+
+    <!-- Read More Button -->
+    <div style="margin-top: 10px; text-align: right;">
+        <a href="{{ post.url }}" class="btn-retro" data-i18n="read_more">
+            READ MORE (Devamını Oku)
+        </a>
+    </div>
+</div>
 {% endfor %}
