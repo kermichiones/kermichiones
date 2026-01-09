@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: site.title }}</title>
-    <!-- Google Fonts: DotGothic16 -->
+    <!-- Google Fonts: DotGothic16 for that Japanese Pixel Vibe -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
@@ -21,255 +21,351 @@
     <meta name="twitter:card" content="summary_large_image">
     <style>
         /* =========================================
-           VIBRANT PALETTE & STYLES
+           CORE VARIABLES & RESET
            ========================================= */
         :root {
-            --hot-pink: #ff0099;
-            --acid-green: #ccff00;
-            --electric-blue: #00f0ff;
+            --neon-pink: #ff1493;    /* Hot Pink - Vibrant accent */
+            --tech-blue: #0000cd;    /* Medium Blue - Classic Link color */
+            --cyan-grid: #00ced1;    /* Grid lines */
+            --bg-color: #f4faff;     /* Very light blue-white */
+            --header-grad: linear-gradient(to bottom, #ffffcc, #ffffff);
+            --border-style: 2px solid var(--neon-pink);
+            /* Legacy variables mapped for compatibility if needed */
+            --hot-pink: var(--neon-pink);
+            --electric-blue: var(--cyan-grid);
             --deep-purple: #6600cc;
-            --border-color: #1a1a1a;
-            --bg-grid: #e5e5f7;
+            --acid-green: #ccff00;
+            --border-color: #000;
         }
 
         body {
             margin: 0;
-            padding: 20px 0;
-            background-color: var(--bg-grid);
-            background-image: linear-gradient(var(--hot-pink) 1px, transparent 1px),
-            linear-gradient(var(--electric-blue) 1px, transparent 1px);
-            background-size: 30px 30px;
-            background-position: 0 0, 15px 15px;
-            font-family: "DotGothic16", "MS PGothic", monospace;
-            font-size: 15px;
-            color: var(--border-color);
+            padding: 10px;
+            /* RETRO GRID BACKGROUND (Tech/Math Notebook Style) */
+            background-color: var(--bg-color);
+            background-image:
+                linear-gradient(var(--cyan-grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--cyan-grid) 1px, transparent 1px);
+            background-size: 20px 20px;
+
+            font-family: "MS PGothic", "DotGothic16", monospace, sans-serif;
+            font-size: 13px; /* Classic small web font size */
+            color: #333;
         }
 
-        /* SCROLLBAR */
+        /* CUSTOM SCROLLBAR (Webkit only) */
         ::-webkit-scrollbar { width: 12px; }
-        ::-webkit-scrollbar-track { background: #fff; border-left: 2px solid #000; }
-        ::-webkit-scrollbar-thumb { background: var(--hot-pink); border: 2px solid #000; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--deep-purple); }
+        ::-webkit-scrollbar-track { background: #fff; border-left: 1px solid #000; }
+        ::-webkit-scrollbar-thumb { background: var(--neon-pink); border: 1px solid #fff; }
 
-        a { 
-            text-decoration: none; 
-            color: var(--deep-purple); 
-            border-bottom: 2px solid var(--electric-blue);
-            font-weight: bold;
-            transition: all 0.1s;
-        }
-        a:hover { 
-            background-color: var(--hot-pink); 
-            color: #fff; 
-            border-bottom: 2px solid #000;
+        a { text-decoration: none; color: var(--tech-blue); }
+        a:hover {
+            background-color: var(--neon-pink);
+            color: #fff;
+            cursor: help;
         }
 
-        /* CONTAINER */
+        /* =========================================
+           MAIN CONTAINER
+           ========================================= */
         .main-container {
-            width: 920px;
-            max-width: 95%;
+            width: 98%;
+            max-width: 1600px;
             margin: 0 auto;
             background-color: #ffffff;
-            border: 3px solid var(--border-color);
-            box-shadow: 10px 10px 0px var(--hot-pink);
+            border: 3px solid #000;
+            /* Sharp shadow for pop-out effect */
+            box-shadow: 8px 8px 0px rgba(255, 20, 147, 0.3);
+        }
+
+        /* =========================================
+           HEADER AREA
+           ========================================= */
+        header {
+            background: #fff;
+            background-image: repeating-linear-gradient(
+                45deg,
+                #fff,
+                #fff 10px,
+                #fff0f5 10px,
+                #fff0f5 20px
+            );
+            border-bottom: 3px solid #000;
+            padding: 20px;
             position: relative;
         }
 
-        /* HEADER */
-        header {
-            background-color: var(--border-color);
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 3px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-        }
-        header::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: radial-gradient(circle, #333 1px, transparent 1px);
-            background-size: 5px 5px;
-            opacity: 0.5;
-            z-index: 0;
-        }
         h1.site-title {
             font-size: 32px;
-            color: var(--electric-blue);
+            color: #000;
             margin: 0;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            position: relative;
-            z-index: 1;
-            text-shadow: 4px 4px 0px var(--hot-pink);
-        }
-        .subtitle {
-            font-size: 14px;
-            color: var(--acid-green);
-            margin-top: 5px;
-            position: relative;
-            z-index: 1;
-            font-weight: normal;
+            letter-spacing: -1px;
+            background-color: var(--neon-pink);
+            color: #fff;
+            display: inline-block;
+            padding: 5px 15px;
+            transform: skew(-10deg); /* Slight tilt for dynamism */
+            border: 2px solid #000;
         }
 
-        /* NAV */
-        .top-nav {
-            background-color: #fff;
-            border-bottom: 3px solid var(--border-color);
-            padding: 0;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
+        .header-deco {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 40px;
+            opacity: 0.2;
+            color: var(--neon-pink);
+            font-weight: bold;
+            pointer-events: none;
         }
-        .top-nav a {
-            flex-grow: 1;
+
+        .subtitle {
+            margin-top: 5px;
+            font-weight: bold;
+            color: #555;
+            display: block;
+        }
+
+        /* =========================================
+           NAVIGATION (Tabs Style)
+           ========================================= */
+        .top-nav {
+            background-color: #000;
+            padding: 5px 0;
             text-align: center;
-            padding: 10px 5px;
-            border-right: 2px solid var(--border-color);
-            border-bottom: none;
-            color: #000;
+        }
+
+        .top-nav a {
+            color: #00ff00; /* Hacker Green text */
+            font-family: monospace;
             font-size: 14px;
+            margin: 0 10px;
+            padding: 2px 8px;
+            border: 1px dashed #00ff00;
+            background: transparent; /* Override existing default style */
             text-decoration: none;
         }
-        .top-nav a:last-child { border-right: none; }
         .top-nav a:hover {
-            background-color: var(--electric-blue);
+            background-color: #00ff00;
             color: #000;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+            border: 1px solid #00ff00;
+            box-shadow: none;
         }
 
-        /* MARQUEE */
+        /* =========================================
+           MARQUEE BAR
+           ========================================= */
         .marquee-container {
-            background: var(--hot-pink);
+            background: var(--neon-pink);
             color: #fff;
             font-weight: bold;
-            padding: 5px;
-            border-bottom: 3px solid var(--border-color);
-            font-size: 14px;
-        }
-
-        /* LAYOUT */
-        .content-wrapper { display: flex; flex-wrap: wrap; }
-        .column { padding: 15px; box-sizing: border-box; }
-        .sidebar-left { width: 200px; background-color: #f2f2f2; border-right: 3px solid var(--border-color); flex-shrink: 0; }
-        .main-content { flex: 1; min-width: 300px; background: #fff; }
-        .sidebar-right { width: 200px; background-color: #f2f2f2; border-left: 3px solid var(--border-color); flex-shrink: 0; }
-
-        @media (max-width: 800px) {
-            .sidebar-left, .sidebar-right, .main-content { width: 100%; border: none; border-bottom: 3px solid var(--border-color); }
-            .sidebar-left { order: 2; }
-            .sidebar-right { order: 3; }
-            .main-content { order: 1; }
-        }
-
-        /* COMPONENTS */
-        .box-header {
-            background-color: #000;
-            color: #fff;
-            padding: 5px;
-            font-weight: bold;
-            text-align: center;
-            border: 2px solid #000;
-            margin-bottom: -2px;
-            position: relative;
-            z-index: 2;
-        }
-        .side-box {
-            background: #fff;
-            border: 2px solid #000;
-            margin-bottom: 20px;
-            padding: 10px;
-            box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
-        }
-
-        /* BLOG CONTENT STYLING (For Markdown) */
-        .blog-entry {
-            margin-bottom: 30px;
-            border: 2px solid #000;
-            background: #fff;
-            box-shadow: 6px 6px 0px var(--electric-blue);
-        }
-        .entry-title {
-            background-color: var(--electric-blue);
-            padding: 8px 12px;
-            font-weight: bold;
-            font-size: 16px;
-            color: #000;
+            padding: 4px;
             border-bottom: 2px solid #000;
+            font-size: 12px;
+        }
+
+        /* =========================================
+           LAYOUT SYSTEM
+           ========================================= */
+        .content-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .sidebar-left, .sidebar-right {
+            width: 220px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            flex-shrink: 0;
+            box-sizing: border-box;
+        }
+
+        .sidebar-left { border-right: 2px solid #000; }
+        .sidebar-right { border-left: 2px solid #000; }
+
+        .main-content {
+            flex: 1;
+            padding: 15px;
+            background-color: #fff;
+            min-width: 300px;
+            box-sizing: border-box;
+        }
+
+        /* =========================================
+           COMPONENTS
+           ========================================= */
+
+        /* Sidebar Boxes */
+        .side-box {
+            border: 2px solid #333;
+            margin-bottom: 15px;
+            background: #fff;
+            box-shadow: 3px 3px 0 #ccc;
+            padding: 0; /* Reset padding for box header structure */
+        }
+
+        .box-header {
+            background-color: #333;
+            color: #fff;
+            font-size: 11px;
+            padding: 4px;
+            text-align: center;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #333; /* Separate header from content */
+            margin: 0;
+            z-index: 1;
+        }
+
+        .box-content {
+            padding: 8px;
+            font-size: 11px;
+            line-height: 1.4;
+        }
+
+        /* Profile Image Placeholder */
+        .pixel-avatar {
+            width: 80px;
+            height: 80px;
+            background: #ddd;
+            border: 2px solid #000;
+            margin: 0 auto 5px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-size: 30px;
+        }
+
+        /* Blog Entry */
+        .blog-entry {
+            margin-bottom: 25px;
+            border: 1px dashed #999;
+            padding: 5px;
+            background-color: #fffafa;
+            box-shadow: none; /* Override previous */
+        }
+
+        .entry-header {
+            background: linear-gradient(to right, #e0e0e0, #fff);
+            border-left: 5px solid var(--neon-pink);
+            padding: 5px 10px;
+            margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .entry-date {
-            font-size: 11px;
-            background: #000;
-            color: var(--acid-green);
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-        .entry-body { padding: 15px; line-height: 1.6; }
 
-        /* Markdown Elements */
-        .entry-body h1, .entry-body h2, .entry-body h3 {
+        .entry-title {
+            font-weight: bold;
+            font-size: 15px;
             color: #000;
-            border-bottom: 2px dashed var(--hot-pink);
-            padding-bottom: 5px;
-            margin-top: 20px;
+            background: transparent;
+            border: none;
+            padding: 0;
+            display: block; /* Override flex from previous */
         }
-        .entry-body h1 { font-size: 20px; border-left: 5px solid var(--hot-pink); padding-left: 10px; background: #fff0f5; }
-        .entry-body pre {
+
+        .entry-meta, .entry-date {
+            font-size: 10px;
+            color: #555;
+            font-family: monospace;
+            background: transparent;
+            padding: 0;
+            border: none;
+        }
+
+        .entry-body {
+            padding: 5px 10px;
+            line-height: 1.6;
+        }
+
+        /* Markdown Elements within entry-body */
+        .entry-body h1, .entry-body h2 {
+             border-bottom: 1px solid var(--neon-pink);
+             color: #000;
+        }
+        .entry-body img { max-width: 100%; border: 1px solid #000; }
+        .entry-body pre { background: #eee; border: 1px solid #999; padding: 10px; overflow-x: auto; color: #000; }
+        .entry-body code { background: #eee; color: #d63384; }
+
+        /* Buttons & Badges */
+        .pixel-btn {
+            background: #e6e6e6;
+            border: 2px outset #fff;
+            padding: 2px 10px;
+            font-size: 11px;
+            color: #000;
+            cursor: pointer;
+            font-family: "MS PGothic", sans-serif;
+            width: auto; /* Reset */
+        }
+        .pixel-btn:active { border-style: inset; }
+
+        .banner-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2px;
+        }
+        .banner-88x31, .btn-88 {
+            width: 88px;
+            height: 31px;
+            background: #000;
+            color: #fff;
+            font-size: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #666 !important;
+            text-align: center;
+            line-height: 10px;
+            text-decoration: none !important;
+        }
+        .banner-88x31:hover, .btn-88:hover { opacity: 0.8; }
+
+        ul.sitemap, ul.pixel-list { padding-left: 15px; margin: 0; list-style: none; }
+        ul.sitemap li, ul.pixel-list li { margin-bottom: 4px; list-style-type: square; color: var(--neon-pink); }
+        ul.sitemap li a, ul.pixel-list li a { color: #333; border: none; font-weight: normal; }
+        ul.sitemap li::marker, ul.pixel-list li::marker { color: var(--neon-pink); }
+
+        footer {
             background-color: #000;
             color: #00ff00;
-            padding: 10px;
-            border: 2px solid #333;
-            overflow-x: auto;
+            text-align: center;
+            padding: 15px;
             font-family: monospace;
-            box-shadow: 3px 3px 0 #999;
+            border-top: 3px double #fff;
         }
-        .entry-body code { background-color: #eee; color: #d63384; padding: 2px 4px; font-family: monospace; font-size: 0.9em; }
-        .entry-body pre code { background-color: transparent; color: inherit; padding: 0; }
-        .entry-body ul { list-style: square; padding-left: 20px; }
-        .entry-body ul li::marker { color: var(--hot-pink); }
-        .entry-body img { max-width: 100%; height: auto; border: 2px solid #000; box-shadow: 4px 4px 0 rgba(0,0,0,0.2); margin: 10px 0; }
 
-        /* Shoutbox & Sidebars */
+        /* Blinking Cursor Effect */
+        .blink { animation: blinker 1s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .sidebar-left, .sidebar-right, .main-content {
+                width: 100%;
+                border: none;
+                border-bottom: 2px solid #000;
+            }
+            .sidebar-left { order: 2; }
+            .sidebar-right { order: 3; }
+            .main-content { order: 1; }
+            h1.site-title { font-size: 20px; }
+        }
+
+        /* Shoutbox Specifics */
         #shoutbox-area {
-            height: 150px;
-            overflow-y: auto;
-            border: 2px inset #ccc;
-            background: #fafafa;
-            padding: 5px;
-            font-size: 12px;
-            margin-bottom: 8px;
+            height: 100px; overflow-y: scroll; border: 1px inset #ccc; background: #fff; font-size: 10px; margin-bottom: 5px;
         }
-        .sb-msg { margin-bottom: 4px; border-bottom: 1px dashed #ddd; padding-bottom: 2px; }
-        .sb-name { color: var(--hot-pink); font-weight: bold; }
+        .sb-msg { border-bottom: none; margin-bottom: 2px; }
+        .sb-name { color: #000; font-weight: bold; }
         .sb-text { color: #333; }
-        .sb-input { width: 100%; box-sizing: border-box; border: 2px solid #000; padding: 4px; font-family: inherit; margin-bottom: 4px; background: #fff; }
-        .sb-btn { width: 100%; background: var(--hot-pink); color: #fff; border: 2px solid #000; font-family: inherit; font-weight: bold; cursor: pointer; padding: 4px; }
-        .sb-btn:hover { background: var(--deep-purple); }
+        .sb-input { width: 90%; margin-bottom: 2px; font-size: 9px; border: 1px solid #999; padding: 2px; }
+        .sb-btn { width: 100%; margin-top: 3px; font-size: 10px; background: #e6e6e6; color: #000; border: 2px outset #fff; }
 
-        .profile-pic {
-            width: 100px; height: 100px; margin: 10px auto;
-            background: var(--electric-blue); border: 2px solid #000;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 30px; color: #fff; overflow: hidden;
-        }
-        ul.pixel-list { list-style: none; padding: 0; margin: 0; }
-        ul.pixel-list li { margin-bottom: 6px; padding-left: 15px; position: relative; }
-        ul.pixel-list li::before { content: "➤"; color: var(--hot-pink); position: absolute; left: 0; font-size: 10px; top: 2px; }
-        .counter-box { background: #000; color: var(--hot-pink); font-family: monospace; padding: 5px; border: 2px solid #999; font-size: 18px; letter-spacing: 5px; margin-top: 5px; }
-        
-        footer { background-color: var(--border-color); color: #fff; text-align: center; padding: 15px; font-size: 12px; border-top: 3px solid #000; }
-        .button-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; }
-        .btn-88 {
-            width: 88px; height: 31px; border: 1px solid #000;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 9px; font-weight: bold; color: #fff; text-decoration: none !important;
-            border-bottom: 1px solid #000 !important;
-        }
-        .btn-88:hover { opacity: 0.8; transform: scale(1.05); }
     </style>
 </head>
 <body>
@@ -277,107 +373,154 @@
 <div class="main-container">
 
     <header>
-        <h1 class="site-title">{{ site.title | default: "Ahmet Arvas" }}</h1>
-        <div class="subtitle">Rastgele Düşünceler</div>
+        <div class="header-deco">///</div>
+        <h1 class="site-title">{{ site.title | default: "AHMET ARVAS" }}<span class="blink">_</span></h1>
+        <div class="subtitle">
+            // {{ site.description | default: "Personal Website & Digital Garden" }}
+        </div>
     </header>
 
     <div class="marquee-container">
         <marquee scrollamount="5" id="wikiquote-marquee">
-            ★ YÜKLENİYOR... ★
+            ★ WELCOME TO MY DOMAIN ★ Site Launch! ★ Design Philosophy: Colorful but Simple! ★ Have a nice day! (◕‿◕)
         </marquee>
     </div>
 
     <nav class="top-nav">
-        <a href="/">ANA SAYFA</a>
-        <a href="/aylik/">AYLIK</a>
-        <a href="/projeler/">PROJELERIM</a>
-        <a href="/arsiv/">ARSIV</a>
-        <a href="/hakkimda/">HAKKIMDA</a>
+        <a href="/">[ANA SAYFA]</a>
+        <a href="/aylik/">[AYLIK]</a>
+        <a href="/projeler/">[PROJELERIM]</a>
+        <a href="/arsiv/">[ARSIV]</a>
+        <a href="/hakkimda/">[HAKKIMDA]</a>
     </nav>
 
     <div class="content-wrapper">
-        <!-- SOL SÜTUN -->
-        <aside class="column sidebar-left">
-            <div class="box-header" style="background: var(--hot-pink);">:: PROFİL ::</div>
+
+        <!-- LEFT SIDEBAR -->
+        <aside class="sidebar-left">
             <div class="side-box">
-                <div class="profile-pic">(¬_¬)</div>
-                <div style="text-align: center; font-weight: bold; margin-bottom: 5px;">Ahmet Arvas</div>
-                <div style="font-size: 11px; text-align: center; color: #666;"></div>
-                <hr style="border: 1px dashed #ccc;">
-                <p style="font-size: 11px;text-align: center;">Embedded Systems, Philosophia,<br> Fungi, Some programming languages <br> and Rocketry</p>
+                <div class="box-header">:: PROFILE ::</div>
+                <div class="box-content" style="text-align: center;">
+                    <div class="pixel-avatar">
+                        <span style="font-size: 30px;">ヅ</span>
+                    </div>
+                    <b>Ahmet Arvas</b><br>
+                    <span style="color: var(--neon-pink); font-size: 10px;">LVL. 25 Engineer</span>
+                    <hr style="border: 0; border-top: 1px dotted #999;">
+                    <div style="text-align: left; font-size: 10px;">
+                        Loc: Türkiye<br>
+                        Mood: Energetic<br>
+                        Job: Building stuff
+                    </div>
+                </div>
             </div>
-            <div class="box-header" style="background: var(--deep-purple);">:: NAV ::</div>
+
             <div class="side-box">
-                <div style="font-size: 11px; font-weight: bold; margin-bottom: 5px; color: #666;">SON GİRDİLER</div>
-                <ul class="pixel-list">
-                    {% for post in site.posts limit:3 %}
-                        <li>
-                            <a href="{{ post.url }}">{{ post.title }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-                {% if site.posts.size == 0 %}
-                    <div style="font-size: 10px; color: red;">[!] HİÇ VERİ YOK</div>
-                {% endif %}
+                <div class="box-header">:: NAVIGATION ::</div>
+                <div class="box-content">
+                    <ul class="sitemap">
+                        {% for post in site.posts limit:5 %}
+                        <li><a href="{{ post.url }}">{{ post.title | truncate: 20 }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
-            <div class="side-box" style="text-align: center;">
-                <div style="font-size: 10px; font-weight: bold; margin-bottom: 5px;">ZİYARETÇİ</div>
-                <img src="https://count.getloli.com/get/@AhmetArvasBlog?theme=moebooru" alt="Ziyaretçi Sayacı" style="width: 100%; border: 2px solid #000; box-shadow: 2px 2px 0 #999;">  
-                <div style="font-size: 9px; color: #666; margin-top: 2px;">Site yeniden yuklenince bile artiyor :(</div>
+
+            <div class="side-box">
+                <div class="box-header">:: MUSIC ::</div>
+                <div class="box-content" style="text-align: center;">
+                    <div style="border: 1px solid #000; background: #000; color: lime; padding: 5px; font-family: monospace; font-size: 10px;">
+                        NOW PLAYING:<br>
+                        City Pop Mix
+                    </div>
+                    <div style="margin-top: 5px;">
+                        <button class="pixel-btn">❚❚</button>
+                        <button class="pixel-btn">▶</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="side-box">
+               <div class="box-header">:: STATS ::</div>
+               <div class="box-content" style="text-align: center;">
+                  <img src="https://count.getloli.com/get/@AhmetArvasBlog?theme=moebooru" alt="Ziyaretçi Sayacı" style="width: 100%; border: 1px solid #000;">
+               </div>
             </div>
         </aside>
 
-        <!-- ORTA İÇERİK (JEKYLL CONTENT) -->
-        <main class="column main-content">
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <div style="background: #ffffcc; border: 1px solid #eebb00; padding: 10px; margin-bottom: 20px; font-size: 12px;">
+                <b style="color: red;">⚠ NOTICE:</b> This site is hand-coded. No frameworks, no bloat. Pure HTML love.
+            </div>
+
             {{ content }}
+
         </main>
 
-        <!-- SAĞ SÜTUN -->
-        <aside class="column sidebar-right">
-            <div class="box-header" style="background: var(--electric-blue); color: #000;">:: ZAMAN ::</div>
-            <div class="side-box" style="text-align: center;">
-                <div id="clock" style="font-size: 20px; font-weight: bold; color: var(--deep-purple);">--:--</div>
-                <div id="date" style="font-size: 12px;">--/--/--</div>
-            </div>
-
-            <div class="box-header" style="background: #000;">:: SHOUTBOX ::</div>
+        <!-- RIGHT SIDEBAR -->
+        <aside class="sidebar-right">
             <div class="side-box">
-                <div id="shoutbox-area"><span style="color:#999;">Bağlanıyor...</span></div>
-                <form id="sb-form" style="margin-top: 5px;">
-                    <input type="text" id="sb-name" class="sb-input" placeholder="İsim" maxlength="15" required>
-                    <input type="text" id="sb-msg" class="sb-input" placeholder="Mesaj..." maxlength="100" required>
-                    <button type="submit" class="sb-btn">GÖNDER!</button>
-                </form>
+                <div class="box-header">:: CLOCK ::</div>
+                <div class="box-content" style="text-align: center;">
+                    <div id="digital-clock" style="font-family: 'Courier New', monospace; font-size: 16px; font-weight: bold; color: var(--tech-blue);">
+                        00:00:00
+                    </div>
+                    <div style="font-size: 9px; color: #666;">Istanbul Time</div>
+                    <div id="date" style="font-size: 10px; margin-top: 2px;">--/--/--</div>
+                </div>
             </div>
 
-            <div class="box-header" style="background: var(--hot-pink);">:: BUTTONS ::</div>
-            <div class="side-box" style="text-align: center;">
-                <div class="button-grid">
-                    <a href="https://simobot.com" class="btn-88" style="background: #ff0099;">My Startup</a>
+            <div class="side-box">
+                <div class="box-header">:: LINKS ::</div>
+                <div class="box-content">
+                    <div class="banner-grid">
+                        <a href="https://simobot.com" class="banner-88x31" style="background:#ff1493;">MY<br>STARTUP</a>
+                        <div class="banner-88x31" style="background:navy;">HTML5</div>
+                        <div class="banner-88x31" style="background:orange; color:black;">NO AI</div>
+                        <div class="banner-88x31" style="background:purple;">RETRO</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="side-box">
+                <div class="box-header">:: SHOUTBOX ::</div>
+                <div class="box-content">
+                    <div id="shoutbox-area">
+                        <b>System:</b> Loading...<br>
+                    </div>
+                    <form id="sb-form" style="margin-top: 5px;">
+                        <input type="text" id="sb-name" placeholder="Name" class="sb-input" required maxlength="15">
+                        <input type="text" id="sb-msg" placeholder="Message" class="sb-input" required maxlength="100">
+                        <button type="submit" class="pixel-btn" style="width: 100%; margin-top: 3px;">Send</button>
+                    </form>
                 </div>
             </div>
         </aside>
+
     </div>
 
-    <footer>&copy; 2026 Ahmet Arvas. Designed with C<sub>10</sub>H<sub>16</sub>N<sub>5</sub>O<sub>13</sub>P<sub>3</sub></footer>
+    <footer>
+        COPYRIGHT (C) 2026 AHMET ARVAS.<br>
+        POWERED BY IMAGINATION AND TURKISH COFFEE.<br>
+        <span style="font-size: 10px; color: #666;">Best viewed with your eyes open.</span>
+    </footer>
+
 </div>
 
 <!-- SCRIPTS & FIREBASE -->
 <script type="module">
-    // 1. Clock & Counter Logic
-    function updateUI() {
+    // 1. Clock Logic
+    function updateTime() {
         const now = new Date();
-        document.getElementById('clock').innerText = now.toLocaleTimeString('tr-TR', {hour: '2-digit', minute:'2-digit'});
-        document.getElementById('date').innerText = now.toLocaleDateString('tr-TR');
+        const clockEl = document.getElementById('digital-clock');
+        const dateEl = document.getElementById('date');
+        if(clockEl) clockEl.innerText = now.toLocaleTimeString('tr-TR');
+        if(dateEl) dateEl.innerText = now.toLocaleDateString('tr-TR');
     }
-    setInterval(() => {
-        const counter = document.getElementById('counter');
-        if(counter && Math.random() > 0.9) { 
-            let current = parseInt(counter.innerText); 
-            counter.innerText = String(current + 1).padStart(5, '0'); 
-        }
-    }, 5000);
-    setInterval(updateUI, 1000); updateUI();
+    setInterval(updateTime, 1000);
+    updateTime();
 
     // 2. Firebase Imports
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -412,8 +555,8 @@
     let displayLimit = 20;
 
     // --- SPAM KORUMASI İÇİN DEĞİŞKENLER ---
-    let lastSentTime = 0;        // Son mesaj atılan zaman
-    const SPAM_COOLDOWN = 5000;  // 5 Saniye bekleme süresi (Milisaniye)
+    let lastSentTime = 0;
+    const SPAM_COOLDOWN = 5000;
 
     async function initFirebase() {
         await signInAnonymously(auth);
@@ -432,103 +575,80 @@
     }
 
     function renderShoutbox() {
-        if (allMessages.length === 0) { 
-            sbArea.innerHTML = '<span style="color:#666">Sessiz...</span>'; 
-            return; 
+        if (!sbArea) return;
+        if (allMessages.length === 0) {
+            sbArea.innerHTML = '<span style="color:#666">Sessiz...</span>';
+            return;
         }
 
         sbArea.innerHTML = "";
         const visibleMessages = allMessages.slice(0, displayLimit);
 
         visibleMessages.forEach(m => {
-            const div = document.createElement('div'); div.className = 'sb-msg';
+            const div = document.createElement('div');
+            div.style.marginBottom = "4px";
             const name = (m.name || 'Anon').replace(/</g, "&lt;");
             const text = (m.text || '').replace(/</g, "&lt;");
-            div.innerHTML = `<span class="sb-name">${name}:</span> <span class="sb-text">${text}</span>`;
+            div.innerHTML = `<b>${name}:</b> ${text}`;
             sbArea.appendChild(div);
         });
-
-        if (allMessages.length > displayLimit) {
-            const loadMoreBtn = document.createElement('button');
-            loadMoreBtn.innerText = "Devamını Göster ▼";
-            loadMoreBtn.style.cssText = "width: 100%; padding: 5px; background: #eee; border: 1px dashed #000; cursor: pointer; color: var(--hot-pink); font-family: inherit; font-size: 10px; margin-top: 5px; font-weight: bold;";
-            loadMoreBtn.onclick = () => {
-                displayLimit += 20;
-                renderShoutbox();
-            };
-            sbArea.appendChild(loadMoreBtn);
-        }
     }
 
-    sbForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        // --- SPAM KONTROLÜ 1: ZAMAN ---
-        const now = Date.now();
-        const timeDiff = now - lastSentTime;
-        
-        if (timeDiff < SPAM_COOLDOWN) {
-            const remaining = Math.ceil((SPAM_COOLDOWN - timeDiff) / 1000);
-            alert(`Hop! Çok hızlısın. Lütfen ${remaining} saniye bekle.`);
-            return; // Fonksiyonu durdur
-        }
+    if (sbForm) {
+        sbForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-        const user = auth.currentUser;
-        if(!user || !sbName.value || !sbMsg.value) return;
-        
-        // --- SPAM KONTROLÜ 2: BUTONU KİLİTLE ---
-        const btn = document.querySelector('.sb-btn');
-        const originalText = btn.innerText;
-        
-        btn.disabled = true;                // Tıklamayı kapat
-        btn.innerText = "Yollanıyor...";    // Yazıyı değiştir
-        btn.style.opacity = "0.6";          // Rengi soldur
-        
-        try {
-            await addDoc(collection(db, 'shoutbox_v2'), {
-                name: sbName.value, 
-                text: sbMsg.value, 
-                timestamp: serverTimestamp(), 
-                uid: user.uid
-            });
-            
-            sbMsg.value = ''; 
-            sbArea.scrollTop = 0;
-            
-            // Son gönderim zamanını güncelle
-            lastSentTime = Date.now(); 
+            const now = Date.now();
+            const timeDiff = now - lastSentTime;
 
-        } catch(err) { 
-            console.error("Hata:", err); 
-            alert("Hata: Mesaj gönderilemedi.");
-        } finally {
-            // İşlem bitince (başarılı veya hatalı) butonu 1 saniye sonra geri aç
-            // 1 saniye eklememizin sebebi "çift tıklama" refleksini tamamen engellemek
-            setTimeout(() => {
-                btn.disabled = false;
-                btn.innerText = originalText;
-                btn.style.opacity = "1";
-            }, 1000);
-        }
-    });
+            if (timeDiff < SPAM_COOLDOWN) {
+                alert(`Please wait.`);
+                return;
+            }
+
+            const user = auth.currentUser;
+            if(!user || !sbName.value || !sbMsg.value) return;
+
+            const btn = sbForm.querySelector('button');
+            const originalText = btn.innerText;
+
+            btn.disabled = true;
+            btn.innerText = "...";
+
+            try {
+                await addDoc(collection(db, 'shoutbox_v2'), {
+                    name: sbName.value,
+                    text: sbMsg.value,
+                    timestamp: serverTimestamp(),
+                    uid: user.uid
+                });
+
+                sbMsg.value = '';
+                sbArea.scrollTop = 0;
+                lastSentTime = Date.now();
+
+            } catch(err) {
+                console.error("Error:", err);
+            } finally {
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.innerText = originalText;
+                }, 1000);
+            }
+        });
+    }
 
     async function loadMarqueeQuote() {
         const marquee = document.getElementById('wikiquote-marquee');
+        if(!marquee) return;
         try {
             const zenUrl = "https://corsproxy.io/?" + encodeURIComponent("https://zenquotes.io/api/random");
             const responseZen = await fetch(zenUrl);
-            if (!responseZen.ok) throw new Error("ZenQuotes hata");
+            if (!responseZen.ok) throw new Error("ZenQuotes error");
             const dataZen = await responseZen.json();
             marquee.innerHTML = `★ "${dataZen[0].q}" — ${dataZen[0].a} ★`;
         } catch (errorZen) {
-            try {
-                const responseKanye = await fetch("https://api.kanye.rest/");
-                if (!responseKanye.ok) throw new Error("Kanye hata");
-                const dataKanye = await responseKanye.json();
-                marquee.innerHTML = `★ "${dataKanye.quote}" — Kanye West ★`;
-            } catch (errorKanye) {
-                marquee.innerHTML = "★ There should be quote ★";
-            }
+             // Fallback
         }
     }
 
