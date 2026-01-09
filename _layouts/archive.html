@@ -2,11 +2,12 @@
 layout: default
 ---
 
-<div class="blog-entry">
-    <div class="entry-title">
+<div class="content-block" style="margin-left: 0; margin-right: 0;">
+    <div class="section-bar" style="background: var(--accent-pink); color: var(--white); margin: -20px -20px 20px -20px; width: calc(100% + 40px); border: none;">
         <span>★ TÜM KAYITLAR (TIMELINE)</span>
-        <span class="entry-date">ROOT/ALL_FILES</span>
+        <span style="font-size: 0.8rem; margin-left: auto;">ROOT/ALL_FILES</span>
     </div>
+
     <div class="entry-body">
         
         <p style="font-size: 12px; margin-bottom: 20px;">
@@ -18,18 +19,18 @@ layout: default
         
         {% assign all_content = blog_posts | concat: projects | sort: 'date' | reverse %}
 
-        <ul class="pixel-list" style="font-family: monospace;">
+        <ul class="pixel-list" style="font-family: var(--font-code); list-style: none; padding: 0;">
             {% for item in all_content %}
-            <li style="border-bottom: 1px dotted #ccc; padding: 5px 0; display: flex; justify-content: space-between; align-items: center;">
+            <li style="border-bottom: 1px dotted var(--accent-pink); padding: 5px 0; display: flex; justify-content: space-between; align-items: center;">
                 
                 <span>
                     {% if item.collection == 'projects' %}
-                        <span style="color: #fff; background: var(--hot-pink); padding: 0 4px; font-size: 10px; margin-right: 5px;">[PROJE]</span>
+                        <span style="color: var(--white); background: var(--accent-pink); padding: 0 4px; font-size: 10px; margin-right: 5px;">[PROJE]</span>
                     {% else %}
-                        <span style="color: #000; background: var(--electric-blue); padding: 0 4px; font-size: 10px; margin-right: 5px;">[BLOG]</span>
+                        <span style="color: var(--white); background: var(--accent-cool); padding: 0 4px; font-size: 10px; margin-right: 5px;">[BLOG]</span>
                     {% endif %}
 
-                    <a href="{{ item.url }}" style="border: none; background: transparent; font-weight: bold; color: #333;">
+                    <a href="{{ item.url }}" style="border: none; background: transparent; font-weight: bold; color: var(--text-contrast);">
                         {{ item.title }}
                     </a>
                 </span>

@@ -2,27 +2,31 @@
 layout: default
 ---
 
-<div class="blog-entry">
-    <div class="entry-title">
+<div class="content-block" style="margin-left: 0; margin-right: 0;">
+    <div class="section-bar" style="background: var(--accent-pink); color: var(--white); margin: -20px -20px 20px -20px; width: calc(100% + 40px); border: none;">
         <span>★ PROJELERİM</span>
-        <span class="entry-date">WORK_LOG</span>
+        <span style="font-size: 0.8rem; margin-left: auto;">WORK_LOG</span>
     </div>
+
     <div class="entry-body">
         <p>Geliştirdiğim bazı oyunlar ve web projeleri:</p>
         
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;">
             
-            {% for project in site.projects %} <div style="border: 2px solid #000; box-shadow: 4px 4px 0 var(--acid-green); background: #fff; padding: 5px; text-align: center;">
-                <div style="background: var(--border-color); height: 80px; display: flex; align-items: center; justify-content: center; color: #fff; margin-bottom: 5px; overflow: hidden;">
+            {% for project in site.projects %}
+            <div class="content-block" style="margin: 0; padding: 10px; box-shadow: 4px 4px 0 var(--accent-cool);">
+                <div style="background: var(--accent-cool); height: 100px; display: flex; align-items: center; justify-content: center; color: var(--white); margin-bottom: 5px; overflow: hidden; border: 1px solid var(--accent-pink);">
                     {% if project.image %}
                     <img src="{{ project.image }}" style="width: 100%; height: 100%; object-fit: cover; border: none; box-shadow: none; margin: 0;">
                     {% else %}
                     <span style="font-size: 30px;">⚡</span>
                     {% endif %}
                 </div>
-                <h4 style="margin: 5px 0; font-size: 14px; border: none; background: none; padding: 0;">{{ project.title }}</h4>
-                <p style="font-size: 11px; margin: 0 0 10px 0;">{{ project.description }}</p>
-                <a href="{{ project.url }}" class="btn-88" style="width: 100%; background: var(--hot-pink);">İNCELE</a>
+                <h4 style="margin: 10px 0; font-size: 16px; font-weight: bold; text-align: center;">{{ project.title }}</h4>
+                <p style="font-size: 12px; margin: 0 0 10px 0; text-align: center;">{{ project.description }}</p>
+                <div style="text-align: center;">
+                    <a href="{{ project.url }}" class="btn-retro" style="width: 100%;">İNCELE</a>
+                </div>
             </div>
             {% endfor %}
             

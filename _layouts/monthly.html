@@ -2,10 +2,10 @@
 layout: default
 ---
 
-<div class="blog-entry">
-    <div class="entry-title">
+<div class="content-block" style="margin-left: 0; margin-right: 0;">
+    <div class="section-bar" style="background: var(--accent-pink); color: var(--white); margin: -20px -20px 20px -20px; width: calc(100% + 40px); border: none;">
         <span>★ AYLIK SİSTEM LOGLARI</span>
-        <span class="entry-date">ARCHIVE_MODE: MONTHLY</span>
+        <span style="font-size: 0.8rem; margin-left: auto;">ARCHIVE_MODE: MONTHLY</span>
     </div>
     
     <div class="entry-body">
@@ -23,7 +23,7 @@ layout: default
 
             {% if current_month != next_month or current_year != next_year %}
                 
-                <div class="box-header" style="background: var(--hot-pink); margin-top: 25px; text-align: left; padding-left: 10px;">
+                <div class="section-bar" style="background: var(--bar-bg); color: var(--text-contrast); margin-top: 25px;">
                     📂 
                     {% case current_month %}
                         {% when '01' %}OCAK
@@ -42,15 +42,15 @@ layout: default
                     {{ current_year }}
                 </div>
                 
-                <div class="side-box" style="margin-bottom: 0; border-top: none;">
-                    <ul class="pixel-list">
+                <div class="sidebar-box" style="margin-bottom: 0; border-top: none;">
+                    <ul class="nav-links" style="text-align: left;">
             {% endif %}
 
-            <li style="margin-bottom: 8px;">
+            <li style="margin-bottom: 8px; border-bottom: 1px dotted #ccc; padding-bottom: 5px;">
                 <span style="font-size: 10px; color: #999; margin-right: 5px;">
                     [{{ post.date | date: "%d" }}]
                 </span>
-                <a href="{{ post.url }}" style="font-weight: bold; color: #333; text-decoration: none; border: none;">
+                <a href="{{ post.url }}" style="font-weight: bold; color: var(--text-contrast); text-decoration: none; border: none; display: inline;">
                     {{ post.title }}
                 </a>
             </li>

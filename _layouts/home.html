@@ -2,24 +2,25 @@
 layout: default
 ---
 
-<div style="border: 2px solid #000; background: var(--acid-green); padding: 10px; margin-bottom: 20px; text-align: center; box-shadow: 5px 5px 0 #000;">
-    <b>⚠ Hosgeldiniz ⚠</b><br>
+<div class="content-block text-center" style="background-color: var(--bar-bg);">
+    <b class="pixel-font">⚠ Hosgeldiniz ⚠</b><br>
     {{ site.description | default: "Yeni icerikler yukleniyor..." }}
 </div>
 
 {% for post in site.posts %}
-<article class="blog-entry">
-    <div class="entry-title">
-        <a href="{{ post.url }}" style="color: #000; text-decoration: none; border: none; background: transparent;">
+<article class="content-block" style="margin-left: 0; margin-right: 0;">
+    <div class="section-bar" style="background: var(--accent-pink); color: var(--white); margin: -20px -20px 20px -20px; width: calc(100% + 40px); border: none;">
+        <a href="{{ post.url }}" style="color: var(--white); text-decoration: none; border: none; flex-grow: 1;">
             <span>★ {{ post.title }}</span>
         </a>
-        <span class="entry-date">{{ post.date | date: "%d %B %Y" }}</span>
+        <span style="font-size: 0.8rem;">{{ post.date | date: "%d %B %Y" }}</span>
     </div>
+
     <div class="entry-body">
         {{ post.excerpt }}
         
         <div style="margin-top: 15px; text-align: right;">
-            <a href="{{ post.url }}" class="btn-88" style="background: var(--deep-purple); display: inline-flex; width: auto; padding: 0 10px;">
+            <a href="{{ post.url }}" class="btn-retro">
                 DEVAMINI OKU >>
             </a>
         </div>

@@ -2,19 +2,19 @@
 layout: default
 ---
 
-<article class="blog-entry">
-    <div class="entry-title">
+<article class="content-block" style="margin-left: 0; margin-right: 0;">
+    <div class="section-bar" style="background: var(--accent-pink); color: var(--white); margin: -20px -20px 20px -20px; width: calc(100% + 40px); border: none;">
         <span>★ {{ page.title }}</span>
-        <span class="entry-date">{{ page.date | date: "%d %B %Y" }}</span>
+        <span style="font-size: 0.8rem; margin-left: auto;">{{ page.date | date: "%d %B %Y" }}</span>
     </div>
-    
-    <div class="entry-body">
+
+    <div class="entry-body post-content">
         {{ content }}
-        
-        <hr style="border: 1px dashed #000; margin: 20px 0;">
-        
+
+        <hr style="border: 1px dotted var(--accent-pink); margin: 20px 0;">
+
         {% if page.music %}
-        <div style="background:#f0f0f0; border-left: 4px solid var(--hot-pink); padding: 5px; font-size: 12px;">
+        <div style="background: var(--canvas); border-left: 4px solid var(--accent-pink); padding: 5px; font-size: 12px; margin-top: 10px;">
             <i>Şu an dinliyorum: {{ page.music }}</i> 🎵
         </div>
         {% endif %}
@@ -23,7 +23,7 @@ layout: default
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
     {% if page.previous.url %}
-    <a href="{{ page.previous.url }}" class="btn-88" style="background: var(--border-color); width: auto; padding: 0 10px;">
+    <a href="{{ page.previous.url }}" class="btn-retro">
         << {{ page.previous.title | truncate: 15 }}
     </a>
     {% else %}
@@ -31,7 +31,7 @@ layout: default
     {% endif %}
 
     {% if page.next.url %}
-    <a href="{{ page.next.url }}" class="btn-88" style="background: var(--border-color); width: auto; padding: 0 10px;">
+    <a href="{{ page.next.url }}" class="btn-retro">
         {{ page.next.title | truncate: 15 }} >>
     </a>
     {% endif %}

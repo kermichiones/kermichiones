@@ -1,0 +1,316 @@
+/* =========================================
+   HEISEI DIGITAL DIARY (COOL-CUTE VER.)
+   ========================================= */
+
+:root {
+    /* Color Palette */
+    --canvas: #FFFEF0;          /* Ivory White */
+    --bar-bg: #FFFFA0;          /* Pale Lemon Yellow */
+    --accent-pink: #FF85A2;     /* Pastel Strawberry */
+    --accent-cool: #89CFF0;     /* Baby Blue */
+    --text-contrast: #4A4A4A;   /* Soft Black */
+    --border-color: #FF85A2;    /* Pink Borders */
+    --white: #FFFFFF;
+
+    /* Typography */
+    --font-header: 'DotGothic16', 'Zen Maru Gothic', sans-serif;
+    --font-body: 'Verdana', 'Tahoma', sans-serif;
+    --font-code: 'Courier New', monospace;
+}
+
+/* =========================================
+   RESET & BASE
+   ========================================= */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--canvas);
+    color: var(--text-contrast);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+a {
+    color: var(--accent-cool);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent-cool);
+    transition: all 0.2s;
+}
+
+a:hover {
+    background-color: var(--accent-pink);
+    color: var(--white);
+    border-bottom: 1px solid var(--accent-pink);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-header);
+    margin: 0;
+    font-weight: normal;
+}
+
+/* =========================================
+   LAYOUT ARCHITECTURE
+   ========================================= */
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: var(--white);
+    border-right: 1px dotted var(--accent-pink);
+    flex-shrink: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-pink) var(--canvas);
+}
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    min-width: 0; /* Prevent flex child overflow */
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================
+   COMPONENTS
+   ========================================= */
+
+/* Section Bars (Yellow Strips) */
+.section-bar {
+    width: 100%;
+    background-color: var(--bar-bg);
+    padding: 8px 15px;
+    border-top: 1px dotted var(--accent-pink);
+    border-bottom: 1px dotted var(--accent-pink);
+    font-family: var(--font-header);
+    color: var(--text-contrast);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-bar::before {
+    content: '★'; /* Pixel icon placeholder */
+    color: var(--accent-pink);
+    font-size: 0.8em;
+}
+
+/* Paper Sheets / Content Blocks */
+.content-block {
+    background-color: var(--white);
+    border: 1px dotted var(--accent-pink);
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 4px 4px 0px rgba(255, 133, 162, 0.2); /* Soft Pink Shadow */
+}
+
+/* Sidebar Boxes */
+.sidebar-box {
+    border: 1px solid var(--accent-pink);
+    padding: 10px;
+    background-color: var(--canvas);
+    margin-bottom: 15px;
+    box-shadow: 2px 2px 0px var(--accent-pink);
+}
+
+.sidebar-title {
+    background-color: var(--accent-pink);
+    color: var(--white);
+    font-family: var(--font-header);
+    padding: 2px 5px;
+    font-size: 0.9rem;
+    text-align: center;
+    margin: -10px -10px 10px -10px; /* Pull out to edges */
+    border-bottom: 1px solid var(--accent-pink);
+}
+
+/* Buttons (Outset) */
+.btn-retro {
+    display: inline-block;
+    background-color: var(--canvas);
+    border: 2px outset var(--white);
+    border-top-color: var(--white);
+    border-left-color: var(--white);
+    border-right-color: #D3D3D3;
+    border-bottom-color: #D3D3D3;
+    padding: 2px 10px;
+    font-family: var(--font-header);
+    font-size: 12px;
+    color: var(--text-contrast);
+    cursor: pointer;
+    text-decoration: none;
+    margin: 2px;
+}
+
+.btn-retro:active {
+    border-style: inset;
+}
+
+.btn-retro:hover {
+    background-color: var(--bar-bg);
+}
+
+/* Profile */
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 10px;
+    background: var(--accent-cool);
+    border: 2px dotted var(--accent-pink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-header);
+    font-size: 24px;
+    color: var(--white);
+    border-radius: 50%; /* Soften it a bit for kawaii feel, or keep square for retro */
+    border-radius: 10px; /* Rounded corners */
+}
+
+/* Marquee */
+.marquee-wrapper {
+    background-color: var(--accent-cool);
+    color: var(--white);
+    font-family: var(--font-header);
+    padding: 5px 0;
+    border-bottom: 1px dotted var(--accent-pink);
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* Shoutbox */
+#shoutbox-area {
+    height: 120px;
+    overflow-y: auto;
+    background: var(--white);
+    border: 1px inset #ccc;
+    font-size: 11px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.sb-msg {
+    margin-bottom: 4px;
+    border-bottom: 1px dotted #eee;
+}
+
+.sb-name {
+    color: var(--accent-pink);
+    font-weight: bold;
+}
+
+/* Navigation Links in Sidebar */
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links li {
+    margin-bottom: 5px;
+}
+
+.nav-links a {
+    display: block;
+    padding: 5px;
+    background-color: var(--white);
+    border: 1px dotted var(--accent-pink);
+    text-align: center;
+    color: var(--text-contrast);
+    border-bottom: 2px solid #ddd; /* Fake 3D bottom */
+}
+
+.nav-links a:hover {
+    transform: translate(1px, 1px);
+    border-bottom: 1px solid #ddd;
+    background-color: var(--bar-bg);
+}
+
+/* Footer */
+.site-footer {
+    background-color: var(--text-contrast);
+    color: var(--white);
+    padding: 20px;
+    text-align: center;
+    font-family: var(--font-code);
+    font-size: 12px;
+    margin-top: auto; /* Push to bottom if content is short */
+}
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+@media (max-width: 768px) {
+    .app-layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 2px dotted var(--accent-pink);
+    }
+
+    .content-block {
+        margin: 10px;
+        padding: 15px;
+    }
+}
+
+/* =========================================
+   HELPER CLASSES
+   ========================================= */
+.text-center { text-align: center; }
+.mt-2 { margin-top: 1rem; }
+.mb-2 { margin-bottom: 1rem; }
+.pixel-font { font-family: var(--font-header); }
+
+/* Markdown Content Styling */
+.post-content h1, .post-content h2 {
+    border-bottom: 2px dotted var(--accent-pink);
+    padding-bottom: 5px;
+    color: var(--accent-pink);
+}
+
+.post-content img {
+    max-width: 100%;
+    border: 1px solid var(--accent-pink);
+    padding: 5px;
+    background: var(--white);
+}
+
+.post-content code {
+    background-color: #eee;
+    padding: 2px 4px;
+    font-family: var(--font-code);
+    font-size: 0.9em;
+}
+
+.post-content pre {
+    background-color: #f4f4f4;
+    padding: 10px;
+    overflow-x: auto;
+    border: 1px solid #ddd;
+}

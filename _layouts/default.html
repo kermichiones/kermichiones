@@ -5,361 +5,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: site.title }}</title>
-    <!-- Google Fonts: DotGothic16 -->
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+    <!-- Icons -->
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Meta -->
     <meta property="og:title" content="{{ page.title | default: site.title }}">
     <meta property="og:description" content="Ahmet Arvas Embedded Systems, Philosophia, Fungi, Some programming languages and Rocketry.">
     <meta property="og:image" content="{{ site.url }}/social-preview.png">
     <meta property="og:url" content="{{ site.url }}{{ page.url }}">
     <meta name="twitter:card" content="summary_large_image">
-    <style>
-        /* =========================================
-           VIBRANT PALETTE & STYLES
-           ========================================= */
-        :root {
-            --hot-pink: #ff0099;
-            --acid-green: #ccff00;
-            --electric-blue: #00f0ff;
-            --deep-purple: #6600cc;
-            --border-color: #1a1a1a;
-            --bg-grid: #e5e5f7;
-        }
-
-        body {
-            margin: 0;
-            padding: 20px 0;
-            background-color: var(--bg-grid);
-            background-image: linear-gradient(var(--hot-pink) 1px, transparent 1px),
-            linear-gradient(var(--electric-blue) 1px, transparent 1px);
-            background-size: 30px 30px;
-            background-position: 0 0, 15px 15px;
-            font-family: "DotGothic16", "MS PGothic", monospace;
-            font-size: 15px;
-            color: var(--border-color);
-        }
-
-        /* SCROLLBAR */
-        ::-webkit-scrollbar { width: 12px; }
-        ::-webkit-scrollbar-track { background: #fff; border-left: 2px solid #000; }
-        ::-webkit-scrollbar-thumb { background: var(--hot-pink); border: 2px solid #000; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--deep-purple); }
-
-        a { 
-            text-decoration: none; 
-            color: var(--deep-purple); 
-            border-bottom: 2px solid var(--electric-blue);
-            font-weight: bold;
-            transition: all 0.1s;
-        }
-        a:hover { 
-            background-color: var(--hot-pink); 
-            color: #fff; 
-            border-bottom: 2px solid #000;
-        }
-
-        /* CONTAINER */
-        .main-container {
-            width: 920px;
-            max-width: 95%;
-            margin: 0 auto;
-            background-color: #ffffff;
-            border: 3px solid var(--border-color);
-            box-shadow: 10px 10px 0px var(--hot-pink);
-            position: relative;
-        }
-
-        /* HEADER */
-        header {
-            background-color: var(--border-color);
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 3px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-        }
-        header::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: radial-gradient(circle, #333 1px, transparent 1px);
-            background-size: 5px 5px;
-            opacity: 0.5;
-            z-index: 0;
-        }
-        h1.site-title {
-            font-size: 32px;
-            color: var(--electric-blue);
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            position: relative;
-            z-index: 1;
-            text-shadow: 4px 4px 0px var(--hot-pink);
-        }
-        .subtitle {
-            font-size: 14px;
-            color: var(--acid-green);
-            margin-top: 5px;
-            position: relative;
-            z-index: 1;
-            font-weight: normal;
-        }
-
-        /* NAV */
-        .top-nav {
-            background-color: #fff;
-            border-bottom: 3px solid var(--border-color);
-            padding: 0;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-        .top-nav a {
-            flex-grow: 1;
-            text-align: center;
-            padding: 10px 5px;
-            border-right: 2px solid var(--border-color);
-            border-bottom: none;
-            color: #000;
-            font-size: 14px;
-            text-decoration: none;
-        }
-        .top-nav a:last-child { border-right: none; }
-        .top-nav a:hover {
-            background-color: var(--electric-blue);
-            color: #000;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        /* MARQUEE */
-        .marquee-container {
-            background: var(--hot-pink);
-            color: #fff;
-            font-weight: bold;
-            padding: 5px;
-            border-bottom: 3px solid var(--border-color);
-            font-size: 14px;
-        }
-
-        /* LAYOUT */
-        .content-wrapper { display: flex; flex-wrap: wrap; }
-        .column { padding: 15px; box-sizing: border-box; }
-        .sidebar-left { width: 200px; background-color: #f2f2f2; border-right: 3px solid var(--border-color); flex-shrink: 0; }
-        .main-content { flex: 1; min-width: 300px; background: #fff; }
-        .sidebar-right { width: 200px; background-color: #f2f2f2; border-left: 3px solid var(--border-color); flex-shrink: 0; }
-
-        @media (max-width: 800px) {
-            .sidebar-left, .sidebar-right, .main-content { width: 100%; border: none; border-bottom: 3px solid var(--border-color); }
-            .sidebar-left { order: 2; }
-            .sidebar-right { order: 3; }
-            .main-content { order: 1; }
-        }
-
-        /* COMPONENTS */
-        .box-header {
-            background-color: #000;
-            color: #fff;
-            padding: 5px;
-            font-weight: bold;
-            text-align: center;
-            border: 2px solid #000;
-            margin-bottom: -2px;
-            position: relative;
-            z-index: 2;
-        }
-        .side-box {
-            background: #fff;
-            border: 2px solid #000;
-            margin-bottom: 20px;
-            padding: 10px;
-            box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
-        }
-
-        /* BLOG CONTENT STYLING (For Markdown) */
-        .blog-entry {
-            margin-bottom: 30px;
-            border: 2px solid #000;
-            background: #fff;
-            box-shadow: 6px 6px 0px var(--electric-blue);
-        }
-        .entry-title {
-            background-color: var(--electric-blue);
-            padding: 8px 12px;
-            font-weight: bold;
-            font-size: 16px;
-            color: #000;
-            border-bottom: 2px solid #000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .entry-date {
-            font-size: 11px;
-            background: #000;
-            color: var(--acid-green);
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-        .entry-body { padding: 15px; line-height: 1.6; }
-
-        /* Markdown Elements */
-        .entry-body h1, .entry-body h2, .entry-body h3 {
-            color: #000;
-            border-bottom: 2px dashed var(--hot-pink);
-            padding-bottom: 5px;
-            margin-top: 20px;
-        }
-        .entry-body h1 { font-size: 20px; border-left: 5px solid var(--hot-pink); padding-left: 10px; background: #fff0f5; }
-        .entry-body pre {
-            background-color: #000;
-            color: #00ff00;
-            padding: 10px;
-            border: 2px solid #333;
-            overflow-x: auto;
-            font-family: monospace;
-            box-shadow: 3px 3px 0 #999;
-        }
-        .entry-body code { background-color: #eee; color: #d63384; padding: 2px 4px; font-family: monospace; font-size: 0.9em; }
-        .entry-body pre code { background-color: transparent; color: inherit; padding: 0; }
-        .entry-body ul { list-style: square; padding-left: 20px; }
-        .entry-body ul li::marker { color: var(--hot-pink); }
-        .entry-body img { max-width: 100%; height: auto; border: 2px solid #000; box-shadow: 4px 4px 0 rgba(0,0,0,0.2); margin: 10px 0; }
-
-        /* Shoutbox & Sidebars */
-        #shoutbox-area {
-            height: 150px;
-            overflow-y: auto;
-            border: 2px inset #ccc;
-            background: #fafafa;
-            padding: 5px;
-            font-size: 12px;
-            margin-bottom: 8px;
-        }
-        .sb-msg { margin-bottom: 4px; border-bottom: 1px dashed #ddd; padding-bottom: 2px; }
-        .sb-name { color: var(--hot-pink); font-weight: bold; }
-        .sb-text { color: #333; }
-        .sb-input { width: 100%; box-sizing: border-box; border: 2px solid #000; padding: 4px; font-family: inherit; margin-bottom: 4px; background: #fff; }
-        .sb-btn { width: 100%; background: var(--hot-pink); color: #fff; border: 2px solid #000; font-family: inherit; font-weight: bold; cursor: pointer; padding: 4px; }
-        .sb-btn:hover { background: var(--deep-purple); }
-
-        .profile-pic {
-            width: 100px; height: 100px; margin: 10px auto;
-            background: var(--electric-blue); border: 2px solid #000;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 30px; color: #fff; overflow: hidden;
-        }
-        ul.pixel-list { list-style: none; padding: 0; margin: 0; }
-        ul.pixel-list li { margin-bottom: 6px; padding-left: 15px; position: relative; }
-        ul.pixel-list li::before { content: "➤"; color: var(--hot-pink); position: absolute; left: 0; font-size: 10px; top: 2px; }
-        .counter-box { background: #000; color: var(--hot-pink); font-family: monospace; padding: 5px; border: 2px solid #999; font-size: 18px; letter-spacing: 5px; margin-top: 5px; }
-        
-        footer { background-color: var(--border-color); color: #fff; text-align: center; padding: 15px; font-size: 12px; border-top: 3px solid #000; }
-        .button-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; }
-        .btn-88 {
-            width: 88px; height: 31px; border: 1px solid #000;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 9px; font-weight: bold; color: #fff; text-decoration: none !important;
-            border-bottom: 1px solid #000 !important;
-        }
-        .btn-88:hover { opacity: 0.8; transform: scale(1.05); }
-    </style>
 </head>
 <body>
 
-<div class="main-container">
-
-    <header>
-        <h1 class="site-title">{{ site.title | default: "Ahmet Arvas" }}</h1>
-        <div class="subtitle">Rastgele Düşünceler</div>
-    </header>
-
-    <div class="marquee-container">
-        <marquee scrollamount="5" id="wikiquote-marquee">
-            ★ YÜKLENİYOR... ★
-        </marquee>
-    </div>
-
-    <nav class="top-nav">
-        <a href="/">ANA SAYFA</a>
-        <a href="/aylik/">AYLIK</a>
-        <a href="/projeler/">PROJELERIM</a>
-        <a href="/arsiv/">ARSIV</a>
-        <a href="/hakkimda/">HAKKIMDA</a>
-    </nav>
-
-    <div class="content-wrapper">
-        <!-- SOL SÜTUN -->
-        <aside class="column sidebar-left">
-            <div class="box-header" style="background: var(--hot-pink);">:: PROFİL ::</div>
-            <div class="side-box">
-                <div class="profile-pic">(¬_¬)</div>
-                <div style="text-align: center; font-weight: bold; margin-bottom: 5px;">Ahmet Arvas</div>
-                <div style="font-size: 11px; text-align: center; color: #666;"></div>
-                <hr style="border: 1px dashed #ccc;">
-                <p style="font-size: 11px;text-align: center;">Embedded Systems, Philosophia,<br> Fungi, Some programming languages <br> and Rocketry</p>
+<div class="app-layout">
+    <!-- SIDEBAR (Left Fixed) -->
+    <aside class="sidebar">
+        <!-- Profile -->
+        <div class="sidebar-box">
+            <div class="sidebar-title">:: PROFİL ::</div>
+            <div class="profile-pic">(｡•̀ᴗ-)✧</div>
+            <div class="text-center">
+                <strong>Ahmet Arvas</strong>
+                <p style="font-size: 11px; margin-top: 5px;">Embedded Systems, Philosophia, Fungi, Rocketry</p>
             </div>
-            <div class="box-header" style="background: var(--deep-purple);">:: NAV ::</div>
-            <div class="side-box">
-                <div style="font-size: 11px; font-weight: bold; margin-bottom: 5px; color: #666;">SON GİRDİLER</div>
-                <ul class="pixel-list">
-                    {% for post in site.posts limit:3 %}
-                        <li>
-                            <a href="{{ post.url }}">{{ post.title }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-                {% if site.posts.size == 0 %}
-                    <div style="font-size: 10px; color: red;">[!] HİÇ VERİ YOK</div>
-                {% endif %}
-            </div>
-            <div class="side-box" style="text-align: center;">
-                <div style="font-size: 10px; font-weight: bold; margin-bottom: 5px;">ZİYARETÇİ</div>
-                <img src="https://count.getloli.com/get/@AhmetArvasBlog?theme=moebooru" alt="Ziyaretçi Sayacı" style="width: 100%; border: 2px solid #000; box-shadow: 2px 2px 0 #999;">  
-                <div style="font-size: 9px; color: #666; margin-top: 2px;">Site yeniden yuklenince bile artiyor :(</div>
-            </div>
-        </aside>
+        </div>
 
-        <!-- ORTA İÇERİK (JEKYLL CONTENT) -->
-        <main class="column main-content">
+        <!-- Navigation -->
+        <div class="sidebar-box">
+            <div class="sidebar-title">:: NAVIGASYON ::</div>
+            <ul class="nav-links">
+                <li><a href="/">ANA SAYFA</a></li>
+                <li><a href="/aylik/">AYLIK</a></li>
+                <li><a href="/projeler/">PROJELERIM</a></li>
+                <li><a href="/arsiv/">ARSIV</a></li>
+                <li><a href="/hakkimda/">HAKKIMDA</a></li>
+            </ul>
+        </div>
+
+        <!-- Clock -->
+        <div class="sidebar-box text-center">
+            <div class="sidebar-title">:: ZAMAN ::</div>
+            <div id="clock" style="font-size: 1.2rem; font-family: var(--font-header);">--:--</div>
+            <div id="date" style="font-size: 0.8rem;">--/--/--</div>
+        </div>
+
+        <!-- Shoutbox -->
+        <div class="sidebar-box">
+            <div class="sidebar-title">:: SHOUTBOX ::</div>
+            <div id="shoutbox-area"><span style="color:#999;">Bağlanıyor...</span></div>
+            <form id="sb-form" style="margin-top: 5px;">
+                <input type="text" id="sb-name" placeholder="İsim" maxlength="15" required style="width: 100%; margin-bottom: 3px; font-family: inherit;">
+                <input type="text" id="sb-msg" placeholder="Mesaj..." maxlength="100" required style="width: 100%; margin-bottom: 3px; font-family: inherit;">
+                <button type="submit" class="sb-btn btn-retro" style="width: 100%;">GÖNDER!</button>
+            </form>
+        </div>
+
+        <!-- Visitor Counter -->
+        <div class="sidebar-box text-center">
+            <div class="sidebar-title">:: ZIYARETÇI ::</div>
+             <img src="https://count.getloli.com/get/@AhmetArvasBlog?theme=moebooru" alt="Ziyaretçi Sayacı" style="width: 100%;">
+        </div>
+
+        <!-- Buttons -->
+        <div class="sidebar-box text-center">
+             <div class="sidebar-title">:: LINKS ::</div>
+             <a href="https://simobot.com" class="btn-retro">My Startup</a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT (Fluid) -->
+    <main class="main-content">
+        <!-- Header -->
+        <header>
+            <div class="section-bar" style="font-size: 2rem; justify-content: center; background-color: var(--canvas); border-bottom: none;">
+                {{ site.title | default: "Ahmet Arvas" }}
+            </div>
+            <div class="marquee-wrapper">
+                <marquee scrollamount="5" id="wikiquote-marquee">★ YÜKLENİYOR... ★</marquee>
+            </div>
+        </header>
+
+        <!-- Page Content -->
+        <section class="content-block post-content">
             {{ content }}
-        </main>
+        </section>
 
-        <!-- SAĞ SÜTUN -->
-        <aside class="column sidebar-right">
-            <div class="box-header" style="background: var(--electric-blue); color: #000;">:: ZAMAN ::</div>
-            <div class="side-box" style="text-align: center;">
-                <div id="clock" style="font-size: 20px; font-weight: bold; color: var(--deep-purple);">--:--</div>
-                <div id="date" style="font-size: 12px;">--/--/--</div>
-            </div>
-
-            <div class="box-header" style="background: #000;">:: SHOUTBOX ::</div>
-            <div class="side-box">
-                <div id="shoutbox-area"><span style="color:#999;">Bağlanıyor...</span></div>
-                <form id="sb-form" style="margin-top: 5px;">
-                    <input type="text" id="sb-name" class="sb-input" placeholder="İsim" maxlength="15" required>
-                    <input type="text" id="sb-msg" class="sb-input" placeholder="Mesaj..." maxlength="100" required>
-                    <button type="submit" class="sb-btn">GÖNDER!</button>
-                </form>
-            </div>
-
-            <div class="box-header" style="background: var(--hot-pink);">:: BUTTONS ::</div>
-            <div class="side-box" style="text-align: center;">
-                <div class="button-grid">
-                    <a href="https://simobot.com" class="btn-88" style="background: #ff0099;">My Startup</a>
-                </div>
-            </div>
-        </aside>
-    </div>
-
-    <footer>&copy; 2026 Ahmet Arvas. Designed with C<sub>10</sub>H<sub>16</sub>N<sub>5</sub>O<sub>13</sub>P<sub>3</sub></footer>
+        <!-- Footer -->
+        <footer class="site-footer">
+            &copy; 2026 Ahmet Arvas. Designed with C<sub>10</sub>H<sub>16</sub>N<sub>5</sub>O<sub>13</sub>P<sub>3</sub>
+            <br>
+            <span style="color: var(--accent-pink);">Heisei Retro Design v2.0</span>
+        </footer>
+    </main>
 </div>
 
 <!-- SCRIPTS & FIREBASE -->
@@ -371,11 +121,8 @@
         document.getElementById('date').innerText = now.toLocaleDateString('tr-TR');
     }
     setInterval(() => {
-        const counter = document.getElementById('counter');
-        if(counter && Math.random() > 0.9) { 
-            let current = parseInt(counter.innerText); 
-            counter.innerText = String(current + 1).padStart(5, '0'); 
-        }
+        // Counter simulation logic removed as it was just mocking numbers locally, but the image counter is real.
+        // Keeping updateUI
     }, 5000);
     setInterval(updateUI, 1000); updateUI();
 
@@ -410,10 +157,8 @@
 
     let allMessages = [];
     let displayLimit = 20;
-
-    // --- SPAM KORUMASI İÇİN DEĞİŞKENLER ---
-    let lastSentTime = 0;        // Son mesaj atılan zaman
-    const SPAM_COOLDOWN = 5000;  // 5 Saniye bekleme süresi (Milisaniye)
+    let lastSentTime = 0;
+    const SPAM_COOLDOWN = 5000;
 
     async function initFirebase() {
         await signInAnonymously(auth);
@@ -432,9 +177,9 @@
     }
 
     function renderShoutbox() {
-        if (allMessages.length === 0) { 
-            sbArea.innerHTML = '<span style="color:#666">Sessiz...</span>'; 
-            return; 
+        if (allMessages.length === 0) {
+            sbArea.innerHTML = '<span style="color:#666">Sessiz...</span>';
+            return;
         }
 
         sbArea.innerHTML = "";
@@ -451,7 +196,8 @@
         if (allMessages.length > displayLimit) {
             const loadMoreBtn = document.createElement('button');
             loadMoreBtn.innerText = "Devamını Göster ▼";
-            loadMoreBtn.style.cssText = "width: 100%; padding: 5px; background: #eee; border: 1px dashed #000; cursor: pointer; color: var(--hot-pink); font-family: inherit; font-size: 10px; margin-top: 5px; font-weight: bold;";
+            loadMoreBtn.className = "btn-retro";
+            loadMoreBtn.style.width = "100%";
             loadMoreBtn.onclick = () => {
                 displayLimit += 20;
                 renderShoutbox();
@@ -462,52 +208,44 @@
 
     sbForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
-        // --- SPAM KONTROLÜ 1: ZAMAN ---
+
         const now = Date.now();
         const timeDiff = now - lastSentTime;
-        
+
         if (timeDiff < SPAM_COOLDOWN) {
             const remaining = Math.ceil((SPAM_COOLDOWN - timeDiff) / 1000);
             alert(`Hop! Çok hızlısın. Lütfen ${remaining} saniye bekle.`);
-            return; // Fonksiyonu durdur
+            return;
         }
 
         const user = auth.currentUser;
         if(!user || !sbName.value || !sbMsg.value) return;
-        
-        // --- SPAM KONTROLÜ 2: BUTONU KİLİTLE ---
-        const btn = document.querySelector('.sb-btn');
+
+        const btn = sbForm.querySelector('button');
         const originalText = btn.innerText;
-        
-        btn.disabled = true;                // Tıklamayı kapat
-        btn.innerText = "Yollanıyor...";    // Yazıyı değiştir
-        btn.style.opacity = "0.6";          // Rengi soldur
-        
+
+        btn.disabled = true;
+        btn.innerText = "Yollanıyor...";
+
         try {
             await addDoc(collection(db, 'shoutbox_v2'), {
-                name: sbName.value, 
-                text: sbMsg.value, 
-                timestamp: serverTimestamp(), 
+                name: sbName.value,
+                text: sbMsg.value,
+                timestamp: serverTimestamp(),
                 uid: user.uid
             });
-            
-            sbMsg.value = ''; 
-            sbArea.scrollTop = 0;
-            
-            // Son gönderim zamanını güncelle
-            lastSentTime = Date.now(); 
 
-        } catch(err) { 
-            console.error("Hata:", err); 
+            sbMsg.value = '';
+            sbArea.scrollTop = 0;
+            lastSentTime = Date.now();
+
+        } catch(err) {
+            console.error("Hata:", err);
             alert("Hata: Mesaj gönderilemedi.");
         } finally {
-            // İşlem bitince (başarılı veya hatalı) butonu 1 saniye sonra geri aç
-            // 1 saniye eklememizin sebebi "çift tıklama" refleksini tamamen engellemek
             setTimeout(() => {
                 btn.disabled = false;
                 btn.innerText = originalText;
-                btn.style.opacity = "1";
             }, 1000);
         }
     });

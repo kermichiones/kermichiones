@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmet Arvas - MOCK</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<div class="app-layout">
+    <!-- SIDEBAR (Left Fixed) -->
+    <aside class="sidebar">
+        <!-- Profile -->
+        <div class="sidebar-box">
+            <div class="sidebar-title">:: PROFİL ::</div>
+            <div class="profile-pic">(｡•̀ᴗ-)✧</div>
+            <div class="text-center">
+                <strong>Ahmet Arvas</strong>
+                <p style="font-size: 11px; margin-top: 5px;">Embedded Systems, Philosophia, Fungi, Rocketry</p>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="sidebar-box">
+            <div class="sidebar-title">:: NAVIGASYON ::</div>
+            <ul class="nav-links">
+                <li><a href="/">ANA SAYFA</a></li>
+                <li><a href="/aylik/">AYLIK</a></li>
+                <li><a href="/projeler/">PROJELERIM</a></li>
+                <li><a href="/arsiv/">ARSIV</a></li>
+                <li><a href="/hakkimda/">HAKKIMDA</a></li>
+            </ul>
+        </div>
+
+        <!-- Clock -->
+        <div class="sidebar-box text-center">
+            <div class="sidebar-title">:: ZAMAN ::</div>
+            <div id="clock" style="font-size: 1.2rem; font-family: var(--font-header);">12:34</div>
+            <div id="date" style="font-size: 0.8rem;">01/01/2026</div>
+        </div>
+
+        <!-- Shoutbox -->
+        <div class="sidebar-box">
+            <div class="sidebar-title">:: SHOUTBOX ::</div>
+            <div id="shoutbox-area">
+                <div class="sb-msg"><span class="sb-name">User1:</span> <span class="sb-text">Hello!</span></div>
+                <div class="sb-msg"><span class="sb-name">User2:</span> <span class="sb-text">Cool site!</span></div>
+            </div>
+            <form id="sb-form" style="margin-top: 5px;">
+                <input type="text" placeholder="İsim" style="width: 100%; margin-bottom: 3px;">
+                <input type="text" placeholder="Mesaj..." style="width: 100%; margin-bottom: 3px;">
+                <button type="button" class="btn-retro" style="width: 100%;">GÖNDER!</button>
+            </form>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT (Fluid) -->
+    <main class="main-content">
+        <!-- Header -->
+        <header>
+            <div class="section-bar" style="font-size: 2rem; justify-content: center; background-color: var(--canvas); border-bottom: none;">
+                Ahmet Arvas
+            </div>
+            <div class="marquee-wrapper">
+                <div style="padding-left: 10px;">★ YÜKLENİYOR... ★ WELCOME TO MY DIGITAL HIDEOUT ★</div>
+            </div>
+        </header>
+
+        <!-- Page Content -->
+        <section class="content-block post-content">
+            <div class="content-block text-center" style="background-color: var(--bar-bg);">
+                <b class="pixel-font">⚠ Hosgeldiniz ⚠</b><br>
+                Yeni icerikler yukleniyor...
+            </div>
+
+            <article class="content-block" style="margin-left: 0; margin-right: 0;">
+                <div class="section-bar" style="background: var(--accent-pink); color: var(--white); margin: -20px -20px 20px -20px; width: calc(100% + 40px); border: none;">
+                    <span>★ Bir Siir</span>
+                    <span style="font-size: 0.8rem; margin-left: auto;">28 December 2025</span>
+                </div>
+
+                <div class="entry-body">
+                    <p>Sample post excerpt here. This is how it looks.</p>
+
+                    <div style="margin-top: 15px; text-align: right;">
+                        <a href="#" class="btn-retro">
+                            DEVAMINI OKU >>
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            &copy; 2026 Ahmet Arvas. Designed with C<sub>10</sub>H<sub>16</sub>N<sub>5</sub>O<sub>13</sub>P<sub>3</sub>
+            <br>
+            <span style="color: var(--accent-pink);">Heisei Retro Design v2.0</span>
+        </footer>
+    </main>
+</div>
+
+</body>
+</html>
