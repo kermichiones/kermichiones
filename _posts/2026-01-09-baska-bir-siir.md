@@ -6,7 +6,7 @@ date: 2026-01-09
 Bazen feda etmek gerekir canları, 
 Yeni bir can var edebilmek için. 
 Ancak yok olmuş bir orduyla, 
-Çıkabilirsin onun karşısına.
+Çıkabilirsin dostun karşısına.
 
 Kendinle yüzleşmektir en zor olanı,
 Hele ki tek fedainin kendin olduğunu anladığında.
