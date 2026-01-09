@@ -37,7 +37,7 @@ permalink: /hakkimda/
         :: SKILLS & STATS ::
     </div>
 
-    <div style="font-family: var(--font-code); font-size: 12px;">
+    <div style="font-family: var(--font-code); font-size: 14px;">
         
         <div style="margin-bottom: 10px;">
             <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
@@ -77,7 +77,7 @@ permalink: /hakkimda/
         
         <div style="border: 1px dotted var(--accent-pink); padding: 10px;">
             <b style="background: var(--accent-pink); color: #fff; padding: 2px 5px; font-size: 12px;" data-i18n="hardware_header">HARDWARE</b>
-            <ul style="margin-top: 10px; font-size: 13px; list-style: square; padding-left: 20px;">
+            <ul style="margin-top: 10px; font-size: 16px; list-style: square; padding-left: 20px;">
                 <li>STM32, ESP32</li>
                 <li>KiCad, Altium</li>
                 <li>Logic Analyzers</li>
@@ -86,7 +86,7 @@ permalink: /hakkimda/
 
         <div style="border: 1px dotted var(--accent-cool); padding: 10px;">
             <b style="background: var(--accent-cool); color: #fff; padding: 2px 5px; font-size: 12px;" data-i18n="interests_header">INTERESTS</b>
-            <ul style="margin-top: 10px; font-size: 13px; list-style: circle; padding-left: 20px;">
+            <ul style="margin-top: 10px; font-size: 16px; list-style: circle; padding-left: 20px;">
                 <li>Mitoloji & Felsefe</li>
                 <li>Doğa ve Tarım</li>
                 <li>Retro Computing</li>

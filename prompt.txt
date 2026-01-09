@@ -1,0 +1,39 @@
+{
+  "role": "Senior Frontend Architect & Retro-UI Specialist",
+  "task": {
+    "action": "Bug Fix & Layout Refactor",
+    "target": "Entire Repository (CSS/HTML)",
+    "goal": "Refine the 'Heisei Retro' aesthetic to be cleaner and strictly responsive. Fix mobile ordering and remove 'cringe' fake-terminal elements."
+  },
+  "content_updates": {
+    "text_changes": [
+      "REMOVE the text 'Heisei Retro Arayüzü Yükleniyor...'. REPLACE it with the original 'Welcome' message found in the old index.html.",
+      "REMOVE fake command-line text like 'view_logs --by-month'. Use standard, clean labels (e.g., 'December Logs', 'Archive') instead."
+    ],
+    "tone_correction": "Eliminate 'fake hacker' aesthetics. The vibe should be 'Personal Digital Diary', not 'Movie Hacker Terminal'."
+  },
+  "layout_fixes": {
+    "internal_page_width_bug": {
+      "problem": "Integrated pages (blogs/logs) are currently too narrow, static, and lack margins.",
+      "solution": "Force all child pages (injected content) to use 'width: 100%' and 'flex-grow: 1'. Remove any 'max-width' restrictions on the <main> or <article> tags. Add 'padding: 2rem' to the content container to ensure text does not touch the borders."
+    },
+    "mobile_stacking_order": {
+      "problem": "On mobile, the Sidebar appears before the Content, or the Header is misplaced.",
+      "solution": "Use CSS Flexbox 'order' property inside the @media (max-width: 768px) query.",
+      "required_order": [
+        "1. Header/Branding (Top)",
+        "2. Main Content (Middle - Immediate visibility)",
+        "3. Sidebar/Widgets (Bottom - Accessibility)"
+      ]
+    }
+  },
+  "visual_identity": {
+    "theme_name": "Heisei Digital Diary (Refined)",
+    "typography": {
+      "headers": "'DotGothic16', sans-serif (for H1-H6 only)",
+      "body": "'Verdana', 'Tahoma', sans-serif (Required for readability)",
+      "size": "Body text must be at least 16px. Line-height 1.6."
+    },
+    "colors": {
+      "background": "#FFFDF5 (Cream)",
+      "section_bars": "#FFFFA0 (Pale Yellow -

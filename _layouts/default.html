@@ -112,12 +112,11 @@
         </div>
     </aside>
 
-    <!-- MAIN CONTENT AREA -->
-    <main class="main-content">
+    <div class="header-area">
         <!-- Top Marquee -->
         <div class="marquee-wrapper">
             <marquee scrollamount="6" id="wikiquote-marquee">
-                (｡•̀ᴗ-)✧ <span data-i18n="welcome_sub">Heisei Retro Arayüzü Yükleniyor...</span>
+                (｡•̀ᴗ-)✧ <span data-i18n="welcome_sub">Welcome</span>
             </marquee>
         </div>
 
@@ -130,16 +129,19 @@
                 Rastgele Düşünceler &middot; Embedded Systems &middot; Philosophia
             </p>
         </header>
+    </div>
 
+    <!-- MAIN CONTENT AREA -->
+    <main class="main-content">
         <!-- Dynamic Content Injection -->
         {{ content }}
-
-        <!-- Footer -->
-        <footer class="site-footer">
-            &copy; 2026 Ahmet Arvas. <br>
-            <span data-i18n="footer_text">Designed with C<sub>10</sub>H<sub>16</sub>N<sub>5</sub>O<sub>13</sub>P<sub>3</sub></span> <br>
-        </footer>
     </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        &copy; 2026 Ahmet Arvas. <br>
+        <span data-i18n="footer_text">Designed with C<sub>10</sub>H<sub>16</sub>N<sub>5</sub>O<sub>13</sub>P<sub>3</sub></span> <br>
+    </footer>
 </div>
 
 <!-- SCRIPTS & FIREBASE -->
