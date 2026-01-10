@@ -2,43 +2,45 @@
 layout: default
 ---
 
-<div class="section-bar">
-    <span class="pixel-icon"></span> <span data-i18n="all_records">ARCHIVE</span>
-</div>
+<div>
+    <div class="section-bar">
+        <span class="pixel-icon"></span> <span data-i18n="all_records">ARCHIVE</span>
+    </div>
 
-<div class="content-block">
-    
-    {% assign blog_posts = site.posts %}
-    {% assign projects = site.projects %}
-    
-    {% assign all_content = blog_posts | concat: projects | sort: 'date' | reverse %}
+    <div class="content-block">
+        
+        {% assign blog_posts = site.posts %}
+        {% assign projects = site.projects %}
+        
+        {% assign all_content = blog_posts | concat: projects | sort: 'date' | reverse %}
 
-    <ul class="nav-links" style="font-family: var(--font-code); font-size: 13px;">
-        {% for item in all_content %}
-        <li style="border-bottom: 1px dotted var(--accent-pink); padding: 8px 0; display: flex; justify-content: space-between; align-items: center;">
-            
-            <span>
-                {% if item.collection == 'projects' %}
-                    <span style="color: #fff; background: var(--accent-pink); padding: 0 4px; font-size: 10px; margin-right: 5px;">[PROJ]</span>
-                {% else %}
-                    <span style="color: #fff; background: var(--accent-cool); padding: 0 4px; font-size: 10px; margin-right: 5px;">[BLOG]</span>
-                {% endif %}
+        <ul class="nav-links" style="font-family: var(--font-code); font-size: 13px;">
+            {% for item in all_content %}
+            <li style="border-bottom: 1px dotted var(--accent-pink); padding: 8px 0; display: flex; justify-content: space-between; align-items: center;">
+                
+                <span>
+                    {% if item.collection == 'projects' %}
+                        <span style="color: #fff; background: var(--accent-pink); padding: 0 4px; font-size: 10px; margin-right: 5px;">[PROJ]</span>
+                    {% else %}
+                        <span style="color: #fff; background: var(--accent-cool); padding: 0 4px; font-size: 10px; margin-right: 5px;">[BLOG]</span>
+                    {% endif %}
 
-                <a href="{{ item.url }}" style="border: none; background: transparent; color: var(--text-main);">
-                    {{ item.title }}
-                </a>
-            </span>
+                    <a href="{{ item.url }}" style="border: none; background: transparent; color: var(--text-main);">
+                        {{ item.title }}
+                    </a>
+                </span>
 
-            <span style="color: #999; font-size: 11px; white-space: nowrap; margin-left: 10px;">
-                {{ item.date | date: "%Y.%m.%d" }}
-            </span>
+                <span style="color: #999; font-size: 11px; white-space: nowrap; margin-left: 10px;">
+                    {{ item.date | date: "%Y.%m.%d" }}
+                </span>
 
-        </li>
-        {% endfor %}
-    </ul>
-    
-    {% if all_content.size == 0 %}
-        <div style="text-align: center; color: red; margin-top: 20px;" data-i18n="empty_directory">[!] EMPTY DIRECTORY</div>
-    {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        
+        {% if all_content.size == 0 %}
+            <div style="text-align: center; color: red; margin-top: 20px;" data-i18n="empty_directory">[!] EMPTY DIRECTORY</div>
+        {% endif %}
 
+    </div>
 </div>

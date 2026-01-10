@@ -3,41 +3,45 @@ layout: default
 ---
 
 <!-- Welcome / Intro Section -->
-<div class="section-bar">
-    <span class="pixel-icon"></span> <span data-i18n="welcome_message">MESSAGE</span>
-</div>
-<div class="content-block" style="margin-bottom: 30px;">
-    <p><b>⚠ <span data-i18n="welcome_message">WELCOME</span> ⚠</b></p>
-    <p><span data-i18n="welcome_sub">{{ site.description | default: "Welcome" }}</span></p>
+<div>
+    <div class="section-bar">
+        <span class="pixel-icon"></span> <span data-i18n="welcome_message">MESSAGE</span>
+    </div>
+    <div class="content-block" style="margin-bottom: 30px;">
+        <p><b>⚠ <span data-i18n="welcome_message">WELCOME</span> ⚠</b></p>
+        <p><span data-i18n="welcome_sub">{{ site.description | default: "Welcome" }}</span></p>
+    </div>
 </div>
 
 <!-- Blog Loop -->
-<div class="section-bar">
-    <span class="pixel-icon"></span> <span data-i18n="diary_entries">DIARY ENTRIES</span>
-</div>
+<div>
+    <div class="section-bar">
+        <span class="pixel-icon"></span> <span data-i18n="diary_entries">DIARY ENTRIES</span>
+    </div>
 
-{% for post in site.posts %}
-<div class="content-block" style="margin-bottom: 20px;">
-    <!-- Post Header as a mini-bar or just header -->
-    <div style="border-bottom: 1px dotted var(--accent-pink); padding-bottom: 5px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: baseline;">
-        <h2 style="font-size: 18px; color: var(--text-main);">
-            <a href="{{ post.url }}" style="border-bottom: none; color: inherit;">
-                <span style="color: var(--accent-pink);">★</span> {{ post.title }}
+    {% for post in site.posts %}
+    <div class="content-block" style="margin-bottom: 20px;">
+        <!-- Post Header as a mini-bar or just header -->
+        <div style="border-bottom: 1px dotted var(--accent-pink); padding-bottom: 5px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: baseline;">
+            <h2 style="font-size: 18px; color: var(--text-main);">
+                <a href="{{ post.url }}" style="border-bottom: none; color: inherit;">
+                    <span style="color: var(--accent-pink);">★</span> {{ post.title }}
+                </a>
+            </h2>
+            <span style="font-family: var(--font-code); font-size: 12px; color: #888;">{{ post.date | date: "%Y-%m-%d" }}</span>
+        </div>
+
+        <!-- Excerpt -->
+        <div style="font-size: 16px; line-height: 1.6;">
+            {{ post.excerpt }}
+        </div>
+
+        <!-- Read More Button -->
+        <div style="margin-top: 10px; text-align: right;">
+            <a href="{{ post.url }}" class="btn-retro" data-i18n="read_more">
+                READ MORE
             </a>
-        </h2>
-        <span style="font-family: var(--font-code); font-size: 12px; color: #888;">{{ post.date | date: "%Y-%m-%d" }}</span>
+        </div>
     </div>
-
-    <!-- Excerpt -->
-    <div style="font-size: 16px; line-height: 1.6;">
-        {{ post.excerpt }}
-    </div>
-
-    <!-- Read More Button -->
-    <div style="margin-top: 10px; text-align: right;">
-        <a href="{{ post.url }}" class="btn-retro" data-i18n="read_more">
-            READ MORE
-        </a>
-    </div>
+    {% endfor %}
 </div>
-{% endfor %}

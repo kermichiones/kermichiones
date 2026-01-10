@@ -2,59 +2,61 @@
 layout: default
 ---
 
-<div class="section-bar">
-    <span class="pixel-icon"></span> <span data-i18n="monthly_logs">MONTHLY LOGS</span>
-</div>
+<div>
+    <div class="section-bar">
+        <span class="pixel-icon"></span> <span data-i18n="monthly_logs">MONTHLY LOGS</span>
+    </div>
 
-<div class="content-block">
-    {% for post in site.posts %}
-        
-        {% capture current_year %}{{ post.date | date: "%Y" }}{% endcapture %}
-        {% capture current_month %}{{ post.date | date: "%m" }}{% endcapture %}
-        
-        {% capture next_year %}{{ post.next.date | date: "%Y" }}{% endcapture %}
-        {% capture next_month %}{{ post.next.date | date: "%m" }}{% endcapture %}
-
-        {% if current_month != next_month or current_year != next_year %}
+    <div class="content-block">
+        {% for post in site.posts %}
             
-            <div style="background: var(--bar-bg); border-top: 1px dotted var(--accent-pink); border-bottom: 1px dotted var(--accent-pink); padding: 5px 10px; margin-top: 25px; margin-bottom: 10px; font-family: var(--font-header);">
-                📂 
-                {% case current_month %}
-                    {% when '01' %}<span data-i18n="jan">JAN (Ocak)</span>
-                    {% when '02' %}<span data-i18n="feb">FEB (Şubat)</span>
-                    {% when '03' %}<span data-i18n="mar">MAR (Mart)</span>
-                    {% when '04' %}<span data-i18n="apr">APR (Nisan)</span>
-                    {% when '05' %}<span data-i18n="may">MAY (Mayıs)</span>
-                    {% when '06' %}<span data-i18n="jun">JUN (Haziran)</span>
-                    {% when '07' %}<span data-i18n="jul">JUL (Temmuz)</span>
-                    {% when '08' %}<span data-i18n="aug">AUG (Ağustos)</span>
-                    {% when '09' %}<span data-i18n="sep">SEP (Eylül)</span>
-                    {% when '10' %}<span data-i18n="oct">OCT (Ekim)</span>
-                    {% when '11' %}<span data-i18n="nov">NOV (Kasım)</span>
-                    {% when '12' %}<span data-i18n="dec">DEC (Aralık)</span>
-                {% endcase %}
-                {{ current_year }}
-            </div>
+            {% capture current_year %}{{ post.date | date: "%Y" }}{% endcapture %}
+            {% capture current_month %}{{ post.date | date: "%m" }}{% endcapture %}
             
-            <ul class="nav-links" style="padding-left: 10px;">
-        {% endif %}
+            {% capture next_year %}{{ post.next.date | date: "%Y" }}{% endcapture %}
+            {% capture next_month %}{{ post.next.date | date: "%m" }}{% endcapture %}
 
-        <li style="margin-bottom: 5px;">
-            <span style="font-size: 11px; color: #999; margin-right: 5px; font-family: var(--font-code);">
-                [{{ post.date | date: "%d" }}]
-            </span>
-            <a href="{{ post.url }}" style="color: var(--text-main); border-bottom: 1px dashed #ccc;">
-                {{ post.title }}
-            </a>
-        </li>
+            {% if current_month != next_month or current_year != next_year %}
+                
+                <div style="background: var(--bar-bg); border-top: 1px dotted var(--accent-pink); border-bottom: 1px dotted var(--accent-pink); padding: 5px 10px; margin-top: 25px; margin-bottom: 10px; font-family: var(--font-header);">
+                    📂 
+                    {% case current_month %}
+                        {% when '01' %}<span data-i18n="jan">JAN (Ocak)</span>
+                        {% when '02' %}<span data-i18n="feb">FEB (Şubat)</span>
+                        {% when '03' %}<span data-i18n="mar">MAR (Mart)</span>
+                        {% when '04' %}<span data-i18n="apr">APR (Nisan)</span>
+                        {% when '05' %}<span data-i18n="may">MAY (Mayıs)</span>
+                        {% when '06' %}<span data-i18n="jun">JUN (Haziran)</span>
+                        {% when '07' %}<span data-i18n="jul">JUL (Temmuz)</span>
+                        {% when '08' %}<span data-i18n="aug">AUG (Ağustos)</span>
+                        {% when '09' %}<span data-i18n="sep">SEP (Eylül)</span>
+                        {% when '10' %}<span data-i18n="oct">OCT (Ekim)</span>
+                        {% when '11' %}<span data-i18n="nov">NOV (Kasım)</span>
+                        {% when '12' %}<span data-i18n="dec">DEC (Aralık)</span>
+                    {% endcase %}
+                    {{ current_year }}
+                </div>
+                
+                <ul class="nav-links" style="padding-left: 10px;">
+            {% endif %}
 
-        {% capture prev_year %}{{ post.previous.date | date: "%Y" }}{% endcapture %}
-        {% capture prev_month %}{{ post.previous.date | date: "%m" }}{% endcapture %}
-        
-        {% if current_month != prev_month or current_year != prev_year %}
-            </ul>
-        {% endif %}
-        
-    {% endfor %}
+            <li style="margin-bottom: 5px;">
+                <span style="font-size: 11px; color: #999; margin-right: 5px; font-family: var(--font-code);">
+                    [{{ post.date | date: "%d" }}]
+                </span>
+                <a href="{{ post.url }}" style="color: var(--text-main); border-bottom: 1px dashed #ccc;">
+                    {{ post.title }}
+                </a>
+            </li>
 
+            {% capture prev_year %}{{ post.previous.date | date: "%Y" }}{% endcapture %}
+            {% capture prev_month %}{{ post.previous.date | date: "%m" }}{% endcapture %}
+            
+            {% if current_month != prev_month or current_year != prev_year %}
+                </ul>
+            {% endif %}
+            
+        {% endfor %}
+
+    </div>
 </div>
