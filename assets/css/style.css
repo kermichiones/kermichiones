@@ -104,6 +104,13 @@ body {
   align-self: start; /* Don't stretch or center vertically */
 }
 
+/* Header styling moved here for consistency */
+.site-header {
+  padding: 40px 20px;
+  background: repeating-linear-gradient(45deg, var(--canvas), var(--canvas) 10px, var(--white) 10px, var(--white) 20px);
+  border-bottom: 1px dotted var(--accent-pink);
+}
+
 /* Main Content Area */
 .main-content {
   grid-area: main;
@@ -173,7 +180,7 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 0;
 }
 
 .section-title {
@@ -195,6 +202,8 @@ a:hover {
 .content-block {
   padding: 2rem;
   width: 100%;
+  background-color: var(--white);
+  border: 1px dotted var(--accent-pink);
 }
 
 /* Buttons (Outset 3D Pastel) */

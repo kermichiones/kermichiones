@@ -6,13 +6,13 @@ layout: default
     <span class="pixel-icon"></span> <span data-i18n="projects_header">PROJECTS (Projeler)</span>
 </div>
 
-<div class="content-block" style="background: #fff;">
+<div class="content-block">
     <p data-i18n="projects_desc">Geliştirdiğim bazı oyunlar ve web projeleri:</p>
     
     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px;">
         
         {% for project in site.projects %} 
-        <div style="border: 1px solid var(--text-main); box-shadow: 5px 5px 0 var(--bar-bg); background: #fff; padding: 10px; display: flex; flex-direction: column;">
+        <div style="border: 1px solid var(--text-main); box-shadow: 5px 5px 0 var(--bar-bg); padding: 10px; display: flex; flex-direction: column;">
             <!-- Image Area -->
             <div style="background: var(--canvas); height: 100px; display: flex; align-items: center; justify-content: center; border: 1px dotted var(--accent-pink); margin-bottom: 10px; overflow: hidden;">
                 {% if project.image %}

@@ -6,7 +6,7 @@ layout: default
     <span class="pixel-icon"></span> <span data-i18n="monthly_logs">MONTHLY LOGS</span>
 </div>
 
-<div class="content-block" style="background: #fff;">
+<div class="content-block">
     {% for post in site.posts %}
         
         {% capture current_year %}{{ post.date | date: "%Y" }}{% endcapture %}

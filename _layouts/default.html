@@ -37,13 +37,6 @@
              <button id="lang-toggle-btn" onclick="toggleLanguage()" class="btn-retro" style="font-size: 10px; padding: 2px 5px;">EN</button>
         </div>
 
-        <!-- Profile Section -->
-        <div class="profile-card">
-            <div class="profile-pic">(¬_¬)</div>
-            <div style="font-weight: bold; font-family: var(--font-header);">Ahmet Arvas</div>
-            <div style="font-size: 12px; margin-top: 5px; color: #666;" data-i18n="subtitle">Rastgele Düşünceler · Gömülü Sistemler · Felsefe</div>
-        </div>
-
         <!-- Navigation -->
         <nav>
             <div class="section-bar" style="justify-content: center; padding: 2px;">
@@ -123,7 +116,7 @@
         </div>
 
         <!-- Main Header Bar -->
-        <header style="padding: 40px 20px; background: repeating-linear-gradient(45deg, var(--canvas), var(--canvas) 10px, #fff 10px, #fff 20px);">
+        <header class="site-header">
             <h1 style="font-size: 48px; color: var(--accent-pink); text-shadow: 2px 2px 0 var(--bar-bg);">
                 {{ site.title | default: "Ahmet Arvas" }}
             </h1>
