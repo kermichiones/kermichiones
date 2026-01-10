@@ -18,6 +18,16 @@
   --font-code: 'Courier New', monospace;
 }
 
+[data-theme="dark"] {
+  --canvas: #222436; /* Moonlight Dark */
+  --bar-bg: #2F324D; /* Deep Moonlight */
+  --accent-pink: #FF9EB5; /* Soft Pink */
+  --accent-cool: #A4D8F0; /* Soft Blue */
+  --text-main: #E0E6ED; /* Moonlight Silver */
+  --white: #2A2C3C; /* Dark Card Bg */
+  --black: #ffffff; /* Inverse Black */
+}
+
 * {
   box-sizing: border-box;
 }
