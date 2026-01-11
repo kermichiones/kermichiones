@@ -109,6 +109,36 @@ body {
   padding: 40px 20px;
   background: repeating-linear-gradient(45deg, var(--canvas), var(--canvas) 10px, var(--white) 10px, var(--white) 20px);
   border-bottom: 1px dotted var(--accent-pink);
+  position: relative;
+  overflow: hidden;
+}
+
+.site-header h1,
+.site-header p {
+  position: relative;
+  z-index: 2;
+}
+
+.site-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 400px; /* Adjust size as needed */
+  height: 100%;
+  background-image: url('../images/banner.png');
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: contain;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .site-header::after {
+    opacity: 0.3;
+    width: 200px;
+  }
 }
 
 /* Main Content Area */
