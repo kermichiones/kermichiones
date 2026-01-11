@@ -30,82 +30,88 @@
 
 <div class="site-wrapper">
     <!-- LEFT SIDEBAR (Fixed/Sticky) -->
-    <aside class="sidebar">
-        <!-- Language Toggle -->
-        <div style="text-align: right; margin-bottom: -15px;">
-             <button id="theme-toggle-btn" onclick="toggleTheme()" class="btn-retro" style="font-size: 10px; padding: 2px 5px;" title="Toggle Theme">☾</button>
-             <button id="lang-toggle-btn" onclick="toggleLanguage()" class="btn-retro" style="font-size: 10px; padding: 2px 5px;">EN</button>
-        </div>
+    <div class="sidebar-container">
+        <aside class="sidebar-nav">
+            <!-- Language/Theme Toggle -->
+            <div style="text-align: right; margin-bottom: 10px;">
+                 <button id="theme-toggle-btn" onclick="toggleTheme()" class="btn-retro" style="font-size: 10px; padding: 2px 5px;" title="Toggle Theme">☾</button>
+                 <button id="lang-toggle-btn" onclick="toggleLanguage()" class="btn-retro" style="font-size: 10px; padding: 2px 5px;">EN</button>
+            </div>
 
-        <!-- Navigation -->
-        <nav>
-            <div class="section-bar" style="justify-content: center; padding: 2px;">
-                <span class="pixel-icon"></span> <span data-i18n="nav_header">MENU</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="/" data-i18n="home">ANA SAYFA</a></li>
-                <li><a href="/aylik/" data-i18n="monthly">AYLIK</a></li>
-                <li><a href="/projeler/" data-i18n="projects">PROJELER</a></li>
-                <li><a href="/arsiv/" data-i18n="archive">ARŞİV</a></li>
-                <li><a href="/hakkimda/" data-i18n="about">HAKKIMDA</a></li>
-            </ul>
-        </nav>
+            <!-- Navigation -->
+            <nav>
+                <div class="section-bar" style="justify-content: center; padding: 2px;">
+                    <span data-i18n="nav_header">:: MENU ::</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="/" data-i18n="home">ANA SAYFA</a></li>
+                    <li><a href="/aylik/" data-i18n="monthly">AYLIK</a></li>
+                    <li><a href="/projeler/" data-i18n="projects">PROJELER</a></li>
+                    <li><a href="/arsiv/" data-i18n="archive">ARŞİV</a></li>
+                    <li><a href="/hakkimda/" data-i18n="about">HAKKIMDA</a></li>
+                </ul>
+            </nav>
+        </aside>
 
-        <!-- Clock/Date Widget -->
-        <div class="profile-card" style="text-align: center;">
-            <div class="section-bar" style="justify-content: center; padding: 2px; margin-bottom: 5px;">
-                 <span data-i18n="time_header">:: ZAMAN ::</span>
+        <aside class="sidebar-widgets">
+            <!-- Clock/Date Widget -->
+            <div class="profile-card" style="text-align: center;">
+                <div class="section-bar" style="justify-content: center; padding: 2px; margin-bottom: 5px;">
+                     <span data-i18n="time_header">:: ZAMAN ::</span>
+                </div>
+                <div id="clock" style="font-family: var(--font-header); font-size: 24px; color: var(--accent-pink);">--:--</div>
+                <div id="date" style="font-size: 12px;">--/--/--</div>
             </div>
-            <div id="clock" style="font-family: var(--font-header); font-size: 24px; color: var(--accent-pink);">--:--</div>
-            <div id="date" style="font-size: 12px;">--/--/--</div>
-        </div>
 
-        <!-- Recent Posts (Mini) -->
-        <div style="margin-top: 10px;">
-             <div class="section-bar" style="padding: 2px;">
-                <span class="pixel-icon"></span> <span data-i18n="new_posts_header">YENİ YAZILAR</span>
+            <!-- Recent Posts (Mini) -->
+            <div style="margin-top: 10px;">
+                 <div class="section-bar" style="justify-content: center; padding: 2px;">
+                    <span data-i18n="new_posts_header">:: YENİ YAZILAR ::</span>
+                </div>
+                <ul style="padding-left: 20px; font-size: 12px; list-style: square;">
+                    {% for post in site.posts limit:3 %}
+                        <li style="margin-bottom: 5px;">
+                            <a href="{{ post.url }}">{{ post.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
-            <ul style="padding-left: 20px; font-size: 12px; list-style: square;">
-                {% for post in site.posts limit:3 %}
-                    <li style="margin-bottom: 5px;">
-                        <a href="{{ post.url }}">{{ post.title }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
 
-        <!-- Visitor Counter -->
-        <div class="profile-card" style="text-align: center; margin-top: 10px;">
-             <div style="font-size: 10px; font-weight: bold; margin-bottom: 5px;" data-i18n="visitor_header">:: ZİYARETÇİ ::</div>
-             <img src="https://count.getloli.com/get/@AhmetArvasBlog?theme=moebooru" alt="Ziyaretçi Sayacı" style="width: 100%; border: 1px dotted var(--accent-pink);">  
-             <div style="font-size: 9px; color: #666; margin-top: 2px;" data-i18n="visitor_desc">Site yeniden yüklenince bile artıyor :(</div>
-        </div>
+            <!-- Visitor Counter -->
+            <div class="profile-card" style="text-align: center; margin-top: 10px;">
+                 <div class="section-bar" style="justify-content: center; padding: 2px; margin-bottom: 5px;">
+                    <span data-i18n="visitor_header">:: ZİYARETÇİ ::</span>
+                 </div>
+                 <img src="https://count.getloli.com/get/@AhmetArvasBlog?theme=moebooru" alt="Ziyaretçi Sayacı" style="width: 100%; border: 1px dotted var(--accent-pink);">  
+                 <div style="font-size: 9px; color: #666; margin-top: 2px;" data-i18n="visitor_desc">Site yeniden yüklenince bile artıyor :(</div>
+            </div>
 
-        <!-- Shoutbox (Moved to Sidebar for Layout) -->
-        <div style="margin-top: 20px;">
-             <div class="section-bar" style="padding: 2px;">
-                <span class="pixel-icon"></span> <span data-i18n="shoutbox_header">SHOUTBOX</span>
+            <!-- Shoutbox -->
+            <div style="margin-top: 20px;">
+                 <div class="section-bar" style="justify-content: center; padding: 2px;">
+                    <span data-i18n="shoutbox_header">:: SHOUTBOX ::</span>
+                </div>
+                <div id="shoutbox-area" style="height: 150px; overflow-y: auto; background: #fff; border: 1px dotted var(--accent-pink); padding: 5px; font-size: 11px; margin-bottom: 5px;">
+                    <span style="color:#999;" data-i18n="loading">Bağlanıyor...</span>
+                </div>
+                <form id="sb-form">
+                    <input type="text" id="sb-name" data-i18n-placeholder="shoutbox_placeholder_name" placeholder="İsim" style="width: 100%; margin-bottom: 2px; font-family: inherit; font-size: 11px;">
+                    <textarea id="sb-msg" data-i18n-placeholder="shoutbox_placeholder_msg" placeholder="Mesaj..." style="width: 100%; height: 40px; font-family: inherit; font-size: 11px; resize: none;"></textarea>
+                    <button type="submit" class="sb-btn btn-retro" style="width: 100%; margin-top: 2px;" data-i18n="send_btn">GÖNDER!</button>
+                </form>
             </div>
-            <div id="shoutbox-area" style="height: 150px; overflow-y: auto; background: #fff; border: 1px dotted var(--accent-pink); padding: 5px; font-size: 11px; margin-bottom: 5px;">
-                <span style="color:#999;" data-i18n="loading">Bağlanıyor...</span>
+            
+            <!-- Buttons/Badges -->
+            <div style="margin-top: 20px; text-align: center;">
+                 <div class="section-bar" style="justify-content: center; padding: 2px;">
+                    <span data-i18n="buttons_header">:: BUTONLAR ::</span>
+                </div>
+                 <a href="https://simobot.com" target="_blank">
+                    <img src="https://placehold.co/88x31/FF85A2/FFF?text=My+Startup" alt="My Startup" style="border: 0;">
+                 </a>
             </div>
-            <form id="sb-form">
-                <input type="text" id="sb-name" data-i18n-placeholder="shoutbox_placeholder_name" placeholder="İsim" style="width: 100%; margin-bottom: 2px; font-family: inherit; font-size: 11px;">
-                <textarea id="sb-msg" data-i18n-placeholder="shoutbox_placeholder_msg" placeholder="Mesaj..." style="width: 100%; height: 40px; font-family: inherit; font-size: 11px; resize: none;"></textarea>
-                <button type="submit" class="sb-btn btn-retro" style="width: 100%; margin-top: 2px;" data-i18n="send_btn">GÖNDER!</button>
-            </form>
-        </div>
-        
-        <!-- Buttons/Badges -->
-        <div style="margin-top: 20px; text-align: center;">
-             <div class="section-bar" style="padding: 2px; justify-content: center;">
-                <span data-i18n="buttons_header">:: BUTONLAR ::</span>
-            </div>
-             <a href="https://simobot.com" target="_blank">
-                <img src="https://placehold.co/88x31/FF85A2/FFF?text=My+Startup" alt="My Startup" style="border: 0;">
-             </a>
-        </div>
-    </aside>
+        </aside>
+    </div>
 
     <div class="header-area">
         <!-- Top Marquee -->

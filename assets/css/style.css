@@ -61,7 +61,7 @@ body {
 }
 
 /* Sidebar (Left) */
-.sidebar {
+.sidebar-container {
   grid-area: sidebar;
   background-color: var(--canvas);
   border-right: 1px dotted var(--accent-pink);
@@ -79,22 +79,22 @@ body {
   scrollbar-color: var(--accent-pink) var(--bar-bg);
 }
 
-.sidebar::-webkit-scrollbar {
+.sidebar-container::-webkit-scrollbar {
   width: 8px;
 }
 
-.sidebar::-webkit-scrollbar-track {
+.sidebar-container::-webkit-scrollbar-track {
   background: var(--bar-bg);
   border-radius: 10px;
 }
 
-.sidebar::-webkit-scrollbar-thumb {
+.sidebar-container::-webkit-scrollbar-thumb {
   background-color: var(--accent-pink);
   border-radius: 10px;
   border: 2px solid var(--bar-bg);
 }
 
-.sidebar::-webkit-scrollbar-thumb:hover {
+.sidebar-container::-webkit-scrollbar-thumb:hover {
   background-color: var(--accent-cool);
 }
 
@@ -133,15 +133,32 @@ body {
     min-height: 100vh;
   }
   .header-area { order: 1; align-self: stretch; }
-  .sidebar {
-    order: 2;
-    height: auto;
-    position: relative;
-    border-right: none;
-    border-bottom: 1px dotted var(--accent-pink);
+  
+  /* Split Sidebar Logic */
+  .sidebar-container {
+    display: contents; /* Removes the wrapper box, children become flex items of .site-wrapper */
   }
+  
+  .sidebar-nav {
+    order: 2;
+    background-color: var(--canvas);
+    border-bottom: 1px dotted var(--accent-pink);
+    padding: 20px;
+  }
+  
   .main-content { order: 3; flex-grow: 1; align-self: stretch; }
-  .site-footer { order: 4; }
+  
+  .sidebar-widgets {
+    order: 4;
+    background-color: var(--canvas);
+    border-top: 1px dotted var(--accent-pink);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .site-footer { order: 5; }
 }
 
 /* =========================================
