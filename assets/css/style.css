@@ -133,14 +133,14 @@ body {
     min-height: 100vh;
   }
   .header-area { order: 1; align-self: stretch; }
-  .main-content { order: 2; flex-grow: 1; align-self: stretch; }
   .sidebar {
-    order: 3;
+    order: 2;
     height: auto;
     position: relative;
     border-right: none;
     border-bottom: 1px dotted var(--accent-pink);
   }
+  .main-content { order: 3; flex-grow: 1; align-self: stretch; }
   .site-footer { order: 4; }
 }
 
