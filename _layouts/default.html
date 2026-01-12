@@ -289,22 +289,47 @@
 
     async function loadMarqueeQuote() {
         const marquee = document.getElementById('wikiquote-marquee');
-        try {
-            const zenUrl = "https://corsproxy.io/?" + encodeURIComponent("https://zenquotes.io/api/random");
-            const responseZen = await fetch(zenUrl);
-            if (!responseZen.ok) throw new Error("ZenQuotes hata");
-            const dataZen = await responseZen.json();
-            marquee.innerHTML = `★ "${dataZen[0].q}" — ${dataZen[0].a} ★`;
-        } catch (errorZen) {
+        
+        // Helper to fetch with timeout
+        const fetchWithTimeout = (url, timeout = 3000) => {
+            return Promise.race([
+                fetch(url),
+                new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), timeout))
+            ]);
+        };
+
+        const apis = [
+            {
+                url: "https://api.quotable.io/random?tags=philosophy,art,wisdom",
+                parser: (data) => ({ q: data.content, a: data.author })
+            },
+            {
+                url: "https://stoic-quotes.com/api/quote",
+                parser: (data) => ({ q: data.text, a: data.author })
+            },
+            {
+                url: "https://dummyjson.com/quotes/random",
+                parser: (data) => ({ q: data.quote, a: data.author })
+            }
+        ];
+
+        for (const api of apis) {
             try {
-                const responseKanye = await fetch("https://api.kanye.rest/");
-                if (!responseKanye.ok) throw new Error("Kanye hata");
-                const dataKanye = await responseKanye.json();
-                marquee.innerHTML = `★ "${dataKanye.quote}" — Kanye West ★`;
-            } catch (errorKanye) {
-                marquee.innerHTML = "★ Welcome ★";
+                const response = await fetchWithTimeout(api.url);
+                if (!response.ok) throw new Error(`API error: ${api.url}`);
+                const data = await response.json();
+                const quote = api.parser(data);
+                
+                if (quote.q && quote.a) {
+                    marquee.innerHTML = `★ "${quote.q}" — ${quote.a} ★`;
+                    return; 
+                }
+            } catch (err) {
+                console.warn(`Quote fetch failed for ${api.url}:`, err);
             }
         }
+
+        marquee.innerHTML = "★ Ars longa, vita brevis — Hippocrates ★";
     }
 
     loadMarqueeQuote();
