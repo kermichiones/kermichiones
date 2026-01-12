@@ -8,7 +8,7 @@ permalink: /hakkimda/
     <span class="pixel-icon"></span> <span data-i18n="id_card">ID_CARD: AHMET_ARVAS</span>
 </div>
 
-<div class="content-block" style="background: #fff; padding: 20px; border: 1px dotted var(--accent-pink);">
+<div class="content-block" style="background: transparent; padding: 20px; border: 1px dotted var(--accent-pink);">
     
     <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
         
