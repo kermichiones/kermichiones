@@ -9,7 +9,7 @@ image: /assets/images/Yuuri%20AI%20Keychain.png
 "There's no reason to hurry when we're on the earth that moves."
 -" ![](/assets/images/gunslinger.gif) "
 
-**Check out the full code on my GitHub!** [https://github.com/kermichiones/ai-keychain-friend/]
+[**Check out the full code on my GitHub!**](https://github.com/kermichiones/ai-keychain-friend/)
 
 I had Raspberry Pi Pico W and 128x128 SPI TFT LCD Display, so I decided to make a keychain that takes my events from notion calendar and gives me reminders for those events as yuu from girls last tour.
 
