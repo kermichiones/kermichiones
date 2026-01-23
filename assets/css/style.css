@@ -358,9 +358,92 @@ a:hover {
   margin-bottom: 15px;
 }
 
-.post-content img {
-  max-width: 100%;
-  border: 1px dotted var(--accent-pink);
-  padding: 5px;
-  background: var(--white);
+/* =========================================
+   CODE BLOCKS (CONCRETE STYLE)
+   ========================================= */
+
+pre, code {
+  font-family: var(--font-code);
+  font-size: 14px;
+}
+
+/* Inline code */
+p code, li code, span code {
+  background-color: #eee;
+  color: #d63384; /* Retro Pink/Red for code */
+  padding: 2px 4px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Block code */
+pre {
+  background-color: #f4f4f4;
+  border: 2px solid var(--text-main);
+  border-radius: 0; /* Concrete/Sharp corners */
+  padding: 15px;
+  overflow-x: auto;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.1); /* Slight depth */
+  position: relative;
+}
+
+pre::before {
+  content: "SOURCE CODE";
+  display: block;
+  background: var(--text-main);
+  color: #fff;
+  font-family: var(--font-header);
+  font-size: 10px;
+  padding: 2px 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+pre code {
+  background-color: transparent;
+  color: var(--text-main);
+  padding: 0;
+  border: none;
+}
+
+/* Dark mode adjustments for code */
+[data-theme="dark"] pre {
+  background-color: #2a2c3c;
+  border-color: var(--text-main);
+}
+[data-theme="dark"] p code {
+  background-color: #333;
+  border-color: #555;
+  color: #ff9eb5;
+}
+
+/* =========================================
+   HOMEPAGE PROJECT CARD (Distinct Style)
+   ========================================= */
+.project-card-home {
+  background-color: #e6f7ff; /* Very Light Blue Sheet */
+  border: 1px dashed var(--accent-cool);
+  padding: 15px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.project-card-home::after {
+  content: "";
+  display: block;
+  height: 5px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--accent-cool),
+    var(--accent-cool) 5px,
+    transparent 5px,
+    transparent 10px
+  );
+  margin-top: 10px;
+}
+
+[data-theme="dark"] .project-card-home {
+  background-color: #1a2634; /* Dark Blue Sheet */
+  border-color: var(--accent-cool);
 }
