@@ -14,7 +14,7 @@ image: /assets/images/Yuuri%20AI%20Keychain.png
 I had Raspberry Pi Pico W and 128x128 SPI TFT LCD Display, so I decided to make a keychain that takes my events from notion calendar and gives me reminders for those events as yuu from girls last tour.
 
 It looks like this:
-<img src="/assets/images/Yuuri%20AI%20Keychain.png" alt="Yuuri AI Keychain" style="width: 75%; height: auto;">
+<img src="/assets/images/Yuuri%20AI%20Keychain.png" alt="Yuuri AI Keychain" style="width: 100%; height: auto;">
 
 
 ### How it works:

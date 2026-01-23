@@ -367,36 +367,40 @@ pre, code {
   font-size: 14px;
 }
 
-/* Inline code - Softer background, consistent text */
-p code, li code, span code, .highlighter-rouge {
-  background-color: var(--bar-bg); /* Use theme yellow instead of harsh gray/white */
+/* Inline code - Neutral, high contrast */
+p code, li code, span code, :not(pre) > code {
+  background-color: #f0f0f0; /* Very light neutral gray */
   color: #d63384; 
   padding: 2px 4px;
   border-radius: 4px;
-  border: 1px dotted var(--accent-pink);
+  border: 1px solid #ddd;
 }
 
 /* Block code */
+div.highlighter-rouge, figure.highlight {
+  background-color: transparent; /* Remove any wrapper background */
+  margin-bottom: 20px;
+}
+
 pre {
-  background-color: #e0e0e0; /* Darker gray to reduce brightness */
-  color: var(--text-main);
+  background-color: #2b2b2b; /* Dark Concrete/Charcoal */
+  color: #e0e0e0; /* Light Gray text */
   border: 2px solid var(--text-main);
   border-radius: 0; 
-  padding: 30px 15px 15px 15px; /* Increased top padding for label */
+  padding: 35px 15px 15px 15px; 
   overflow-x: auto;
   box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
   position: relative;
-  margin-bottom: 20px;
 }
 
 pre::before {
   content: "SOURCE CODE";
   display: block;
-  background: var(--text-main);
+  background: var(--accent-pink); /* Use accent pink for the tag */
   color: #fff;
   font-family: var(--font-header);
   font-size: 10px;
-  padding: 2px 5px;
+  padding: 2px 8px;
   position: absolute;
   top: 0;
   left: 0;
@@ -412,16 +416,15 @@ pre code {
 
 /* Dark mode adjustments for code */
 [data-theme="dark"] pre {
-  background-color: #2a2c3c;
-  border-color: var(--text-main);
-  color: var(--text-main);
+  background-color: #1a1b26; /* Deeper dark */
+  border-color: var(--accent-cool);
 }
 [data-theme="dark"] p code, 
 [data-theme="dark"] li code, 
 [data-theme="dark"] span code,
-[data-theme="dark"] .highlighter-rouge {
-  background-color: #333;
-  border-color: #555;
+[data-theme="dark"] :not(pre) > code {
+  background-color: #2a2c3c;
+  border-color: #444;
   color: #ff9eb5;
 }
 
