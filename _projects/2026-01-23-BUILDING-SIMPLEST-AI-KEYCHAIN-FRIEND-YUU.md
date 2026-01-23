@@ -1,7 +1,9 @@
 ---
-layout: projects
+layout: post
 title: BUILDING SIMPLEST KEYCHAIN AI FRIEND YUU
 date: 2026-01-23
+description: A keychain that takes events from Notion and gives reminders as Yuuri from Girls Last Tour.
+image: /assets/images/Yuuri%20AI%20Keychain.png
 ---
 "There's no reason to hurry when we're on the earth that moves."
 -" ![](/assets/images/gunslinger.gif) "
