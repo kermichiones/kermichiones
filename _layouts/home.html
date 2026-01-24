@@ -18,7 +18,7 @@ layout: default
         <span class="pixel-icon"></span> <span data-i18n="projects_header">PROJECTS</span>
     </div>
     
-    {% for project in site.projects limit:3 %}
+    {% for project in site.projects limit:10 %}
     <div class="project-card-home">
         <div style="display: flex; justify-content: space-between; align-items: flex-start;">
             <div>
@@ -49,6 +49,14 @@ layout: default
         </div>
     </div>
     {% endfor %}
+
+    {% if site.projects.size > 10 %}
+    <div style="text-align: center; margin-bottom: 30px;">
+        <a href="/projeler/" class="btn-retro" style="width: 100%; text-align: center; border-color: var(--accent-cool);" data-i18n="view_all_projects">
+            VIEW ALL PROJECTS &raquo;
+        </a>
+    </div>
+    {% endif %}
 </div>
 
 <!-- Blog Loop -->
@@ -57,7 +65,7 @@ layout: default
         <span class="pixel-icon"></span> <span data-i18n="diary_entries">DIARY ENTRIES</span>
     </div>
 
-    {% for post in site.posts %}
+    {% for post in site.posts limit:10 %}
     <div class="post-card-home">
         <!-- Post Header -->
         <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
@@ -86,4 +94,12 @@ layout: default
         </div>
     </div>
     {% endfor %}
+
+    {% if site.posts.size > 10 %}
+    <div style="text-align: center; margin-bottom: 30px;">
+        <a href="/aylik/" class="btn-retro" style="width: 100%; text-align: center; border-color: var(--accent-pink);" data-i18n="view_all_posts">
+            VIEW ALL ENTRIES &raquo;
+        </a>
+    </div>
+    {% endif %}
 </div>
