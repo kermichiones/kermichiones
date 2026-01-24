@@ -457,3 +457,33 @@ pre code {
   background-color: #1a2634; /* Dark Blue Sheet */
   border-color: var(--accent-cool);
 }
+
+/* =========================================
+   HOMEPAGE POST CARD (Yellowish Style)
+   ========================================= */
+.post-card-home {
+  background-color: #fffff0; /* Very Light Yellow (Ivory) */
+  border: 1px dashed var(--accent-pink);
+  padding: 15px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.post-card-home::after {
+  content: "";
+  display: block;
+  height: 5px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--accent-pink),
+    var(--accent-pink) 5px,
+    transparent 5px,
+    transparent 10px
+  );
+  margin-top: 10px;
+}
+
+[data-theme="dark"] .post-card-home {
+  background-color: #2f2a2d; /* Darkish Warm Grey */
+  border-color: var(--accent-pink);
+}
