@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Zen+Maru+Gothic:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     
     <!-- Styles -->
     <link rel="stylesheet" href="/assets/css/style.css">
@@ -114,13 +114,6 @@
     </div>
 
     <div class="header-area">
-        <!-- Top Marquee -->
-        <div class="marquee-wrapper">
-            <marquee scrollamount="6" id="wikiquote-marquee">
-                (｡•̀ᴗ-)✧ <span data-i18n="welcome_sub">Welcome</span>
-            </marquee>
-        </div>
-
         <!-- Main Header Bar -->
         <header class="site-header">
             <h1 style="font-size: 48px; color: var(--accent-pink); text-shadow: 2px 2px 0 var(--bar-bg);">
@@ -287,52 +280,6 @@
         }
     });
 
-    async function loadMarqueeQuote() {
-        const marquee = document.getElementById('wikiquote-marquee');
-        
-        // Helper to fetch with timeout
-        const fetchWithTimeout = (url, timeout = 3000) => {
-            return Promise.race([
-                fetch(url),
-                new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), timeout))
-            ]);
-        };
-
-        const apis = [
-            {
-                url: "https://api.quotable.io/random?tags=philosophy,art,wisdom",
-                parser: (data) => ({ q: data.content, a: data.author })
-            },
-            {
-                url: "https://stoic-quotes.com/api/quote",
-                parser: (data) => ({ q: data.text, a: data.author })
-            },
-            {
-                url: "https://dummyjson.com/quotes/random",
-                parser: (data) => ({ q: data.quote, a: data.author })
-            }
-        ];
-
-        for (const api of apis) {
-            try {
-                const response = await fetchWithTimeout(api.url);
-                if (!response.ok) throw new Error(`API error: ${api.url}`);
-                const data = await response.json();
-                const quote = api.parser(data);
-                
-                if (quote.q && quote.a) {
-                    marquee.innerHTML = `★ "${quote.q}" — ${quote.a} ★`;
-                    return; 
-                }
-            } catch (err) {
-                console.warn(`Quote fetch failed for ${api.url}:`, err);
-            }
-        }
-
-        marquee.innerHTML = "★ Ars longa, vita brevis — Hippocrates ★";
-    }
-
-    loadMarqueeQuote();
     initFirebase();
 </script>
 </body>
