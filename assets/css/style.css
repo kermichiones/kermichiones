@@ -637,6 +637,10 @@ body {
    MOBILE SKELETON COLLAPSE OVERRIDES
    ========================================================================== */
 @media (max-width: 768px) {
+  html, body {
+    overflow: auto !important;
+    height: auto !important;
+  }
   .split-wrapper {
     grid-template-columns: 1fr;
     height: auto;
