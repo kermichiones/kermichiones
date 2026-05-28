@@ -3,11 +3,11 @@ layout: default
 ---
 
 <div>
-    <div class="section-bar">
-        <span class="pixel-icon"></span> <span data-i18n="monthly_logs">MONTHLY LOGS</span>
+    <div class="section-bar" style="margin-bottom: 25px;">
+        <span data-i18n="monthly_logs">MONTHLY LOGS</span>
     </div>
 
-    <div class="content-block">
+    <div style="padding: 10px 0;">
         {% for post in site.posts %}
             
             {% capture current_year %}{{ post.date | date: "%Y" }}{% endcapture %}
@@ -18,7 +18,7 @@ layout: default
 
             {% if current_month != next_month or current_year != next_year %}
                 
-                <div style="background: var(--bar-bg); border-top: 1px dotted var(--accent-pink); border-bottom: 1px dotted var(--accent-pink); padding: 5px 10px; margin-top: 25px; margin-bottom: 10px; font-family: var(--font-header);">
+                <div style="background: var(--card-bg); border: 1px solid var(--border-color); font-family: var(--font-header); color: var(--accent-color); font-weight: 700; border-radius: 4px; padding: 8px 14px; margin-top: 35px; margin-bottom: 15px; font-size: 13.5px; letter-spacing: 0.5px;">
                     📂 
                     {% case current_month %}
                         {% when '01' %}<span data-i18n="jan">JAN (Ocak)</span>
@@ -37,14 +37,14 @@ layout: default
                     {{ current_year }}
                 </div>
                 
-                <ul class="nav-links" style="padding-left: 10px;">
+                <ul class="nav-links" style="padding-left: 5px; gap: 10px;">
             {% endif %}
 
-            <li style="margin-bottom: 5px;">
-                <span style="font-size: 11px; color: #999; margin-right: 5px; font-family: var(--font-code);">
+            <li style="margin-bottom: 8px; list-style: none; display: flex; align-items: center;">
+                <span style="font-size: 11px; color: var(--text-muted); margin-right: 10px; font-family: 'Inter', sans-serif; letter-spacing: 0.5px; font-weight: 600;">
                     [{{ post.date | date: "%d" }}]
                 </span>
-                <a href="{{ post.url }}" style="color: var(--text-main); border-bottom: 1px dashed #ccc;">
+                <a href="{{ post.url }}" style="color: var(--text-main); font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent;" onmouseenter="this.style.color='var(--accent-color)'; this.style.borderBottomColor='var(--accent-color)';" onmouseleave="this.style.color='var(--text-main)'; this.style.borderBottomColor='transparent';">
                     {{ post.title }}
                 </a>
             </li>

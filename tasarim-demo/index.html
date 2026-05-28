@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmet Arvas</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="split-wrapper">
+        
+        <!-- LEFT SIDEBAR (Fixed Column) -->
+        <aside class="left-sidebar">
+            
+            <!-- Profile Section -->
+            <section class="profile-card">
+                <div class="profile-pic"></div>
+                <h2 class="profile-name" data-i18n="site_title">Ahmet Arvas</h2>
+                <span class="profile-title" data-i18n="lvl_engineer">MÜHENDİS ADAYI</span>
+                <p class="profile-desc">
+                    <span data-i18n="bio_title" style="display:block; margin-bottom:5px;">Elektrik & Elektronik Mühendisliği öğrencisi.</span>
+                    <span data-i18n="bio_desc">Gömülü Sistemler Meraklısı & Retro Web Aşığı.</span>
+                </p>
+            </section>
+
+            <!-- Navigation Links -->
+            <nav>
+                <div class="section-bar" data-i18n="nav_header">:: MENÜ ::</div>
+                <ul class="nav-links" style="margin-top: 10px;">
+                    <li class="nav-item active"><a href="index.html" data-i18n="home">ANA SAYFA</a></li>
+                    <li class="nav-item"><a href="post-keychain-rocket.html" data-i18n="projects">PROJELER</a></li>
+                    <li class="nav-item active"><a href="post-pin.html" data-i18n="archive">ARŞİV</a></li>
+                </ul>
+            </nav>
+
+            <!-- Clock & Date Widget -->
+            <section class="clock-widget">
+                <div class="section-bar" data-i18n="time_header">:: ZAMAN ::</div>
+                <div class="clock-display">
+                    <div id="clock">--:--:--</div>
+                    <div id="date">--/--/----</div>
+                </div>
+            </section>
+
+            <!-- Visitor Counter Widget -->
+            <section class="visitor-widget">
+                <div class="section-bar" data-i18n="visitor_header">:: ZİYARETÇİ ::</div>
+                <div class="visitor-display">
+                    <img src="https://count.getloli.com/get/@AhmetArvasBlog?theme=moebooru" alt="Ziyaretçi Sayacı">
+                    <span class="visitor-caption" data-i18n="visitor_desc">Site yeniden yüklenince bile artıyor :(</span>
+                </div>
+            </section>
+
+            <!-- Shoutbox Widget -->
+            <section>
+                <div class="section-bar" data-i18n="shoutbox_header">:: SHOUTBOX ::</div>
+                <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
+                    <div class="shoutbox-posts" id="shoutboxPosts"></div>
+                    <form id="shoutForm" class="shoutbox-inputs">
+                        <div class="shoutbox-input-row">
+                            <input type="text" id="shoutNameInput" class="shoutbox-field" style="width: 80px;" placeholder="İsim" data-i18n-placeholder="shoutbox_placeholder_name" required>
+                            <input type="text" id="shoutMsgInput" class="shoutbox-field" style="flex-grow: 1;" placeholder="Mesaj..." data-i18n-placeholder="shoutbox_placeholder_msg" required>
+                        </div>
+                        <button type="submit" class="btn-shoutbox" data-i18n="send_btn">GÖNDER!</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Interactive Action Controls (Theme & Language Switch) -->
+            <section class="action-controls">
+                <button id="lang-toggle-btn" class="action-btn">EN</button>
+                <button id="theme-toggle-btn" class="action-btn">☾</button>
+            </section>
+
+        </aside>
+
+        <!-- RIGHT CONTENT (Scrollable Main Panel) -->
+        <main class="right-content">
+            
+            <!-- Welcome Header Block -->
+            <header class="right-header">
+                <h1 class="site-title" data-i18n="welcome_message">HOŞGELDİNİZ</h1>
+                <p class="site-subtitle" data-i18n="welcome_sub">Hoşgeldiniz</p>
+            </header>
+
+            <!-- Diary Entries Section -->
+            <section class="stream-section">
+                <div class="section-bar" data-i18n="diary_entries">GÜNLÜK GİRDİLERİ</div>
+                <div class="stream-container">
+                    
+                    <!-- Post 1: Rockets and Keychains aftermath -->
+                    <article class="post-card-home">
+                        <div class="card-title-line">
+                            <h3 class="card-title-main">Anahtarlık Postundan Sonra Olanlar</h3>
+                            <span class="card-date">2026-05-28</span>
+                        </div>
+                        <p class="card-body">
+                            Dersler pek onları ciddiye alamadığımdan beklediğim gibiler. Elbet düzeleceklerdir... onlar düzelmese de başka şeyler düzelir. Hayat spesifik şeylerden spesifik bir hal bekleyemeyecek kadar kısa. Tüm bunlar bir tarafa bazı şeyleri kaydetmek istedim...
+                        </p>
+                        <div style="text-align: right; margin-top: 10px;">
+                            <a href="post-keychain-rocket.html" class="btn-retro" data-i18n="read_more">DEVAMINI OKU</a>
+                        </div>
+                    </article>
+
+                    <!-- Post 2: Film Review -->
+                    <article class="post-card-home">
+                        <div class="card-title-line">
+                            <h3 class="card-title-main">Bir Film Hakkında : Pin - 1988</h3>
+                            <span class="card-date">2026-05-27</span>
+                        </div>
+                        <p class="card-body">
+                            Bugün yakın bir zamanda izlediğim "Pin" filmi üzerine yazmak istedim. Bu filmde tüm senaryonun etrafında döndüğü şey, tıbbi amaçlarla kullanılan bir manken. Bu mankenin özelliği ise özellikle rasyonel olmak üzere verilen sorulara cevap verebilmesi...
+                        </p>
+                        <div style="text-align: right; margin-top: 10px;">
+                            <a href="post-pin.html" class="btn-retro" data-i18n="read_more">DEVAMINI OKU</a>
+                        </div>
+                    </article>
+
+                </div>
+            </section>
+
+            <div class="clean-card-divider">❦   ❦   ❦</div>
+
+            <!-- Projects Listing Section -->
+            <section class="stream-section">
+                <div class="section-bar" data-i18n="projects_header">PROJELER</div>
+                <div class="stream-container">
+                    <article class="project-card-home">
+                        <div class="card-title-line">
+                            <h3 class="card-title-main">Building Simplest AI Keychain Friend (YUU)</h3>
+                            <span class="card-date">2026-01-23</span>
+                        </div>
+                        <p class="card-body">
+                            Elimdeki elektronik artıklarla yapmaya çalıştığım, GIF oynatabilen yapay zekâ destekli anahtarlık projesinin teknik detayları ve donanım mimarisi...
+                        </p>
+                        <div style="text-align: right; margin-top: 10px;">
+                            <a href="https://www.ahmetarvas.tr/projects/2026-01-23-BUILDING-SIMPLEST-AI-KEYCHAIN-FRIEND-YUU.html" target="_blank" class="btn-retro" data-i18n="examine_btn">İNCELE</a>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="simple-footer">
+                <span data-i18n="footer_text">C10H16N5O13P3 ile tasarlandı</span> | Ahmet Arvas © 2026
+            </footer>
+
+        </main>
+
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

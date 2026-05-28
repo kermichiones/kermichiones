@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anahtarlık Postundan Sonra Olanlar | Ahmet Arvas</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="split-wrapper">
+        
+        <!-- LEFT SIDEBAR (Fixed Column) -->
+        <aside class="left-sidebar">
+            
+            <!-- Profile Section -->
+            <section class="profile-card">
+                <div class="profile-pic"></div>
+                <h2 class="profile-name" data-i18n="site_title">Ahmet Arvas</h2>
+                <span class="profile-title" data-i18n="lvl_engineer">MÜHENDİS ADAYI</span>
+                <p class="profile-desc">
+                    <span data-i18n="bio_title" style="display:block; margin-bottom:5px;">Elektrik & Elektronik Mühendisliği öğrencisi.</span>
+                    <span data-i18n="bio_desc">Gömülü Sistemler Meraklısı & Retro Web Aşığı.</span>
+                </p>
+            </section>
+
+            <!-- Navigation Links -->
+            <nav>
+                <div class="section-bar" data-i18n="nav_header">:: MENÜ ::</div>
+                <ul class="nav-links" style="margin-top: 10px;">
+                    <li class="nav-item"><a href="index.html" data-i18n="home">ANA SAYFA</a></li>
+                    <li class="nav-item"><a href="post-keychain-rocket.html" data-i18n="projects">PROJELER</a></li>
+                    <li class="nav-item active"><a href="post-pin.html" data-i18n="archive">ARŞİV</a></li>
+                </ul>
+            </nav>
+
+            <!-- Clock & Date Widget -->
+            <section class="clock-widget">
+                <div class="section-bar" data-i18n="time_header">:: ZAMAN ::</div>
+                <div class="clock-display">
+                    <div id="clock">--:--:--</div>
+                    <div id="date">--/--/----</div>
+                </div>
+            </section>
+
+            <!-- Visitor Counter Widget -->
+            <section class="visitor-widget">
+                <div class="section-bar" data-i18n="visitor_header">:: ZİYARETÇİ ::</div>
+                <div class="visitor-display">
+                    <img src="https://count.getloli.com/get/@AhmetArvasBlog?theme=moebooru" alt="Ziyaretçi Sayacı">
+                    <span class="visitor-caption" data-i18n="visitor_desc">Site yeniden yüklenince bile artıyor :(</span>
+                </div>
+            </section>
+
+            <!-- Shoutbox Widget -->
+            <section>
+                <div class="section-bar" data-i18n="shoutbox_header">:: SHOUTBOX ::</div>
+                <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
+                    <div class="shoutbox-posts" id="shoutboxPosts"></div>
+                    <form id="shoutForm" class="shoutbox-inputs">
+                        <div class="shoutbox-input-row">
+                            <input type="text" id="shoutNameInput" class="shoutbox-field" style="width: 80px;" placeholder="İsim" data-i18n-placeholder="shoutbox_placeholder_name" required>
+                            <input type="text" id="shoutMsgInput" class="shoutbox-field" style="flex-grow: 1;" placeholder="Mesaj..." data-i18n-placeholder="shoutbox_placeholder_msg" required>
+                        </div>
+                        <button type="submit" class="btn-shoutbox" data-i18n="send_btn">GÖNDER!</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Interactive Action Controls (Theme & Language Switch) -->
+            <section class="action-controls">
+                <button id="lang-toggle-btn" class="action-btn">EN</button>
+                <button id="theme-toggle-btn" class="action-btn">☾</button>
+            </section>
+
+        </aside>
+
+        <!-- RIGHT CONTENT (Scrollable Main Panel) -->
+        <main class="right-content">
+            
+            <div style="margin-bottom: 10px;">
+                <a href="index.html" class="btn-retro">⬅ Ana Sayfaya Dön / Back to Home</a>
+            </div>
+
+            <article class="article-container">
+                
+                <header class="article-header">
+                    <h1 class="article-title">Anahtarlık Postundan Sonra Olanlar</h1>
+                    <div class="article-meta">
+                        <span>📅 2026-05-28</span>
+                        <span style="margin: 0 10px;">|</span>
+                        <span>#atölye #roketçilik</span>
+                    </div>
+                </header>
+
+                <div class="post-content">
+                    
+                    <p>
+                        Dersler pek onları ciddiye alamadığımdan beklediğim gibiler. Elbet düzeleceklerdir... onlar düzelmese de başka şeyler düzelir. Hayat spesifik şeylerden spesifik bir hal bekleyemeyecek kadar kısa. Tüm bunlar bir tarafa bazı şeyleri kaydetmek istedim, yakın arkadaşlarımdan Tülin'e geçen web sitesine eklemiş olduğum elimdeki artıklarla yapmaya çalıştığım gif gösteren AI destekli anahatarlığın linkini atmıştım. (https://www.ahmetarvas.tr/projects/2026-01-23-BUILDING-SIMPLEST-AI-KEYCHAIN-FRIEND-YUU.html)  Yani basit bir proje idi Ramazan bayramı sonuydu, yeni bir döneme başlayacaktık. Beklemediğim şekilde bundan lise öğrencilerine yaptırıp verelim gibi bir fikir çıktı kendisinden onların mühendisliğe olan ilgileri artar diye, ben de geçmişte roketçiliğe zaman ayırırdım dolayısıyla benden de liseliler için roketçiliğe giriş eğitimi bekleniyordu. Her şeyi kendileri yapmalı diye düşündüm bütçe de bulunmuştu bir yerlerden bayağı elle yatırmayı deneyimlesinler diye A3-8 motorların koyulabileceği küçük bir gövdeyi el işi kağıdını PVC boruya sarıp katman katman tutkallayacakları bir plan kurdum. Bu arada benim dahil olamadığım anahtarlık etkinliğinde lise öğrencileri aşağıdaki gibi bir sistemin sahibi olmuşlar:
+                    </p>
+
+                    <figure class="clean-figure">
+                        <img src="../assets/images/lise_anahtarlik_etkinligi.png" alt="Lise Anahtarlık Etkinliği" style="width: 550px;">
+                    </figure>
+
+                    <p>
+                        Bir blog yazısının buraya kadar geleceğini düşünmezdim doğrusu ve 2026 yılında yaklaşık 20 adet yapılmış, komik bir durum. 
+                    </p>
+
+                    <p>
+                        Evet roket işine geri dönebiliriz. Dediğim gibi liseli gençler roket gövdeleri, kanatçıkları ve burun konileri hatta paraşütleri, kısacası motor hariç her kısmı kendi elleriyle ürettikleri roketlere sahip oldular. Arkadaşım Ali'nin de çıktığı aşağıdaki fotoğrafta nasıl el işi kağıdı sarılır ve tutkallanır gösteriyorum.
+                    </p>
+
+                    <figure class="clean-figure">
+                        <img src="../assets/images/roket_govde_hazirlama.png" alt="Roket Gövdesi Hazırlama" style="width: 550px;">
+                    </figure>
+
+                    <p>
+                        Alüminyum folyo ile motoru sarıyorlar, kanatçığı ve burun konisini de kalıplarından kesip taktıklarından sonra
+                        Neticesinde her öğrencinin az çok böyle bir roketi oluyor: 
+                    </p>
+
+                    <figure class="clean-figure">
+                        <img src="../assets/images/ogrenci_roketi_tamamlanmis.png" alt="Tamamlanmış Öğrenci Roketi" style="width: 550px;">
+                    </figure>
+
+                    <p>
+                        Öğrenciler ile beraber basınç merkezi ve ağırlık merkezlerini bulup ona göre stabilite ayarı yapmamız gerekiyordu ancak zaman yetmediğinden roketleri uçuş öncesi elden geçirme işi bize kaldı. 
+                    </p>
+
+                    <p>
+                        Biz de fırlatma gününden önce her birini elden geçirdik. Basınç merkezi bulmak için aşağıdaki yöntem ile çıkardığımız kartonun ağırlık merkezine baktık ve onu yaklaşık olarak kabul ettik. 
+                    </p>
+
+                    <figure class="clean-figure">
+                        <img src="../assets/images/basinc_merkezi_bulma.png" alt="Karton Üzerinden Basınç Merkezi Bulma" style="width: 450px;">
+                    </figure>
+
+                    <p>
+                        Ağırlık merkezini ise kolayca bulduk. Basınç merkezi ve ağırlık merkezi birbirine çok yakın çıkınca (Ağırlık merkezi basınç merkezinden en az 1 çap ileride olmalı) Burun konisine roketleri yaparken eklediğimiz oyun hamurunun yetersiz olduğunu anladık. Tabi roket içinde de yer kalmadığından basınç merkezini geriye çekmek dışında bir şansımız yoktu. Elime makası alıp kafamda belirlediğim yeni basınç merkezine göre öğrencilerin roketlerinin kanatçıklarını küçülttüm. Tabi yanımda bulunan arkadaşlarım da fırlatma rampasını bitirmede çok büyük katkılar sundular. O da aşağıdaki görselde. Rokete sabitlenmiş bir pipet fırlatma rampasına roketi sabitliyordu.
+                    </p>
+
+                    <figure class="clean-figure">
+                        <img src="../assets/images/roket_firlatma_rampasi.png" alt="Fırlatma Rampası Pipet Detayı" style="width: 550px;">
+                    </figure>
+
+                    <p>
+                        Heh bir de fırlatmadan önce birkaç tanesine yapılması çok kritik olan sallama testini yaptık başarılı olunca fırlatmaya hazırdık. Onunla alakalı da aşağıdaki görsel bilgi veriyor:
+                    </p>
+
+                    <figure class="clean-figure">
+                        <img src="../assets/images/roket_sallama_testi.png" alt="Sallama Testi" style="width: 450px;">
+                    </figure>
+
+                    <p>
+                        Kanatçıkları ne olur ne olmaz diye plastik macunla sabitledik müthiş bir şeymiş fırlatma rampasının birinci şişini boruya sabitlerken de kullandık, kesinlikle bir daha kullanacağım bir malzeme oldu benim için sertleşince kırması imkansız. 
+                    </p>
+
+                    <figure class="clean-figure">
+                        <img src="../assets/images/kanatcik_sabitleme.png" alt="Kanatçıkları sabitlerken ben" style="width: 550px;">
+                        <figcaption>Kanatçıkları sabitlerken ben</figcaption>
+                    </figure>
+
+                    <p>
+                        Tam 9 adet roketimiz vardı. Tümünü kazasız uçurduk. Evet aerodinamik olarak o kadar iyi değillerdi ama önceden hiç roket yapmamış gençler, çok başarılı bir iş çıkarmışlardı. Eğitmen olmak bir zevkti.
+                    </p>
+
+                    <p>
+                        Hatta örnek bir video:
+                    </p>
+
+                    <figure class="clean-figure">
+                        <video controls style="max-width: 100%; width: 640px; height: auto;">
+                            <source src="../assets/videos/roket_firlatma_ani.mp4" type="video/mp4">
+                            Tarayıcınız video oynatmayı desteklemiyor.
+                        </video>
+                    </figure>
+
+                    <p>
+                        Son olarak atış alanında bir türlü fırlatma yapamadık komik olan şey krokodil kablolarımız paslıymış. En iyi atışları oradaki görevlilerin verdikleri kabloların ucuna U şeklinde reziztans teli bağlayıp roket motorunun altındaki deliğe kabloyu denk getirerek yaptık. Hikaye bu kadar. 
+                    </p>
+
+                </div>
+
+            </article>
+
+            <!-- Footer -->
+            <footer class="simple-footer">
+                <span data-i18n="footer_text">C10H16N5O13P3 ile tasarlandı</span> | Ahmet Arvas © 2026
+            </footer>
+
+        </main>
+
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

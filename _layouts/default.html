@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Zen+Maru+Gothic:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     
     <!-- Styles -->
     <link rel="stylesheet" href="/assets/css/style.css">
@@ -28,22 +28,26 @@
 </head>
 <body>
 
-<div class="site-wrapper">
-    <!-- LEFT SIDEBAR (Fixed/Sticky) -->
-    <div class="sidebar-container">
-        <aside class="sidebar-nav">
-            <!-- Language/Theme Toggle -->
-            <div style="text-align: right; margin-bottom: 10px;">
-                 <button id="theme-toggle-btn" onclick="toggleTheme()" class="btn-retro" style="font-size: 10px; padding: 2px 5px;" title="Toggle Theme">☾</button>
-                 <button id="lang-toggle-btn" onclick="toggleLanguage()" class="btn-retro" style="font-size: 10px; padding: 2px 5px;">EN</button>
-            </div>
+    <div class="split-wrapper">
+        
+        <!-- LEFT SIDEBAR (Fixed Column) -->
+        <aside class="left-sidebar">
+            
+            <!-- Profile Section -->
+            <section class="profile-card">
+                <div class="profile-pic"></div>
+                <h2 class="profile-name" data-i18n="site_title">Ahmet Arvas</h2>
+                <span class="profile-title" data-i18n="lvl_engineer">MÜHENDİS ADAYI</span>
+                <p class="profile-desc">
+                    <span data-i18n="bio_title" style="display:block; margin-bottom:5px;">Elektrik & Elektronik Mühendisliği öğrencisi.</span>
+                    <span data-i18n="bio_desc">Gömülü Sistemler Meraklısı & Retro Web Aşığı.</span>
+                </p>
+            </section>
 
-            <!-- Navigation -->
+            <!-- Navigation Links -->
             <nav>
-                <div class="section-bar" style="justify-content: center; padding: 2px;">
-                    <span data-i18n="nav_header">:: MENU ::</span>
-                </div>
-                <ul class="nav-links">
+                <div class="section-bar" data-i18n="nav_header">:: MENÜ ::</div>
+                <ul class="nav-links" style="margin-top: 10px;">
                     <li><a href="/" data-i18n="home">ANA SAYFA</a></li>
                     <li><a href="/aylik/" data-i18n="monthly">AYLIK</a></li>
                     <li><a href="/projeler/" data-i18n="projects">PROJELER</a></li>
@@ -51,236 +55,242 @@
                     <li><a href="/hakkimda/" data-i18n="about">HAKKIMDA</a></li>
                 </ul>
             </nav>
+
+            <!-- Clock & Date Widget -->
+            <section class="clock-widget">
+                <div class="section-bar" data-i18n="time_header">:: ZAMAN ::</div>
+                <div class="clock-display">
+                    <div id="clock">--:--:--</div>
+                    <div id="date">--/--/----</div>
+                </div>
+            </section>
+
+            <!-- Visitor Counter Widget -->
+            <section class="visitor-widget">
+                <div class="section-bar" data-i18n="visitor_header">:: ZİYARETÇİ ::</div>
+                <div class="visitor-display">
+                    <img src="https://count.getloli.com/get/@AhmetArvasBlog?theme=moebooru" alt="Ziyaretçi Sayacı">
+                    <span class="visitor-caption" data-i18n="visitor_desc">Site yeniden yüklenince bile artıyor :(</span>
+                </div>
+            </section>
+
+            <!-- Shoutbox Widget -->
+            <section>
+                <div class="section-bar" data-i18n="shoutbox_header">:: SHOUTBOX ::</div>
+                <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
+                    <div class="shoutbox-posts" id="shoutbox-area">
+                        <span style="color:#999;" data-i18n="loading">Bağlanıyor...</span>
+                    </div>
+                    <form id="sb-form" class="shoutbox-inputs">
+                        <div class="shoutbox-input-row">
+                            <input type="text" id="sb-name" class="shoutbox-field" style="width: 80px;" placeholder="İsim" data-i18n-placeholder="shoutbox_placeholder_name" required>
+                            <input type="text" id="sb-msg" class="shoutbox-field" style="flex-grow: 1;" placeholder="Mesaj..." data-i18n-placeholder="shoutbox_placeholder_msg" required>
+                        </div>
+                        <button type="submit" class="sb-btn btn-shoutbox" data-i18n="send_btn">GÖNDER!</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Interactive Action Controls (Theme & Language Switch) -->
+            <section class="action-controls">
+                <button id="lang-toggle-btn" onclick="toggleLanguage()" class="action-btn">EN</button>
+                <button id="theme-toggle-btn" onclick="toggleTheme()" class="action-btn">☾</button>
+            </section>
+
         </aside>
 
-        <aside class="sidebar-widgets">
-            <!-- Clock/Date Widget -->
-            <div class="profile-card" style="text-align: center;">
-                <div class="section-bar" style="justify-content: center; padding: 2px; margin-bottom: 5px;">
-                     <span data-i18n="time_header">:: ZAMAN ::</span>
-                </div>
-                <div id="clock" style="font-family: var(--font-header); font-size: 24px; color: var(--accent-pink);">--:--</div>
-                <div id="date" style="font-size: 12px;">--/--/--</div>
-            </div>
-
-            <!-- Recent Posts (Mini) -->
-            <div style="margin-top: 10px;">
-                 <div class="section-bar" style="justify-content: center; padding: 2px;">
-                    <span data-i18n="new_posts_header">:: YENİ YAZILAR ::</span>
-                </div>
-                <ul style="padding-left: 20px; font-size: 12px; list-style: square;">
-                    {% for post in site.posts limit:3 %}
-                        <li style="margin-bottom: 5px;">
-                            <a href="{{ post.url }}">{{ post.title }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-
-            <!-- Visitor Counter -->
-            <div class="profile-card" style="text-align: center; margin-top: 10px;">
-                 <div class="section-bar" style="justify-content: center; padding: 2px; margin-bottom: 5px;">
-                    <span data-i18n="visitor_header">:: ZİYARETÇİ ::</span>
-                 </div>
-                 <img src="https://count.getloli.com/get/@AhmetArvasBlog?theme=moebooru" alt="Ziyaretçi Sayacı" style="width: 100%; border: 1px dotted var(--accent-pink);">  
-                 <div style="font-size: 9px; color: #666; margin-top: 2px;" data-i18n="visitor_desc">Site yeniden yüklenince bile artıyor :(</div>
-            </div>
-
-            <!-- Shoutbox -->
-            <div style="margin-top: 20px;">
-                 <div class="section-bar" style="justify-content: center; padding: 2px;">
-                    <span data-i18n="shoutbox_header">:: SHOUTBOX ::</span>
-                </div>
-                <div id="shoutbox-area" style="height: 150px; overflow-y: auto; background: #fff; border: 1px dotted var(--accent-pink); padding: 5px; font-size: 11px; margin-bottom: 5px;">
-                    <span style="color:#999;" data-i18n="loading">Bağlanıyor...</span>
-                </div>
-                <form id="sb-form">
-                    <input type="text" id="sb-name" data-i18n-placeholder="shoutbox_placeholder_name" placeholder="İsim" style="width: 100%; margin-bottom: 2px; font-family: inherit; font-size: 11px;">
-                    <textarea id="sb-msg" data-i18n-placeholder="shoutbox_placeholder_msg" placeholder="Mesaj..." style="width: 100%; height: 40px; font-family: inherit; font-size: 11px; resize: none;"></textarea>
-                    <button type="submit" class="sb-btn btn-retro" style="width: 100%; margin-top: 2px;" data-i18n="send_btn">GÖNDER!</button>
-                </form>
-            </div>
+        <!-- RIGHT CONTENT (Scrollable Main Panel) -->
+        <main class="right-content">
             
-            <!-- Buttons/Badges -->
-            <div style="margin-top: 20px; text-align: center;">
-                 <div class="section-bar" style="justify-content: center; padding: 2px;">
-                    <span data-i18n="buttons_header">:: BUTONLAR ::</span>
-                </div>
-                 <a href="https://simobot.com" target="_blank">
-                    <img src="https://placehold.co/88x31/FF85A2/FFF?text=My+Startup" alt="My Startup" style="border: 0;">
-                 </a>
-            </div>
-        </aside>
+            <!-- Welcome Header Block -->
+            <header class="right-header">
+                <h1 class="site-title" data-i18n="welcome_message">HOŞGELDİNİZ</h1>
+                <p class="site-subtitle" data-i18n="welcome_sub">Hoşgeldiniz</p>
+            </header>
+
+            <!-- Dynamic Content Injected here -->
+            {{ content }}
+
+            <!-- Footer -->
+            <footer class="simple-footer">
+                <span data-i18n="footer_text">C10H16N5O13P3 ile tasarlandı</span> | Ahmet Arvas © 2026
+            </footer>
+
+        </main>
+
     </div>
 
-    <div class="header-area">
-        <!-- Main Header Bar -->
-        <header class="site-header">
-            <h1 style="font-size: 48px; color: var(--accent-pink); text-shadow: 2px 2px 0 var(--bar-bg);">
-                {{ site.title | default: "Ahmet Arvas" }}
-            </h1>
-        </header>
-    </div>
+    <!-- SCRIPTS & FIREBASE -->
+    <script src="/assets/js/lang.js"></script>
+    <script type="module">
+        // 1. Clock & Date Dynamic Updater
+        function updateClock() {
+            const clockEl = document.getElementById('clock');
+            const dateEl = document.getElementById('date');
+            if (!clockEl || !dateEl) return;
+            const now = new Date();
+            
+            clockEl.innerText = now.toLocaleTimeString(currentLang === 'tr' ? 'tr-TR' : 'en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
 
-    <!-- MAIN CONTENT AREA -->
-    <main class="main-content">
-        <!-- Dynamic Content Injection -->
-        {{ content }}
-    </main>
+            const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+            const dateStr = now.toLocaleDateString(currentLang === 'tr' ? 'tr-TR' : 'en-US', dateOptions);
+            dateEl.innerText = dateStr.toUpperCase();
+        }
+        window.updateClock = updateClock;
+        setInterval(updateClock, 1000);
+        updateClock();
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        &copy; 2026 Ahmet Arvas. <br>
-        <span data-i18n="footer_text">Designed with C<sub>10</sub>H<sub>16</sub>N<sub>5</sub>O<sub>13</sub>P<sub>3</sub></span> <br>
-    </footer>
-</div>
+        // 2. Firebase Imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+        import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-<!-- SCRIPTS & FIREBASE -->
-<script src="/assets/js/lang.js"></script>
-<script type="module">
-    // 1. Clock & Counter Logic
-    function updateUI() {
-        const now = new Date();
-        document.getElementById('clock').innerText = now.toLocaleTimeString('tr-TR', {hour: '2-digit', minute:'2-digit'});
-        document.getElementById('date').innerText = now.toLocaleDateString('tr-TR');
-    }
-    setInterval(updateUI, 1000); updateUI();
+        // 3. Config
+        const firebaseConfig = {
+          apiKey: "AIzaSyDqRF27KZDPaqkfmL5twF_ZfhULarFGJmA",
+          authDomain: "mywebsite-6c85a.firebaseapp.com",
+          projectId: "mywebsite-6c85a",
+          storageBucket: "mywebsite-6c85a.firebasestorage.app",
+          messagingSenderId: "40740255090",
+          appId: "1:40740255090:web:431cc19c0287d78a0c99eb",
+          measurementId: "G-5LRBSW6C82"
+        };
 
-    // 2. Firebase Imports
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
-    import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        // 4. Initialize
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
 
-    // 3. Config
-    const firebaseConfig = {
-      apiKey: "AIzaSyDqRF27KZDPaqkfmL5twF_ZfhULarFGJmA",
-      authDomain: "mywebsite-6c85a.firebaseapp.com",
-      projectId: "mywebsite-6c85a",
-      storageBucket: "mywebsite-6c85a.firebasestorage.app",
-      messagingSenderId: "40740255090",
-      appId: "1:40740255090:web:431cc19c0287d78a0c99eb",
-      measurementId: "G-5LRBSW6C82"
-    };
+        // 5. Shoutbox Logic
+        const sbArea = document.getElementById('shoutbox-area');
+        const sbForm = document.getElementById('sb-form');
+        const sbName = document.getElementById('sb-name');
+        const sbMsg = document.getElementById('sb-msg');
 
-    // 4. Initialize
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-    const db = getFirestore(app);
-    const auth = getAuth(app);
+        let allMessages = [];
+        let displayLimit = 20;
 
-    // 5. Shoutbox Logic
-    const sbArea = document.getElementById('shoutbox-area');
-    const sbForm = document.getElementById('sb-form');
-    const sbName = document.getElementById('sb-name');
-    const sbMsg = document.getElementById('sb-msg');
+        let lastSentTime = 0;        // Anti-spam timer
+        const SPAM_COOLDOWN = 5000;  // 5 seconds cooldown
 
-    let allMessages = [];
-    let displayLimit = 20;
+        async function initFirebase() {
+            await signInAnonymously(auth);
 
-    // --- SPAM KORUMASI İÇİN DEĞİŞKENLER ---
-    let lastSentTime = 0;        // Son mesaj atılan zaman
-    const SPAM_COOLDOWN = 5000;  // 5 Saniye bekleme süresi (Milisaniye)
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    const q = collection(db, 'shoutbox_v2');
+                    onSnapshot(q, (snapshot) => {
+                        allMessages = [];
+                        snapshot.forEach(doc => allMessages.push(doc.data()));
+                        allMessages.sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
+                        renderShoutbox();
+                    });
+                }
+            });
+        }
 
-    async function initFirebase() {
-        await signInAnonymously(auth);
+        function renderShoutbox() {
+            if (allMessages.length === 0) { 
+                sbArea.innerHTML = '<span style="color:#666">Sessiz...</span>'; 
+                return; 
+            }
 
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const q = collection(db, 'shoutbox_v2');
-                onSnapshot(q, (snapshot) => {
-                    allMessages = [];
-                    snapshot.forEach(doc => allMessages.push(doc.data()));
-                    allMessages.sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
+            sbArea.innerHTML = "";
+            const visibleMessages = allMessages.slice(0, displayLimit);
+
+            visibleMessages.forEach(m => {
+                const div = document.createElement('div'); 
+                div.className = 'shout-msg';
+                
+                const name = (m.name || 'Anon').replace(/</g, "&lt;");
+                const text = (m.text || '').replace(/</g, "&lt;");
+                
+                let formattedDate = "";
+                if (m.timestamp && m.timestamp.seconds) {
+                    const d = new Date(m.timestamp.seconds * 1000);
+                    formattedDate = `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}.${d.getFullYear()} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+                } else {
+                    formattedDate = "--/--/----";
+                }
+                
+                div.innerHTML = `
+                    <span class="shout-time">${formattedDate}</span>
+                    <span class="shout-author">${name}:</span>
+                    <span class="shout-text">${text}</span>
+                `;
+                sbArea.appendChild(div);
+            });
+
+            // Scroll to the bottom of the ledger
+            sbArea.scrollTop = sbArea.scrollHeight;
+
+            if (allMessages.length > displayLimit) {
+                const loadMoreBtn = document.createElement('button');
+                loadMoreBtn.innerText = "Devamını Göster ▼";
+                loadMoreBtn.className = "btn-shoutbox";
+                loadMoreBtn.style.cssText = "width: 100%; padding: 6px; font-size: 10px; margin-top: 10px;";
+                loadMoreBtn.onclick = () => {
+                    displayLimit += 20;
                     renderShoutbox();
+                };
+                sbArea.appendChild(loadMoreBtn);
+            }
+        }
+
+        sbForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const now = Date.now();
+            const timeDiff = now - lastSentTime;
+            
+            if (timeDiff < SPAM_COOLDOWN) {
+                const remaining = Math.ceil((SPAM_COOLDOWN - timeDiff) / 1000);
+                alert(`Hop! Çok hızlısın. Lütfen ${remaining} saniye bekle.`);
+                return;
+            }
+
+            const user = auth.currentUser;
+            if(!user || !sbName.value || !sbMsg.value) return;
+            
+            const btn = document.querySelector('.btn-shoutbox');
+            const originalText = btn.innerText;
+            
+            btn.disabled = true;
+            btn.innerText = "Yollanıyor...";
+            btn.style.opacity = "0.6";
+            
+            try {
+                await addDoc(collection(db, 'shoutbox_v2'), {
+                    name: sbName.value, 
+                    text: sbMsg.value, 
+                    timestamp: serverTimestamp(), 
+                    uid: user.uid
                 });
+                
+                sbMsg.value = ''; 
+                sbArea.scrollTop = sbArea.scrollHeight;
+                lastSentTime = Date.now(); 
+
+            } catch(err) { 
+                console.error("Hata:", err); 
+                alert("Hata: Mesaj gönderilemedi.");
+            } finally {
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.innerText = originalText;
+                    btn.style.opacity = "1";
+                }, 1000);
             }
         });
-    }
 
-    function renderShoutbox() {
-        if (allMessages.length === 0) { 
-            sbArea.innerHTML = '<span style="color:#666">Sessiz...</span>'; 
-            return; 
-        }
-
-        sbArea.innerHTML = "";
-        const visibleMessages = allMessages.slice(0, displayLimit);
-
-        visibleMessages.forEach(m => {
-            const div = document.createElement('div'); div.className = 'sb-msg';
-            div.style.marginBottom = "4px";
-            div.style.borderBottom = "1px dashed #ddd";
-            const name = (m.name || 'Anon').replace(/</g, "&lt;");
-            const text = (m.text || '').replace(/</g, "&lt;");
-            div.innerHTML = `<span style="color:var(--accent-pink); font-weight:bold;">${name}:</span> <span style="color:#333;">${text}</span>`;
-            sbArea.appendChild(div);
-        });
-
-        if (allMessages.length > displayLimit) {
-            const loadMoreBtn = document.createElement('button');
-            loadMoreBtn.innerText = "Devamını Göster ▼";
-            loadMoreBtn.style.cssText = "width: 100%; padding: 5px; background: #eee; border: 1px dashed #000; cursor: pointer; color: var(--accent-pink); font-family: inherit; font-size: 10px; margin-top: 5px; font-weight: bold;";
-            loadMoreBtn.onclick = () => {
-                displayLimit += 20;
-                renderShoutbox();
-            };
-            sbArea.appendChild(loadMoreBtn);
-        }
-    }
-
-    sbForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        // --- SPAM KONTROLÜ 1: ZAMAN ---
-        const now = Date.now();
-        const timeDiff = now - lastSentTime;
-        
-        if (timeDiff < SPAM_COOLDOWN) {
-            const remaining = Math.ceil((SPAM_COOLDOWN - timeDiff) / 1000);
-            alert(`Hop! Çok hızlısın. Lütfen ${remaining} saniye bekle.`);
-            return; // Fonksiyonu durdur
-        }
-
-        const user = auth.currentUser;
-        if(!user || !sbName.value || !sbMsg.value) return;
-        
-        // --- SPAM KONTROLÜ 2: BUTONU KİLİTLE ---
-        const btn = document.querySelector('.sb-btn');
-        const originalText = btn.innerText;
-        
-        btn.disabled = true;                // Tıklamayı kapat
-        btn.innerText = "Yollanıyor...";    // Yazıyı değiştir
-        btn.style.opacity = "0.6";          // Rengi soldur
-        
-        try {
-            await addDoc(collection(db, 'shoutbox_v2'), {
-                name: sbName.value, 
-                text: sbMsg.value, 
-                timestamp: serverTimestamp(), 
-                uid: user.uid
-            });
-            
-            sbMsg.value = ''; 
-            sbArea.scrollTop = 0;
-            
-            // Son gönderim zamanını güncelle
-            lastSentTime = Date.now(); 
-
-        } catch(err) { 
-            console.error("Hata:", err); 
-            alert("Hata: Mesaj gönderilemedi.");
-        } finally {
-            // İşlem bitince (başarılı veya hatalı) butonu 1 saniye sonra geri aç
-            setTimeout(() => {
-                btn.disabled = false;
-                btn.innerText = originalText;
-                btn.style.opacity = "1";
-            }, 1000);
-        }
-    });
-
-    initFirebase();
-</script>
+        initFirebase();
+    </script>
 </body>
 </html>

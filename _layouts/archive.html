@@ -3,34 +3,34 @@ layout: default
 ---
 
 <div>
-    <div class="section-bar">
-        <span class="pixel-icon"></span> <span data-i18n="all_records">ARCHIVE</span>
+    <div class="section-bar" style="margin-bottom: 25px;">
+        <span data-i18n="all_records">ARCHIVE</span>
     </div>
 
-    <div class="content-block">
+    <div style="padding: 10px 0;">
         
         {% assign blog_posts = site.posts %}
         {% assign projects = site.projects %}
         
         {% assign all_content = blog_posts | concat: projects | sort: 'date' | reverse %}
 
-        <ul class="nav-links" style="font-family: var(--font-code); font-size: 13px;">
+        <ul class="nav-links" style="font-family: var(--font-body); font-size: 14px; gap: 0;">
             {% for item in all_content %}
-            <li style="border-bottom: 1px dotted var(--accent-pink); padding: 8px 0; display: flex; justify-content: space-between; align-items: center;">
+            <li style="border-bottom: 1px solid var(--border-color); padding: 12px 0; display: flex; justify-content: space-between; align-items: center; list-style: none;">
                 
                 <span>
                     {% if item.collection == 'projects' %}
-                        <span style="color: #fff; background: var(--accent-pink); padding: 0 4px; font-size: 10px; margin-right: 5px;">[PROJ]</span>
+                        <span style="color: var(--bg-color); background: var(--accent-color); padding: 2px 6px; font-family: 'Inter', sans-serif; font-size: 9px; margin-right: 8px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">[PROJ]</span>
                     {% else %}
-                        <span style="color: #fff; background: var(--accent-cool); padding: 0 4px; font-size: 10px; margin-right: 5px;">[BLOG]</span>
+                        <span style="color: var(--text-main); background: var(--border-color); padding: 2px 6px; font-family: 'Inter', sans-serif; font-size: 9px; margin-right: 8px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">[BLOG]</span>
                     {% endif %}
 
-                    <a href="{{ item.url }}" style="border: none; background: transparent; color: var(--text-main);">
+                    <a href="{{ item.url }}" style="border: none; background: transparent; color: var(--text-main); font-weight: 600; text-decoration: none;">
                         {{ item.title }}
                     </a>
                 </span>
 
-                <span style="color: #999; font-size: 11px; white-space: nowrap; margin-left: 10px;">
+                <span style="color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 11px; white-space: nowrap; margin-left: 10px; letter-spacing: 0.5px;">
                     {{ item.date | date: "%Y.%m.%d" }}
                 </span>
 
@@ -39,7 +39,7 @@ layout: default
         </ul>
         
         {% if all_content.size == 0 %}
-            <div style="text-align: center; color: red; margin-top: 20px;" data-i18n="empty_directory">[!] EMPTY DIRECTORY</div>
+            <div style="text-align: center; color: var(--accent-color); font-family: var(--font-header); font-weight: 700; margin-top: 30px;" data-i18n="empty_directory">[!] EMPTY DIRECTORY</div>
         {% endif %}
 
     </div>

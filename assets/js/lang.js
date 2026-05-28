@@ -41,6 +41,10 @@ function applyLanguage(lang) {
     
     // Update HTML lang attribute
     document.documentElement.lang = lang;
+
+    if (typeof window.updateClock === 'function') {
+        window.updateClock();
+    }
 }
 
 function toggleLanguage() {

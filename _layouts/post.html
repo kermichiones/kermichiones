@@ -2,32 +2,37 @@
 layout: default
 ---
 
-<article>
-    <!-- Post Title Bar -->
-    <div class="section-bar" style="justify-content: space-between;">
-        <span class="section-title">★ {{ page.title }}</span>
-        <span style="font-family: var(--font-code); font-size: 12px;">{{ page.date | date: "%Y.%m.%d" }}</span>
+<article class="article-container">
+    
+    <header class="article-header">
+        <h1 class="article-title">{{ page.title }}</h1>
+        <div class="article-meta">
+            <span>📅 {{ page.date | date: "%Y-%m-%d" }}</span>
+            {% if page.tags.size > 0 or page.categories.size > 0 %}
+            <span style="margin: 0 10px;">|</span>
+            <span>
+                {% for tag in page.tags %}
+                #{{ tag }} 
+                {% endfor %}
+                {% for cat in page.categories %}
+                #{{ cat }} 
+                {% endfor %}
+            </span>
+            {% endif %}
+        </div>
+    </header>
+
+    <div class="post-content">
+        {{ content }}
     </div>
 
-    <!-- Paper Sheet Content -->
-    <div class="content-block post-content" style="margin-bottom: 20px;">
-        {{ content }}
-        
-        <hr style="border: 0; border-bottom: 1px dotted var(--accent-pink); margin: 30px 0;">
-        
-        {% if page.music %}
-        <div style="background: var(--canvas); border: 1px dashed var(--accent-cool); padding: 10px; font-size: 13px; font-family: var(--font-code);">
-            🎵 <b data-i18n="now_playing">NOW PLAYING:</b> {{ page.music }}
-        </div>
-        {% endif %}
-    </div>
 </article>
 
 <!-- Navigation -->
-<div style="display: flex; justify-content: space-between; margin-bottom: 40px; padding: 0 10px;">
+<div style="display: flex; justify-content: space-between; margin-top: 40px; margin-bottom: 40px; padding: 0 10px;">
     {% if page.previous.url %}
     <a href="{{ page.previous.url }}" class="btn-retro">
-        &laquo; {{ page.previous.title | truncate: 20 }}
+        &laquo; {{ page.previous.title | truncate: 25 }}
     </a>
     {% else %}
     <span></span>
@@ -35,7 +40,7 @@ layout: default
 
     {% if page.next.url %}
     <a href="{{ page.next.url }}" class="btn-retro">
-        {{ page.next.title | truncate: 20 }} &raquo;
+        {{ page.next.title | truncate: 25 }} &raquo;
     </a>
     {% endif %}
 </div>
