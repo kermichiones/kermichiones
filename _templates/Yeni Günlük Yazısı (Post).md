@@ -5,21 +5,30 @@ date: {{date}}
 description: "Bu günlük yazısının kısa bir özeti veya açıklaması..."
 ---
 
-Günlük girdisine ait giriş paragrafı buraya gelecek...
+<p class="drop-cap">Giriş paragrafınızın ilk kelimesi buraya gelecek. Model B tasarımı sayesinde ilk harf otomatik olarak Cinzel Serif fontunda ve şık bir crimson/gold renginde büyüyecektir. Devam eden metni buraya yazabilirsiniz...</p>
+
+Yazının geri kalan kısımlarını standart markdown ile yazabilirsiniz.
 
 ## Alt Başlık
 
-İçerik buraya gelecek...
+İçeriklerinizi zenginleştirmek için aşağıdaki Model B estetik bileşenlerini kullanabilirsiniz:
 
-### 📸 Resim Ekleme Şablonu (Model B Tasarımıyla Uyumlu)
-<div style="text-align: center; margin: 30px 0;">
-    <img src="/assets/images/resim_adi.png" alt="Resim Açıklaması" style="max-width: 100%; width: 550px; height: auto; border-radius: 8px; box-shadow: 0 8px 24px rgba(143, 58, 43, 0.12); border: 1px solid var(--border-color);">
-</div>
+### 📖 Estetik Alıntı (Renaissance Blockquote)
+> "Hayat, spesifik şeylerden spesifik bir hal bekleyemeyecek kadar kısa. Bazı anları kaydetmek gerekir."
+> — *Ahmet Arvas*
 
-### 🎥 Video Ekleme Şablonu
-<div style="text-align: center; margin: 30px 0;">
-    <video controls style="max-width: 100%; width: 650px; height: auto; border-radius: 8px; box-shadow: 0 8px 24px rgba(143, 58, 43, 0.12); border: 1px solid var(--border-color);">
-        <source src="/assets/videos/video_adi.mp4" type="video/mp4">
-        Tarayıcınız video etiketini desteklemiyor.
-    </video>
+### 📸 Model B Uyumlu Görsel (Clean Figure)
+Sitenin estetik şablonuyla %100 uyumlu, ince çerçeveli ve alt yazılı görsel bloğu:
+
+<figure class="clean-figure">
+    <img src="/assets/images/resim_adi.png" alt="Açıklama Metni">
+    <figcaption>Görselin altındaki italik açıklama yazısı buraya gelir.</figcaption>
+</figure>
+
+### 💡 Akademik Bilgi Kartı (Academic Card)
+Yazı içinde özel olarak vurgulamak istediğiniz notlar veya ekstra bilgiler için:
+
+<div class="academic-card">
+    <div class="academic-card-header">💡 ÖNEMLİ NOT</div>
+    Bu bir akademik bilgi kartıdır. Sol tarafındaki kalın renk çizgisi ve yumuşak arka plan rengi ile metinlerinizi öne çıkarır.
 </div>

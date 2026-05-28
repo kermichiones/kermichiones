@@ -6,25 +6,57 @@ description: "Projenin ne işe yaradığına dair 1-2 cümlelik kısa özet..."
 image: /assets/images/proje_kapak_resmi.png
 ---
 
-> "Projenin ana mottosu, felsefesi veya ilham verici bir alıntı buraya..."
-> — *Motto Sahibi*
+<div class="highlight-header">🚀 PROJE MOTTO / ALINTI</div>
 
-[**🔗 GitHub'da Kodları İnceleyin!**](https://github.com/kermichiones/proje-repo-adi)
+> "There's no reason to hurry when we're on the earth that moves."
+> — *Motto / İlham Veren Alıntı*
 
-### 🛠️ Proje Hakkında
-Bu projeyi tasarlama amacım, kullanılan teknolojiler ve genel donanım/yazılım mimarisi...
+[**🔗 GitHub'da Proje Kodlarını İnceleyin!**](https://github.com/kermichiones/proje-repo-adi)
+
+---
+
+## 🛠️ Proje Hakkında
+<p class="drop-cap">B bu projeyi tasarlama amacım, kullanılan teknolojiler ve genel donanım/yazılım mimarisi... Projenin arkasındaki motivasyon ve karşılaşılan temel zorlukların nasıl çözüldüğü buraya gelecek.</p>
+
+<div class="academic-card">
+    <div class="academic-card-header">📋 PROJE ÖZETİ</div>
+    Donanım mimarisi ve yazılım akışı tamamen el yapımı olup, Model B temasıyla tam uyumlu şekilde hazırlanmıştır.
+</div>
+
+---
 
 ## 📦 Donanım Bileşenleri (Hardware)
-- **Mikrokontrolcü:** Raspberry Pi Pico W / ESP32 / Arduino...
-- **Ekran / Çıkış:** ST7735 1.44" TFT LCD Display...
-- **Sensörler:** ...
-- **Güç / Batarya:** ...
+Burada projenizde kullandığınız fiziksel kartları listeleyebilirsiniz:
 
-## 💻 Yazılım ve Çalışma Mantığı (Software)
-1. **Adım 1:** ...
-2. **Adım 2:** ...
+*   **Mikrokontrolcü:** `Raspberry Pi Pico W` veya `ESP32`
+*   **Ekran:** `1.44" ST7735 TFT LCD Display`
+*   **Sensörler:** ...
+*   **Güç Kaynağı:** ...
 
-### 📸 Proje Görselleri
-<div style="text-align: center; margin: 30px 0;">
-    <img src="/assets/images/proje_gorseli.png" alt="Proje Arayüzü veya Donanımı" style="max-width: 100%; width: 550px; height: auto; border-radius: 8px; box-shadow: 0 8px 24px rgba(143, 58, 43, 0.12); border: 1px solid var(--border-color);">
+<figure class="clean-figure">
+    <img src="/assets/images/proje_gorseli.png" alt="Proje Donanım Şeması">
+    <figcaption>Geliştirilen donanımın fiziksel prototip veya şematik görünümü.</figcaption>
+</figure>
+
+---
+
+## 💻 Yazılım ve Geliştirme Süreci
+Projeyi geliştirirken takip ettiğiniz aşamaları ve kronolojiyi göstermek için aşağıdaki estetik zaman çizelgesini kullanabilirsiniz:
+
+<div class="academic-timeline">
+    <div class="timeline-item">
+        <div class="timeline-date">AŞAMA 1 — DONANIM ARAŞTIRMASI</div>
+        <div class="timeline-title">Fiziksel Devrenin Kurulması</div>
+        <p>Raspberry Pi Pico W pin şemaları incelenerek SPI ekran bağlantıları yapıldı ve test sinyali gönderildi.</p>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-date">AŞAMA 2 — YAZILIM KODLAMASI</div>
+        <div class="timeline-title">Notion API Bağlantısı</div>
+        <p>Notion takviminden etkinlikleri çekmek için Python / C++ tabanlı bir arka plan servisi yazıldı.</p>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-date">AŞAMA 3 — TEST & MONTAJ</div>
+        <div class="timeline-title">Kutulama ve Yayına Alma</div>
+        <p>3D yazıcı ile basılan gövdeye montaj tamamlanarak mobil cihaz olarak anahtarlığa bağlandı.</p>
+    </div>
 </div>
