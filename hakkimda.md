@@ -16,7 +16,6 @@ permalink: /hakkimda/
             <div style="width: 120px; height: 120px; border-radius: 6px; border: 1.5px solid var(--border-color); background-color: var(--bg-color); display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 10px;">
                 <img src="/assets/ahmet.jpg" alt="Ahmet" onerror="this.style.display='none'; this.parentNode.innerText='(¬_¬)'" style="width:100%; height:100%; object-fit:cover; filter: sepia(15%) contrast(98%);">
             </div>
-            <div style="background: var(--accent-color); color: var(--bg-color); font-size: 10px; font-weight: 700; padding: 4px; border-radius: 4px; font-family: 'Inter', sans-serif; letter-spacing: 0.5px; text-transform: uppercase;" data-i18n="lvl_engineer">LVL. 1 ENGINEER</div>
         </div>
 
         <div style="flex: 1;">
