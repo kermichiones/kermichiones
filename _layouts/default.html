@@ -226,8 +226,8 @@
                 sbArea.appendChild(div);
             });
 
-            // Scroll to the bottom of the ledger
-            sbArea.scrollTop = sbArea.scrollHeight;
+            // Scroll to the top of the ledger (where newest messages are)
+            sbArea.scrollTop = 0;
 
             if (allMessages.length > displayLimit) {
                 const loadMoreBtn = document.createElement('button');
@@ -273,7 +273,7 @@
                 });
                 
                 sbMsg.value = ''; 
-                sbArea.scrollTop = sbArea.scrollHeight;
+                sbArea.scrollTop = 0;
                 lastSentTime = Date.now(); 
 
             } catch(err) { 

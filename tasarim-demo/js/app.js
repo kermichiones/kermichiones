@@ -165,7 +165,8 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
       shoutboxPosts.appendChild(msgDiv);
     });
-    shoutboxPosts.scrollTop = shoutboxPosts.scrollHeight;
+    // Scroll to the top of the ledger (where newest messages are)
+    shoutboxPosts.scrollTop = 0;
   }
 
   if (shoutForm && shoutNameInput && shoutMsgInput) {
@@ -178,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const now = new Date();
       const formattedDate = `${String(now.getDate()).padStart(2, '0')}.${String(now.getMonth() + 1).padStart(2, '0')}.${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
 
-      shouts.push({
+      shouts.unshift({
         name: author,
         message: text,
         date: formattedDate
