@@ -24,7 +24,7 @@ permalink: /hakkimda/
             </h2>
             <p style="line-height: 1.7; font-family: var(--font-body); font-size: 15px; color: var(--text-main);">
                 <b>Abdullah Gül Üniversitesi (AGÜ)</b><br>
-                <span data-i18n="bio_title">Elektrik & Elektronik Mühendisliği (EEE) öğrencisi.</span>
+                <span data-i18n="bio_title">Elektrik & Elektronik Mühendisliği öğrencisi.</span>
             </p>
         </div>
     </div>
