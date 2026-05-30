@@ -76,6 +76,14 @@
             <section class="music-widget">
                 <div class="section-bar" style="text-align: center;" data-i18n="mozart_header">:: MOZART BÖLÜMÜ ::</div>
                 <div class="music-display">
+                    <!-- Album Cover Art (Minimal & Retro) -->
+                    <div class="music-album-art">
+                        <div id="mozart-disc" class="music-note-icon">🎵</div>
+                        <div class="music-meta-credits">
+                            <span class="music-artist">W. A. Mozart</span>
+                        </div>
+                    </div>
+
                     <!-- Selected Track Title (Serif/Header Font) -->
                     <div id="mozart-track-title" class="music-track-title">KV 246 &bull; Piano Concerto No. 8</div>
 
@@ -189,6 +197,7 @@
         const mozartProgress = document.getElementById('mozart-progress');
         const mozartAudio = document.getElementById('mozart-audio');
         const mozartTrackTitle = document.getElementById('mozart-track-title');
+        const mozartDisc = document.getElementById('mozart-disc');
 
         if (mozartSelect && mozartPlayBtn && mozartTimeCurrent && mozartTimeTotal && mozartProgress && mozartAudio) {
             function formatTime(seconds) {
@@ -209,6 +218,7 @@
                     mozartTimeCurrent.innerText = "00:00";
                     mozartTimeTotal.innerText = "00:00";
                     mozartProgress.value = 0;
+                    if (mozartDisc) mozartDisc.classList.remove('playing');
 
                     // Extract a clean track title from option text
                     const selectedOptionText = mozartSelect.options[mozartSelect.selectedIndex].text;
@@ -222,10 +232,12 @@
                     mozartAudio.play();
                     mozartPlayBtn.classList.add('playing');
                     mozartPlayBtn.innerHTML = '<span class="btn-icon">⏸</span>';
+                    if (mozartDisc) mozartDisc.classList.add('playing');
                 } else {
                     mozartAudio.pause();
                     mozartPlayBtn.classList.remove('playing');
                     mozartPlayBtn.innerHTML = '<span class="btn-icon">▶</span>';
+                    if (mozartDisc) mozartDisc.classList.remove('playing');
                 }
             });
 
@@ -253,6 +265,7 @@
                 mozartPlayBtn.classList.remove('playing');
                 mozartPlayBtn.innerHTML = '<span class="btn-icon">▶</span>';
                 mozartProgress.value = 0;
+                if (mozartDisc) mozartDisc.classList.remove('playing');
             });
         }
 
