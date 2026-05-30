@@ -12,12 +12,6 @@ permalink: /hakkimda/
     
     <div style="display: flex; flex-wrap: wrap; gap: 25px; align-items: flex-start; margin-bottom: 30px;">
         
-        <div style="flex: 0 0 120px; text-align: center;">
-            <div style="width: 120px; height: 120px; border-radius: 6px; border: 1.5px solid var(--border-color); background-color: var(--bg-color); display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 10px;">
-                <img src="/assets/ahmet.jpg" alt="Ahmet" onerror="this.style.display='none'; this.parentNode.innerText='(¬_¬)'" style="width:100%; height:100%; object-fit:cover; filter: sepia(15%) contrast(98%);">
-            </div>
-        </div>
-
         <div style="flex: 1;">
             <h2 style="margin-top: 0; font-family: var(--font-header); font-size: 24px; color: var(--accent-color); font-weight: 700; border-bottom: 1.5px solid var(--border-color); display: inline-block; padding-bottom: 6px; margin-bottom: 12px;">
                 Ahmet Arvas
