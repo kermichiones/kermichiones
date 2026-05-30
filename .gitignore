@@ -1,0 +1,5 @@
+# Ignore all MP3 files inside assets/music to avoid high mobile data consumption
+assets/music/*.mp3
+
+# Except for the single default track we want to track and upload first
+!assets/music/(KV 246) Piano Concerto n° 8.mp3
