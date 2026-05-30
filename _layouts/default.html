@@ -72,6 +72,33 @@
                 </div>
             </section>
 
+            <!-- Mozart Audio Player Widget -->
+            <section class="music-widget">
+                <div class="section-bar">:: MOZART PLAYER ::</div>
+                <div class="music-display">
+                    <select id="mozart-select" class="music-select">
+                        <option value="" disabled selected>— Eser Seçin / Select Concerto —</option>
+                        <option value="(KV 246) Piano Concerto n° 8.mp3">No. 8 in C major, KV 246</option>
+                        <option value="(KV 271) Piano Concerto n° 9.mp3">No. 9 in E flat major, KV 271</option>
+                        <option value="(KV 413) Piano Concerto n° 11.mp3">No. 11 in F major, KV 413</option>
+                        <option value="(KV 414) Piano Concerto n° 12.mp3">No. 12 in A major, KV 414</option>
+                        <option value="(KV 415) Piano Concerto n° 13.mp3">No. 13 in C major, KV 415</option>
+                        <option value="(KV 449) Piano Concerto n° 14.mp3">No. 14 in E flat major, KV 449</option>
+                    </select>
+                    
+                    <div class="music-controls">
+                        <button id="mozart-play-btn" class="music-btn" disabled>▶</button>
+                        <div class="music-time" id="mozart-time">00:00 / 00:00</div>
+                    </div>
+                    
+                    <div class="music-progress-container">
+                        <input type="range" id="mozart-progress" class="music-slider" min="0" max="100" value="0" disabled>
+                    </div>
+
+                    <audio id="mozart-audio"></audio>
+                </div>
+            </section>
+
             <!-- Shoutbox Widget -->
             <section>
                 <div class="section-bar" data-i18n="shoutbox_header">:: SHOUTBOX ::</div>
@@ -142,6 +169,68 @@
         window.updateClock = updateClock;
         setInterval(updateClock, 1000);
         updateClock();
+
+        // Mozart Audio Player Logic
+        const mozartSelect = document.getElementById('mozart-select');
+        const mozartPlayBtn = document.getElementById('mozart-play-btn');
+        const mozartTime = document.getElementById('mozart-time');
+        const mozartProgress = document.getElementById('mozart-progress');
+        const mozartAudio = document.getElementById('mozart-audio');
+
+        if (mozartSelect && mozartPlayBtn && mozartTime && mozartProgress && mozartAudio) {
+            function formatTime(seconds) {
+                if (isNaN(seconds)) return "00:00";
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }
+
+            mozartSelect.addEventListener('change', () => {
+                const selectedFile = mozartSelect.value;
+                if (selectedFile) {
+                    mozartAudio.src = `/assets/music/${selectedFile}`;
+                    mozartPlayBtn.disabled = false;
+                    mozartProgress.disabled = false;
+                    mozartPlayBtn.innerText = "▶";
+                    mozartTime.innerText = "00:00 / 00:00";
+                    mozartProgress.value = 0;
+                }
+            });
+
+            mozartPlayBtn.addEventListener('click', () => {
+                if (mozartAudio.paused) {
+                    mozartAudio.play();
+                    mozartPlayBtn.innerText = "⏸";
+                } else {
+                    mozartAudio.pause();
+                    mozartPlayBtn.innerText = "▶";
+                }
+            });
+
+            mozartAudio.addEventListener('timeupdate', () => {
+                if (mozartAudio.duration) {
+                    const percent = (mozartAudio.currentTime / mozartAudio.duration) * 100;
+                    mozartProgress.value = percent;
+                    mozartTime.innerText = `${formatTime(mozartAudio.currentTime)} / ${formatTime(mozartAudio.duration)}`;
+                }
+            });
+
+            mozartAudio.addEventListener('loadedmetadata', () => {
+                mozartTime.innerText = `00:00 / ${formatTime(mozartAudio.duration)}`;
+            });
+
+            mozartProgress.addEventListener('input', () => {
+                if (mozartAudio.duration) {
+                    const seekTime = (mozartProgress.value / 100) * mozartAudio.duration;
+                    mozartAudio.currentTime = seekTime;
+                }
+            });
+            
+            mozartAudio.addEventListener('ended', () => {
+                mozartPlayBtn.innerText = "▶";
+                mozartProgress.value = 0;
+            });
+        }
 
         // 2. Firebase Imports
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
