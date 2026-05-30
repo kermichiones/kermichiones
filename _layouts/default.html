@@ -74,25 +74,45 @@
 
             <!-- Mozart Audio Player Widget -->
             <section class="music-widget">
-                <div class="section-bar">:: MOZART PLAYER ::</div>
+                <div class="section-bar">:: MOZART CLASSICS ::</div>
                 <div class="music-display">
+                    <!-- Album Cover Art (Minimal & Retro) -->
+                    <div class="music-album-art">
+                        <div id="mozart-disc" class="music-note-icon">🎵</div>
+                        <div class="music-meta-credits">
+                            <span class="music-artist">W. A. Mozart</span>
+                            <span class="music-orchestra">Derek Han, piano &bull; Paul Freeman</span>
+                        </div>
+                    </div>
+
+                    <!-- Selected Track Title (Serif/Header Font) -->
+                    <div id="mozart-track-title" class="music-track-title">KV 246 &bull; Piano Concerto No. 8</div>
+
+                    <!-- Dropdown for Concerto Selection -->
                     <select id="mozart-select" class="music-select">
                         <option value="" disabled selected>— Eser Seçin / Select Concerto —</option>
-                        <option value="(KV 246) Piano Concerto n° 8.mp3">No. 8 in C major, KV 246</option>
-                        <option value="(KV 271) Piano Concerto n° 9.mp3">No. 9 in E flat major, KV 271</option>
-                        <option value="(KV 413) Piano Concerto n° 11.mp3">No. 11 in F major, KV 413</option>
-                        <option value="(KV 414) Piano Concerto n° 12.mp3">No. 12 in A major, KV 414</option>
-                        <option value="(KV 415) Piano Concerto n° 13.mp3">No. 13 in C major, KV 415</option>
-                        <option value="(KV 449) Piano Concerto n° 14.mp3">No. 14 in E flat major, KV 449</option>
+                        <option value="(KV 246) Piano Concerto n° 8.mp3">No. 8 in C major, KV 246 (Allegro - Andante - Tempo di menuetto)</option>
+                        <option value="(KV 271) Piano Concerto n° 9.mp3">No. 9 in E flat major, KV 271 (Allegro - Andantino - Rondeau presto)</option>
+                        <option value="(KV 413) Piano Concerto n° 11.mp3">No. 11 in F major, KV 413 "Jeunehomme"</option>
+                        <option value="(KV 414) Piano Concerto n° 12.mp3">No. 12 in A major, KV 414 (Allegro - Andante - Rondeau)</option>
+                        <option value="(KV 415) Piano Concerto n° 13.mp3">No. 13 in C major, KV 415 (Allegro - Andante - Allegro)</option>
+                        <option value="(KV 449) Piano Concerto n° 14.mp3">No. 14 in E flat major, KV 449 (Allegro vivace - Andantino)</option>
                     </select>
                     
-                    <div class="music-controls">
-                        <button id="mozart-play-btn" class="music-btn" disabled>▶</button>
-                        <div class="music-time" id="mozart-time">00:00 / 00:00</div>
-                    </div>
-                    
-                    <div class="music-progress-container">
+                    <!-- Progress & Timeline Slider -->
+                    <div class="music-progress-wrapper">
                         <input type="range" id="mozart-progress" class="music-slider" min="0" max="100" value="0" disabled>
+                        <div class="music-time-row">
+                            <span id="mozart-time-current">00:00</span>
+                            <span id="mozart-time-total">00:00</span>
+                        </div>
+                    </div>
+
+                    <!-- Play Control Button -->
+                    <div class="music-controls-row">
+                        <button id="mozart-play-btn" class="music-play-btn" disabled>
+                            <span class="btn-icon">▶</span>
+                        </button>
                     </div>
 
                     <audio id="mozart-audio"></audio>
@@ -173,11 +193,14 @@
         // Mozart Audio Player Logic
         const mozartSelect = document.getElementById('mozart-select');
         const mozartPlayBtn = document.getElementById('mozart-play-btn');
-        const mozartTime = document.getElementById('mozart-time');
+        const mozartTimeCurrent = document.getElementById('mozart-time-current');
+        const mozartTimeTotal = document.getElementById('mozart-time-total');
         const mozartProgress = document.getElementById('mozart-progress');
         const mozartAudio = document.getElementById('mozart-audio');
+        const mozartTrackTitle = document.getElementById('mozart-track-title');
+        const mozartDisc = document.getElementById('mozart-disc');
 
-        if (mozartSelect && mozartPlayBtn && mozartTime && mozartProgress && mozartAudio) {
+        if (mozartSelect && mozartPlayBtn && mozartTimeCurrent && mozartTimeTotal && mozartProgress && mozartAudio) {
             function formatTime(seconds) {
                 if (isNaN(seconds)) return "00:00";
                 const mins = Math.floor(seconds / 60);
@@ -191,19 +214,31 @@
                     mozartAudio.src = `/assets/music/${selectedFile}`;
                     mozartPlayBtn.disabled = false;
                     mozartProgress.disabled = false;
-                    mozartPlayBtn.innerText = "▶";
-                    mozartTime.innerText = "00:00 / 00:00";
+                    mozartPlayBtn.classList.remove('playing');
+                    mozartPlayBtn.innerHTML = '<span class="btn-icon">▶</span>';
+                    mozartTimeCurrent.innerText = "00:00";
+                    mozartTimeTotal.innerText = "00:00";
                     mozartProgress.value = 0;
+                    mozartDisc.classList.remove('playing');
+
+                    // Extract a clean track title from option text
+                    const selectedOptionText = mozartSelect.options[mozartSelect.selectedIndex].text;
+                    const cleanTitle = selectedOptionText.split(' (')[0];
+                    mozartTrackTitle.innerText = cleanTitle;
                 }
             });
 
             mozartPlayBtn.addEventListener('click', () => {
                 if (mozartAudio.paused) {
                     mozartAudio.play();
-                    mozartPlayBtn.innerText = "⏸";
+                    mozartPlayBtn.classList.add('playing');
+                    mozartPlayBtn.innerHTML = '<span class="btn-icon">⏸</span>';
+                    mozartDisc.classList.add('playing');
                 } else {
                     mozartAudio.pause();
-                    mozartPlayBtn.innerText = "▶";
+                    mozartPlayBtn.classList.remove('playing');
+                    mozartPlayBtn.innerHTML = '<span class="btn-icon">▶</span>';
+                    mozartDisc.classList.remove('playing');
                 }
             });
 
@@ -211,12 +246,13 @@
                 if (mozartAudio.duration) {
                     const percent = (mozartAudio.currentTime / mozartAudio.duration) * 100;
                     mozartProgress.value = percent;
-                    mozartTime.innerText = `${formatTime(mozartAudio.currentTime)} / ${formatTime(mozartAudio.duration)}`;
+                    mozartTimeCurrent.innerText = formatTime(mozartAudio.currentTime);
+                    mozartTimeTotal.innerText = formatTime(mozartAudio.duration);
                 }
             });
 
             mozartAudio.addEventListener('loadedmetadata', () => {
-                mozartTime.innerText = `00:00 / ${formatTime(mozartAudio.duration)}`;
+                mozartTimeTotal.innerText = formatTime(mozartAudio.duration);
             });
 
             mozartProgress.addEventListener('input', () => {
@@ -227,8 +263,10 @@
             });
             
             mozartAudio.addEventListener('ended', () => {
-                mozartPlayBtn.innerText = "▶";
+                mozartPlayBtn.classList.remove('playing');
+                mozartPlayBtn.innerHTML = '<span class="btn-icon">▶</span>';
                 mozartProgress.value = 0;
+                mozartDisc.classList.remove('playing');
             });
         }
 

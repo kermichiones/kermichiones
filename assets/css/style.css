@@ -632,7 +632,7 @@ body {
   letter-spacing: 0.2px;
 }
 
-/* Mozart Audio Player Styles */
+/* Mozart Audio Player Styles - Aldine Premium Edition */
 .music-widget {
   text-align: center;
 }
@@ -640,88 +640,126 @@ body {
 .music-display {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
-  padding: 15px;
+  padding: 18px;
   border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(61, 49, 46, 0.02);
+  box-shadow: 0 4px 12px rgba(61, 49, 46, 0.03);
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  gap: 15px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .music-display:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(61, 49, 46, 0.04);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(61, 49, 46, 0.06);
+  border-color: var(--accent-color);
+}
+
+.music-album-art {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  border-radius: 4px;
+  text-align: left;
+}
+
+.music-note-icon {
+  font-size: 20px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+  animation: music-spin 8s linear infinite paused;
+}
+
+.music-note-icon.playing {
+  animation-play-state: running;
+}
+
+@keyframes music-spin {
+  100% { transform: rotate(360deg); }
+}
+
+.music-meta-credits {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.music-artist {
+  font-family: var(--font-header);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent-color);
+}
+
+.music-orchestra {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  color: var(--text-muted);
+}
+
+.music-track-title {
+  font-family: var(--font-header);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-main);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 5px;
+  opacity: 0.8;
+  font-style: italic;
 }
 
 .music-select {
   width: 100%;
-  padding: 8px;
+  padding: 9px 12px;
   background-color: var(--bg-color);
   color: var(--text-main);
   border: 1px solid var(--border-color);
   border-radius: 4px;
   font-family: 'Inter', sans-serif;
-  font-size: 11.5px;
+  font-size: 11px;
   outline: none;
   cursor: pointer;
-  transition: border-color 0.2s ease;
+  transition: all 0.25s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238F3A2B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  padding-right: 30px;
 }
 
 .music-select:focus {
   border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(143, 58, 43, 0.05);
 }
 
-.music-controls {
+.music-progress-wrapper {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.music-btn {
-  background-color: var(--bg-color);
-  color: var(--accent-color);
-  border: 1px solid var(--border-color);
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 12px;
-  transition: all 0.2s ease;
-  outline: none;
-}
-
-.music-btn:hover:not(:disabled) {
-  background-color: var(--accent-color);
-  color: var(--bg-color);
-  border-color: var(--accent-color);
-}
-
-.music-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.music-time {
-  font-family: var(--font-code);
-  font-size: 10.5px;
-  color: var(--text-muted);
-}
-
-.music-progress-container {
-  width: 100%;
-  display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .music-slider {
   -webkit-appearance: none;
   width: 100%;
-  height: 4px;
+  height: 3px;
   border-radius: 2px;
   background: var(--border-color);
   outline: none;
@@ -731,32 +769,89 @@ body {
 
 .music-slider:disabled {
   cursor: not-allowed;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .music-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: var(--accent-color);
   cursor: pointer;
-  transition: transform 0.1s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  border: 1px solid var(--bg-color);
 }
 
 .music-slider:not(:disabled)::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
+  transform: scale(1.3);
+  background: var(--accent-color);
 }
 
 .music-slider::-moz-range-thumb {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: var(--accent-color);
   cursor: pointer;
-  border: none;
-  transition: transform 0.1s ease;
+  border: 1px solid var(--bg-color);
+  transition: transform 0.2s ease;
+}
+
+.music-time-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-code);
+  font-size: 9.5px;
+  color: var(--text-muted);
+}
+
+.music-controls-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.music-play-btn {
+  background-color: var(--bg-color);
+  color: var(--accent-color);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.music-play-btn .btn-icon {
+  font-size: 16px;
+  margin-left: 2px;
+  transition: transform 0.2s ease;
+}
+
+.music-play-btn.playing .btn-icon {
+  margin-left: 0;
+}
+
+.music-play-btn:hover:not(:disabled) {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  border-color: var(--accent-color);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(143, 58, 43, 0.15);
+}
+
+.music-play-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
 /* ==========================================================================
