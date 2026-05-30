@@ -26,26 +26,31 @@ permalink: /hakkimda/
                 <b>Abdullah Gül Üniversitesi (AGÜ)</b><br>
                 <span data-i18n="bio_title">Elektrik & Elektronik Mühendisliği öğrencisi.</span>
             </p>
+            <p style="line-height: 1.7; font-family: var(--font-body); font-size: 14.5px; color: var(--text-main); margin-top: 15px; border-left: 2px solid var(--accent-color); padding-left: 10px;">
+                <b>🚀 Şu Anki Odak Noktam / Current Focus:</b><br>
+                <span>Computer-Brain Interface (CBI), EEG Sinyal Ölçümü ve Gelişmiş Gömülü Sistem Teknolojileri.</span>
+            </p>
         </div>
     </div>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-top: 25px;">
         
         <div style="border: 1px solid var(--border-color); border-radius: 5px; padding: 15px; background: rgba(226, 215, 195, 0.05);">
-            <b style="background: var(--accent-color); color: var(--bg-color); padding: 4px 8px; font-size: 11px; font-family: var(--font-header); font-weight: 700; letter-spacing: 1px; border-radius: 3px; display: inline-block; margin-bottom: 15px;" data-i18n="hardware_header">HARDWARE</b>
+            <b style="background: var(--accent-color); color: var(--bg-color); padding: 4px 8px; font-size: 11px; font-family: var(--font-header); font-weight: 700; letter-spacing: 1px; border-radius: 3px; display: inline-block; margin-bottom: 15px;" data-i18n="hardware_header">DONANIM & YETENEKLER</b>
             <ul style="font-size: 14.5px; list-style: square; padding-left: 20px; color: var(--text-main); line-height: 1.8;">
-                <li>STM32, ESP32</li>
-                <li>KiCad, Altium</li>
-                <li>Logic Analyzers</li>
+                <li>Altium Designer ile PCB Tasarım & Üretimi</li>
+                <li>Solidworks ile 3D Mekanik Tasarım</li>
+                <li>Gömülü Sistemler (STM32, ESP32, Arduino)</li>
+                <li>EEG Cihazları ve Biyomedikal Donanımlar</li>
             </ul>
         </div>
 
         <div style="border: 1px solid var(--border-color); border-radius: 5px; padding: 15px; background: rgba(226, 215, 195, 0.05);">
-            <b style="background: var(--accent-color); color: var(--bg-color); padding: 4px 8px; font-size: 11px; font-family: var(--font-header); font-weight: 700; letter-spacing: 1px; border-radius: 3px; display: inline-block; margin-bottom: 15px;" data-i18n="interests_header">INTERESTS</b>
+            <b style="background: var(--accent-color); color: var(--bg-color); padding: 4px 8px; font-size: 11px; font-family: var(--font-header); font-weight: 700; letter-spacing: 1px; border-radius: 3px; display: inline-block; margin-bottom: 15px;" data-i18n="interests_header">İLGİ ALANLARI</b>
             <ul style="font-size: 14.5px; list-style: circle; padding-left: 20px; color: var(--text-main); line-height: 1.8;">
-                <li>Mitoloji & Felsefe</li>
-                <li>Doğa ve Tarım</li>
-                <li>Retro Computing</li>
+                <li>Mikoloji (Mantar Bilimi)</li>
+                <li>Doğa ve Yaban Hayatı</li>
+                <li>Model Roketçilik</li>
             </ul>
         </div>
 
