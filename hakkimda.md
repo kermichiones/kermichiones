@@ -27,7 +27,7 @@ permalink: /hakkimda/
                 <span data-i18n="bio_title">Elektrik & Elektronik Mühendisliği öğrencisi.</span>
             </p>
             <p style="line-height: 1.7; font-family: var(--font-body); font-size: 14.5px; color: var(--text-main); margin-top: 15px; border-left: 2px solid var(--accent-color); padding-left: 10px;">
-                <b>🚀 Şu Anki Odak Noktam / Current Focus:</b><br>
+                <b>Şu an ilgi alanım:</b><br>
                 <span>Computer-Brain Interface (CBI), EEG Sinyal Ölçümü ve Gelişmiş Gömülü Sistem Teknolojileri.</span>
             </p>
         </div>
