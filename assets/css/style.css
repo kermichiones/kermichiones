@@ -963,3 +963,171 @@ body {
   margin-bottom: 6px;
 }
 
+/* ==========================================================================
+   FILM METADATA CARD (Aldine Premium Film Critique Styling)
+   ========================================================================== */
+.film-metadata-card {
+  display: flex;
+  gap: 25px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 20px;
+  margin: 25px 0 35px 0;
+  box-shadow: 0 2px 8px rgba(61, 49, 46, 0.02);
+  align-items: flex-start;
+}
+
+.film-poster {
+  flex: 0 0 130px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--bg-color);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+}
+
+.film-poster img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: sepia(15%) contrast(98%);
+}
+
+.film-details {
+  flex: 1;
+}
+
+.film-details-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.film-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dotted var(--border-color);
+  padding-bottom: 8px;
+  font-size: 14px;
+}
+
+.film-detail-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.film-detail-label {
+  font-family: var(--font-header);
+  font-weight: 700;
+  color: var(--accent-color);
+  font-size: 12.5px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.film-detail-value {
+  color: var(--text-main);
+  font-family: var(--font-body);
+}
+
+.film-rating-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.film-rating-num {
+  font-family: var(--font-header);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+.film-rating-scale {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-right: 4px;
+}
+
+/* Star Rating styling */
+.film-rating-stars {
+  display: inline-flex;
+  gap: 3px;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.star {
+  font-family: Arial, sans-serif;
+  user-select: none;
+  display: inline-block;
+}
+
+.star.filled {
+  color: var(--accent-color);
+}
+
+.star.empty {
+  color: rgba(143, 58, 43, 0.12);
+}
+
+[data-theme="dark"] .star.empty {
+  color: rgba(212, 175, 55, 0.12);
+}
+
+.star.half-filled {
+  position: relative;
+  color: rgba(143, 58, 43, 0.12);
+}
+
+[data-theme="dark"] .star.half-filled {
+  color: rgba(212, 175, 55, 0.12);
+}
+
+.star.half-filled::before {
+  content: "★";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  overflow: hidden;
+  color: var(--accent-color);
+}
+
+/* Mobile responsive collapse for film metadata card */
+@media (max-width: 576px) {
+  .film-metadata-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+  
+  .film-poster {
+    flex: 0 0 160px;
+    width: 160px;
+  }
+  
+  .film-details {
+    width: 100%;
+  }
+  
+  .film-detail-row {
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+    padding-bottom: 10px;
+  }
+  
+  .film-rating-wrapper {
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .film-rating-scale {
+    margin-right: 0;
+  }
+}
+

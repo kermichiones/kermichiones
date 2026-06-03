@@ -1,0 +1,99 @@
+---
+layout: default
+---
+
+<article class="article-container">
+    
+    <header class="article-header">
+        <h1 class="article-title">{{ page.title }}</h1>
+        <div class="article-meta">
+            <span>📅 {{ page.date | date: "%Y-%m-%d" }}</span>
+        </div>
+    </header>
+
+    <!-- Film Metadata Card (Premium Aldine Style) -->
+    <div class="film-metadata-card">
+        {% if page.image %}
+        <div class="film-poster">
+            <img src="{{ page.image }}" alt="{{ page.title }} Poster">
+        </div>
+        {% endif %}
+        
+        <div class="film-details">
+            <div class="film-details-grid">
+                {% if page.director %}
+                <div class="film-detail-row">
+                    <span class="film-detail-label">Yönetmen / Director:</span>
+                    <span class="film-detail-value">{{ page.director }}</span>
+                </div>
+                {% endif %}
+                
+                {% if page.year %}
+                <div class="film-detail-row">
+                    <span class="film-detail-label">Yıl / Year:</span>
+                    <span class="film-detail-value">{{ page.year }}</span>
+                </div>
+                {% endif %}
+                
+                {% if page.genre %}
+                <div class="film-detail-row">
+                    <span class="film-detail-label">Tür / Genre:</span>
+                    <span class="film-detail-value">{{ page.genre }}</span>
+                </div>
+                {% endif %}
+                
+                {% if page.runtime %}
+                <div class="film-detail-row">
+                    <span class="film-detail-label">Süre / Runtime:</span>
+                    <span class="film-detail-value">{{ page.runtime }}</span>
+                </div>
+                {% endif %}
+                
+                {% if page.rating %}
+                <div class="film-detail-row film-rating-row">
+                    <span class="film-detail-label">Puan / Rating:</span>
+                    <div class="film-rating-wrapper">
+                        <span class="film-rating-num">{{ page.rating }}</span><span class="film-rating-scale">/10</span>
+                        <div class="film-rating-stars" title="{{ page.rating }} / 10">
+                            {% assign rating_value = page.rating | plus: 0.0 %}
+                            {% for i in (1..5) %}
+                                {% assign threshold_full = i | times: 2.0 %}
+                                {% assign threshold_half = threshold_full | minus: 1.0 %}
+                                {% if rating_value >= threshold_full %}
+                                    <span class="star filled">★</span>
+                                {% elsif rating_value >= threshold_half %}
+                                    <span class="star half-filled">★</span>
+                                {% else %}
+                                    <span class="star empty">★</span>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="post-content">
+        {{ content }}
+    </div>
+
+</article>
+
+<!-- Navigation -->
+<div style="display: flex; justify-content: space-between; margin-top: 40px; margin-bottom: 40px; padding: 0 10px;">
+    {% if page.previous.url %}
+    <a href="{{ page.previous.url }}" class="btn-retro">
+        &laquo; {{ page.previous.title | truncate: 25 }}
+    </a>
+    {% else %}
+    <span></span>
+    {% endif %}
+
+    {% if page.next.url %}
+    <a href="{{ page.next.url }}" class="btn-retro">
+        {{ page.next.title | truncate: 25 }} &raquo;
+    </a>
+    {% endif %}
+</div>
