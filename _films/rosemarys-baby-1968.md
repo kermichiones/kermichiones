@@ -2,12 +2,12 @@
 layout: film
 title: "Bir Film Hakkında: Rosemary's Baby - 1968"
 date: 2026-09-30
-director: "Roman Polanski"
+director: Roman Polanski
 year: 1968
-genre: "Korku, Dram, Gizem"
-runtime: "2s 17dk"
-rating: 8.8
-description: "Yeni taşındıkları tarihi New York apartmanında esrarengiz komşuların tuhaf ilgisine maruz kalan Rosemary'nin kabusa dönen hamilelik süreci ve psikolojik gerilimi."
+genre: Korku, Dram, Gizem
+runtime: 2s 17dk
+rating: 7.5
+description: Yeni taşındıkları tarihi New York apartmanında esrarengiz komşuların tuhaf ilgisine maruz kalan Rosemary'nin kabusa dönen hamilelik süreci ve psikolojik gerilimi.
 ---
 
 Film yorumlarken hikayeyi anlatmak galiba pek doğru değil. Çünkü hem bayağı yorucu hem de asıl anladığım şeyin ne olduğunu gizliyor gibi. Dolayısıyla bundan sonra hikayeyi bildiğinizi var sayacağım.

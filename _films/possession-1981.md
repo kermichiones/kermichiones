@@ -2,13 +2,13 @@
 layout: film
 title: "Bir Film Hakkında: Possession - 1981"
 date: 2026-05-29
-director: "Andrzej Żuławski"
+director: Andrzej Żuławski
 year: 1981
-genre: "Dram, Korku, Gizem, Sanat"
-runtime: "2s 4dk"
-rating: 8.5
-image: "/assets/images/possession-anna-isa.jpeg"
-description: "Tarihin en sarsıcı oyunculuklarından biriyle, soğuk savaş Berlin'inde bir evliliğin çöküşünün, deliliğin ve inanç ile tanrı arayışının getirdiği varoluşsal tıkanmanın sinematik tasviri."
+genre: Dram, Korku, Gizem, Sanat
+runtime: 2s 4dk
+rating: 9
+image: /assets/images/possession-anna-isa.jpeg
+description: Tarihin en sarsıcı oyunculuklarından biriyle, soğuk savaş Berlin'inde bir evliliğin çöküşünün, deliliğin ve inanç ile tanrı arayışının getirdiği varoluşsal tıkanmanın sinematik tasviri.
 ---
 
 <p class="drop-cap">Film sanki olay örgüsü ile değil, oyuncuyla anlatmak istediğini anlatıyormuş gibi. Başlangıçta Berlin Duvarının hemen dibinde bir apartman dairesinde bir çiftin aniden eskisi gibi olamadıklarını görüyoruz. Koca Mark karısı Anna'yı yeniden görmeye gizemli bir ajanlık görevinden geliyor. Ancak Anna git gide derinleşen bir şekilde kocasından tiksinti duyuyor. Oğulları Bob ise bana göre bu durumlara aşırı kayıtsız kalıyor. Ben Anna'dan çok Bob'un ağlama seslerini duymayı beklerdim doğrusu. Film devam ettikçe bazı şeyleri izleyiciyi huzursuz ediyor ve git gide irrasyonel bir temele oturmaya başlıyor. Mark'ın elini kesmesi ve acı duymaması Anna'nın psikopatik hareketleri mükemmel bir oyunculukla gözler önüne gelince insanın gerçeklik algısı değişiyor. Bir de Bob'un öğretmeninin saçları hariç bire bir Anna'ya benzemesi gibi insanı gerçeklikten yavaşça sıyıran unsurlar göze çarpıyor. Lafı uzatmayalım, Anna ilk fırsatta Mark'ı aldattığını ve bundan haz aldığını bir hayat kadını olduğunu ve bir koca için rahatsız edici olabilecek her şeyi teker teker dilinden dökmeye başlıyor. 
