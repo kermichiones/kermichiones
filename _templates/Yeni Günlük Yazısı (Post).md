@@ -2,33 +2,51 @@
 layout: post
 title: "{{title}}"
 date: {{date}}
-description: "Bu günlük yazısının kısa bir özeti veya açıklaması..."
+description: "Kaydin ozeti: makale sayfasinda 'Ozet' bolumunde gorunur, arama sonuclarinda da kullanilir."
+tags: [etiket-1, etiket-2]
+highlights:
+  - "Ilk one cikan bulgu veya cumle."
+  - "Ikinci one cikan nokta."
 ---
 
-<p class="drop-cap">Giriş paragrafınızın ilk kelimesi buraya gelecek. Model B tasarımı sayesinde ilk harf otomatik olarak Cinzel Serif fontunda ve şık bir crimson/gold renginde büyüyecektir. Devam eden metni buraya yazabilirsiniz...</p>
+<p class="drop-cap">Giris paragrafinizin ilk harfi otomatik olarak buyuk ve turuncu goruntulenir. Devam eden metni buraya yazabilirsiniz.</p>
 
-Yazının geri kalan kısımlarını standart markdown ile yazabilirsiniz.
+Yazinin geri kalanini standart markdown ile yazabilirsiniz. `##` ile actiginiz basliklar makale sayfasinda **otomatik olarak numaralandirilir** (1., 2., ...) ve sol taraftaki "Icerik" anahatinda listelenir.
 
-## Alt Başlık
+## Ilk bolum
 
-İçeriklerinizi zenginleştirmek için aşağıdaki Model B estetik bileşenlerini kullanabilirsiniz:
+Alt basliklar (`###`) 1.1., 1.2. seklinde numaralanir.
 
-### 📖 Estetik Alıntı (Renaissance Blockquote)
-> "Hayat, spesifik şeylerden spesifik bir hal bekleyemeyecek kadar kısa. Bazı anları kaydetmek gerekir."
-> — *Ahmet Arvas*
+### Alt bolum
 
-### 📸 Model B Uyumlu Görsel (Clean Figure)
-Sitenin estetik şablonuyla %100 uyumlu, ince çerçeveli ve alt yazılı görsel bloğu:
+Metin, gorsel ve tablolari serbestce kullanabilirsiniz.
+
+## Gorseller
+
+Markdown ile eklenen her gorsel otomatik olarak "Sekil n." basligi alir; `alt` metni sekil aciklamasi olarak kullanilir:
+
+![Sekil aciklamasi buraya yazilir, altyazi olarak gorunur.](/assets/images/resim_adi.png)
+
+Kendi altyazinizi yazmak isterseniz:
 
 <figure class="clean-figure">
-    <img src="/assets/images/resim_adi.png" alt="Açıklama Metni">
-    <figcaption>Görselin altındaki italik açıklama yazısı buraya gelir.</figcaption>
+    <img src="/assets/images/resim_adi.png" alt="Aciklama metni">
+    <figcaption>Gorselin altindaki aciklama yazisi.</figcaption>
 </figure>
 
-### 💡 Akademik Bilgi Kartı (Academic Card)
-Yazı içinde özel olarak vurgulamak istediğiniz notlar veya ekstra bilgiler için:
+## Vurgu bileşenleri
+
+> "Hayat, spesifik seylerden spesifik bir hal bekleyemeyecek kadar kisa."
+> — *Ahmet Arvas*
 
 <div class="academic-card">
-    <div class="academic-card-header">💡 ÖNEMLİ NOT</div>
-    Bu bir akademik bilgi kartıdır. Sol tarafındaki kalın renk çizgisi ve yumuşak arka plan rengi ile metinlerinizi öne çıkarır.
+    <div class="academic-card-header">Not</div>
+    Vurgulamak istediginiz bilgi kutusu. Sol kenarindaki turuncu cizgi ile one cikar.
 </div>
+
+## Tablo
+
+| Deneme | Sonuc | Not |
+|--------|-------|-----|
+| 1      | 82 m  | stabil |
+| 2      | 96 m  | hafif salinim |

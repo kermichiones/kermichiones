@@ -1,0 +1,65 @@
+---
+layout: default
+---
+
+<div class="sd-container">
+
+    <ol class="sd-breadcrumb">
+        <li><a href="/" data-i18n="home">Ana Sayfa</a></li>
+        <li aria-current="page" data-i18n="search_results">Arama sonuçları</li>
+    </ol>
+
+    <div class="sd-layout sd-layout-facets" id="sd-search-results">
+
+        <!-- ============ ARAMAYI DARALT ============ -->
+        <aside aria-label="Aramayı daralt">
+            <h2 class="sd-refine-title" data-i18n="refine_search">Aramayı daralt</h2>
+
+            <form id="sd-refine-form">
+                <div class="sd-field" style="margin-bottom: 12px;">
+                    <label for="sd-refine-qs" data-i18n="search_terms_label">Terimler</label>
+                    <input type="search" id="sd-refine-qs" name="qs" placeholder="anahtar kelime...">
+                </div>
+                <div class="sd-field" style="margin-bottom: 12px;">
+                    <label for="sd-refine-authors" data-i18n="search_author_label">Yazar / etiket</label>
+                    <input type="text" id="sd-refine-authors" name="authors" placeholder="{{ site.author.name }}">
+                </div>
+                <button type="submit" class="sd-btn sd-btn-sm" style="width: 100%;" data-i18n="apply_filters">Filtreleri uygula</button>
+            </form>
+
+            <div id="sd-facets" style="margin-top: 18px;"></div>
+
+            <section class="sd-panel" style="margin-top: 18px;">
+                <h2 class="sd-panel-title" data-i18n="search_tips">Arama ipuçları</h2>
+                <div class="sd-panel-body" style="font-size: .8125rem; color: var(--sd-text-muted);">
+                    <p data-i18n="tip_1">Birden fazla kelime yazarsanız hepsini birlikte içeren kayıtlar listelenir.</p>
+                    <p data-i18n="tip_2">Türkçe karakterler göz ardı edilir: “sıır” ile “şiir” aynı sonucu verir.</p>
+                    <p data-i18n="tip_3">Başlık, etiket, özet ve tam metin birlikte taranır.</p>
+                </div>
+            </section>
+        </aside>
+
+        <!-- ============ SONUÇLAR ============ -->
+        <section>
+            <div class="sd-results-head">
+                <h1 class="sd-results-count" id="sd-result-count"><span>…</span> sonuç</h1>
+                <div class="sd-results-tools">
+                    <label for="sd-sort" data-i18n="sort_by">Sırala:</label>
+                    <select id="sd-sort">
+                        <option value="relevance" data-i18n="sort_relevance">İlgi düzeyi</option>
+                        <option value="date" data-i18n="sort_newest">En yeni</option>
+                        <option value="date-asc" data-i18n="sort_oldest">En eski</option>
+                        <option value="title" data-i18n="sort_title">Başlık (A-Z)</option>
+                    </select>
+                </div>
+            </div>
+
+            <p style="font-size: .8125rem; color: var(--sd-text-muted); padding: 10px 0 4px;" id="sd-query-summary"></p>
+
+            <ul class="sd-result-list" id="sd-result-list">
+                <li><div class="sd-empty" data-i18n="loading">Dizin yükleniyor…</div></li>
+            </ul>
+        </section>
+
+    </div>
+</div>

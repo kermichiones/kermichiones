@@ -1,4 +1,7 @@
 title: Ahmet Arvas
+brand_name: Ahmet Arvas
+brand_logo: /assets/images/logo.png
+institution: Abdullah Gül Üniversitesi
 description: Kisisel blog'um cesitli yazılar paylasıyorum.
 baseurl: "" 
 url: "https://ahmetarvas.tr" 
@@ -21,9 +24,6 @@ author:
 collections:
   projects:
     output: true
-  films:
-    output: true
-    permalink: /films/:path/
 
 # --- Eklentiler (Plugins) ---
 # Buraya SEO ve Sitemap eklentilerini ekledik

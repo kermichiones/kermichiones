@@ -4,12 +4,13 @@
     <meta name="google-site-verification" content="JSDn562cYb-8Xe6FAgxVYZHTAXoFg9VojDN7cj8LSTI" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title | default: site.title }}</title>
+    <title>{% if page.title %}{{ page.title }} - {{ site.brand_name | default: site.title }}{% else %}{{ site.brand_name | default: site.title }} | {{ site.description }}{% endif %}</title>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300..700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400&display=swap" rel="stylesheet">
+
     <!-- Styles -->
     <link rel="stylesheet" href="/assets/css/style.css">
     <script src="/assets/js/theme.js"></script>
@@ -19,60 +20,151 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    
+
+    <meta name="description" content="{{ page.description | default: site.description }}">
     <meta property="og:title" content="{{ page.title | default: site.title }}">
-    <meta property="og:description" content="Ahmet Arvas Embedded Systems, Philosophia, Fungi, Some programming languages and Rocketry.">
+    <meta property="og:description" content="{{ page.description | default: site.description }}">
     <meta property="og:image" content="{{ site.url }}/social-preview.png">
     <meta property="og:url" content="{{ site.url }}{{ page.url }}">
     <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
 
-    <div class="split-wrapper">
-        
-        <!-- LEFT SIDEBAR (Fixed Column) -->
-        <aside class="left-sidebar">
-            
-            <!-- Profile Section -->
-            <section class="profile-card">
-                <div class="profile-pic"><img src="/assets/images/profile.png" alt="Ahmet Arvas" style="width: 100%; height: 100%; object-fit: cover;"></div>
-                <h2 class="profile-name" data-i18n="site_title">Ahmet Arvas</h2>
-                <p class="profile-desc">
-                    <span data-i18n="bio_title" style="display:block; margin-bottom:5px;">Elektrik & Elektronik Mühendisliği öğrencisi.</span>
-                </p>
-            </section>
+<a class="skip-link" href="#main">İçeriğe geç</a>
 
-            <!-- Navigation Links -->
-            <nav>
-                <div class="section-bar" data-i18n="nav_header">:: MENÜ ::</div>
-                <ul class="nav-links" style="margin-top: 10px;">
-                    <li><a href="/" data-i18n="home">ANA SAYFA</a></li>
-                    <li><a href="/aylik/" data-i18n="monthly">AYLIK</a></li>
-                    <li><a href="/projeler/" data-i18n="projects">PROJELER</a></li>
-                    <li><a href="/films/" data-i18n="films">FİLMLER</a></li>
-                    <li><a href="/arsiv/" data-i18n="archive">ARŞİV</a></li>
-                    <li><a href="/hakkimda/" data-i18n="about">HAKKIMDA</a></li>
-                </ul>
-            </nav>
+<!-- ==================== GLOBAL HEADER ==================== -->
+<header class="gh" id="gh">
+    <div class="gh-main">
 
-            <!-- Clock & Date Widget -->
-            <section class="clock-widget">
-                <div class="section-bar" data-i18n="time_header">:: ZAMAN ::</div>
-                <div class="clock-display">
+        <a class="gh-branding" href="/" aria-label="{{ site.brand_name | default: site.title }} ana sayfa">
+            {% assign brand_logo_file = site.static_files | where: "path", site.brand_logo | first %}
+            {% if brand_logo_file %}
+            <img class="gh-logo gh-logo-img" src="{{ site.brand_logo }}" alt="" width="52" height="47">
+            {% else %}
+            <svg class="gh-logo" viewBox="0 0 54 54" role="img" aria-hidden="true" focusable="false">
+                <circle cx="27" cy="27" r="25" fill="none" stroke="var(--sd-orange)" stroke-width="2"/>
+                <path d="M27 11 L38.5 43 H32.9 L27 25.6 L21.1 43 H15.5 Z" fill="var(--sd-orange)"/>
+                <rect x="20.5" y="33" width="13" height="2.6" fill="var(--sd-bg)"/>
+            </svg>
+            {% endif %}
+            <span class="gh-wordmark">
+                <span class="gh-wordmark-main">{{ site.brand_name | default: site.title }}</span>
+            </span>
+        </a>
+
+        <nav class="gh-nav" aria-label="Ana gezinme">
+            <a href="/arsiv/" {% if page.url == '/arsiv/' %}class="is-active"{% endif %} data-i18n="nav_records">Yazılar &amp; Projeler</a>
+            <a href="/projeler/" {% if page.url == '/projeler/' %}class="is-active"{% endif %} data-i18n="projects">Projeler</a>
+            <a href="/aylik/" {% if page.url == '/aylik/' %}class="is-active"{% endif %} data-i18n="nav_volumes">Ciltler</a>
+        </nav>
+
+        <span class="gh-spacer"></span>
+
+        <div class="gh-tools">
+            <a class="gh-icon-btn" href="/search/" title="Arama" aria-label="Arama sayfası">
+                <svg viewBox="0 0 100 128" aria-hidden="true" focusable="false"><path d="M19.22 76.91c-5.84-5.84-9.05-13.6-9.05-21.85s3.21-16.01 9.05-21.85c5.84-5.83 13.59-9.05 21.85-9.05 8.25 0 16.01 3.22 21.84 9.05 5.84 5.84 9.05 13.6 9.05 21.85s-3.21 16.01-9.05 21.85c-5.83 5.83-13.59 9.05-21.84 9.05-8.26 0-16.01-3.22-21.85-9.05zm80.33 29.6L73.23 80.19c5.61-7.15 8.68-15.9 8.68-25.13 0-10.91-4.25-21.17-11.96-28.88-7.72-7.71-17.97-11.96-28.88-11.96S19.9 18.47 12.19 26.18C4.47 33.89.22 44.15.22 55.06s4.25 21.17 11.97 28.88C19.9 91.65 30.16 95.9 41.07 95.9c9.23 0 17.98-3.07 25.13-8.68l26.32 26.32 7.03-7.03"/></svg>
+            </a>
+            <a class="gh-icon-btn" href="/hakkimda/" title="Hakkında ve yardım" aria-label="Hakkında">
+                <svg viewBox="0 0 114 128" aria-hidden="true" focusable="false"><path d="M57 8C35.69 7.69 15.11 21.17 6.68 40.71c-8.81 19.38-4.91 43.67 9.63 59.25 13.81 15.59 36.85 21.93 56.71 15.68 21.49-6.26 37.84-26.81 38.88-49.21 1.59-21.15-10.47-42.41-29.29-52.1C74.76 10.17 65.88 7.99 57 8zm0 10c20.38-.37 39.57 14.94 43.85 34.85 4.59 18.53-4.25 39.23-20.76 48.79-17.05 10.59-40.96 7.62-54.9-6.83-14.45-13.94-17.42-37.85-6.83-54.9C26.28 26.5 41.39 17.83 57 18zm-.14 14C45.31 32.26 40 40.43 40 50v2h10v-2c0-4.22 2.22-9.66 8-9.24 5.5.4 6.32 5.14 5.78 8.14C62.68 55.06 52 58.4 52 69.4V76h10v-5.56c0-8.16 11.22-11.52 12-21.7.74-9.86-5.56-16.52-16-16.74-.39-.01-.76-.01-1.14 0zM52 82v10h10V82H52z"/></svg>
+            </a>
+            <a class="gh-icon-btn" href="/hakkimda/" title="{{ site.author.name }}" aria-label="Yazar profili">
+                <svg viewBox="0 0 106 128" aria-hidden="true" focusable="false"><path d="M11.07 120l.84-9.29C13.88 91.92 35.25 87.78 53 87.78c17.74 0 39.11 4.13 41.08 22.84l.84 9.38h10.04l-.93-10.34C101.88 89.23 83.89 78 53 78S4.11 89.22 1.95 109.73L1.04 120h10.03M53 17.71c-9.72 0-18.24 8.69-18.24 18.59 0 13.67 7.84 23.98 18.24 23.98S71.24 49.97 71.24 36.3c0-9.9-8.52-18.59-18.24-18.59zM53 70c-15.96 0-28-14.48-28-33.67C25 20.97 37.82 8 53 8s28 12.97 28 28.33C81 55.52 68.96 70 53 70"/></svg>
+            </a>
+            <button class="gh-icon-btn gh-hamburger" id="gh-menu-btn" type="button" aria-expanded="false" aria-controls="gh-drawer" aria-label="Menüyü aç/kapat">
+                <svg viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M0 6h40v3H0zm0 12h40v3H0zm0 12h40v3H0z"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="gh-drawer" id="gh-drawer">
+        <ul>
+            <li><a href="/" data-i18n="home">Ana Sayfa</a></li>
+            <li><a href="/search/" data-i18n="search">Arama</a></li>
+            <li><a href="/arsiv/" data-i18n="archive">Arşiv</a></li>
+            <li><a href="/aylik/" data-i18n="monthly">Aylık</a></li>
+            <li><a href="/projeler/" data-i18n="projects">Projeler</a></li>
+            <li><a href="/hakkimda/" data-i18n="about">Hakkımda</a></li>
+        </ul>
+    </div>
+</header>
+
+<!-- ==================== QUICK SEARCH ==================== -->
+{% unless page.layout == 'post' %}
+<section class="sd-searchbar{% unless page.layout == 'home' %} sd-searchbar-compact{% endunless %}" aria-label="Hızlı arama">
+    <div class="sd-container">
+        <h2 class="sd-search-title">
+            <span data-i18n="search_heading">Bu arşivdeki yazıları ve projeleri ara</span>
+        </h2>
+
+        <form class="sd-search-form" action="/search/" method="get" role="search" id="sd-quick-search">
+            <div class="sd-search-inputs">
+                <div class="sd-field sd-suggest-wrap">
+                    <label for="qs" data-i18n="search_terms_label">Bu terimleri içeren kayıtları bul</label>
+                    <input type="search" id="qs" name="qs" autocomplete="off" spellcheck="false"
+                           placeholder="anahtar kelime, başlık, cümle..."
+                           data-i18n-placeholder="search_terms_ph"
+                           role="combobox" aria-expanded="false" aria-autocomplete="list"
+                           aria-controls="qs-suggest" value="{{ page.prefill_qs }}">
+                    <div class="sd-suggest" id="qs-suggest" role="listbox" aria-label="Öneriler"></div>
+                </div>
+
+                <div class="sd-field">
+                    <label for="pub" data-i18n="search_pub_label">Bu koleksiyon içinde</label>
+                    <select id="pub" name="pub">
+                        <option value="" data-i18n="search_pub_all">Tüm koleksiyonlar</option>
+                        <option value="posts" data-i18n="col_posts">Yazılar (Blog)</option>
+                        <option value="projects" data-i18n="col_projects">Projeler</option>
+                    </select>
+                </div>
+
+                <div class="sd-field">
+                    <label for="authors" data-i18n="search_author_label">Yazar / etiket</label>
+                    <input type="text" id="authors" name="authors" placeholder="{{ site.author.name }}"
+                           autocomplete="off">
+                </div>
+            </div>
+
+            <div class="sd-search-actions">
+                <a class="sd-advanced" href="/search/" data-i18n="search_advanced">Gelişmiş arama ve filtreler</a>
+                <button type="submit" class="sd-btn" aria-label="Aramayı gönder">
+                    <svg viewBox="0 0 100 128" aria-hidden="true" focusable="false"><path d="M19.22 76.91c-5.84-5.84-9.05-13.6-9.05-21.85s3.21-16.01 9.05-21.85c5.84-5.83 13.59-9.05 21.85-9.05 8.25 0 16.01 3.22 21.84 9.05 5.84 5.84 9.05 13.6 9.05 21.85s-3.21 16.01-9.05 21.85c-5.83 5.83-13.59 9.05-21.84 9.05-8.26 0-16.01-3.22-21.85-9.05zm80.33 29.6L73.23 80.19c5.61-7.15 8.68-15.9 8.68-25.13 0-10.91-4.25-21.17-11.96-28.88-7.72-7.71-17.97-11.96-28.88-11.96S19.9 18.47 12.19 26.18C4.47 33.89.22 44.15.22 55.06s4.25 21.17 11.97 28.88C19.9 91.65 30.16 95.9 41.07 95.9c9.23 0 17.98-3.07 25.13-8.68l26.32 26.32 7.03-7.03"/></svg>
+                    <span data-i18n="search_btn">Ara</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endunless %}
+
+<!-- ==================== MAIN ==================== -->
+<main class="sd-main" id="main">
+    {{ content }}
+</main>
+
+<!-- ==================== SITE TOOLS BAND ==================== -->
+<section class="sd-tools-band" aria-label="Site araçları">
+    <div class="sd-container">
+        <h2 data-i18n="tools_header">Site araçları</h2>
+        <p class="sd-tools-sub" data-i18n="tools_sub">Saat, Mozart piyano konçertoları, ziyaretçi sayacı ve okuyucu notları.</p>
+
+        <div class="sd-tools-grid">
+
+            <!-- Saat -->
+            <section class="sd-panel">
+                <h3 class="sd-panel-title" data-i18n="time_header">Zaman</h3>
+                <div class="sd-panel-body sd-clock">
                     <div id="clock">--:--:--</div>
                     <div id="date">--/--/----</div>
                 </div>
             </section>
 
-            <!-- Mozart Audio Player Widget -->
-            <section class="music-widget">
-                <div class="section-bar" style="text-align: center;" data-i18n="mozart_header">:: MOZART BÖLÜMÜ ::</div>
-                <div class="music-display">
-                    <!-- Selected Track Title (Serif/Header Font) -->
+            <!-- Mozart -->
+            <section class="sd-panel">
+                <h3 class="sd-panel-title" data-i18n="mozart_header">Mozart bölümü</h3>
+                <div class="sd-panel-body">
                     <div id="mozart-track-title" class="music-track-title">KV 246 &bull; Piano Concerto No. 8</div>
 
-                    <!-- Dropdown for Concerto Selection -->
-                    <select id="mozart-select" class="music-select">
+                    <select id="mozart-select" class="music-select" aria-label="Konçerto seç">
                         <option value="" disabled selected>— Eser Seçin / Select Concerto —</option>
                         <option value="(KV 037) Piano Concerto n° 1.mp3">No. 1 in F major, KV 37 (Allegro - Andante - Allegro)</option>
                         <option value="(KV 039) Piano Concerto n° 2.mp3">No. 2 in B flat major, KV 39 (Allegro spiritoso - Andante staccato - Molto allegro)</option>
@@ -100,19 +192,17 @@
                         <option value="(KV 537) Piano Concerto n° 26.mp3">No. 26 in D major, KV 537 "Coronation" (Allegro - Larghetto - Allegretto)</option>
                         <option value="(KV 595) Piano Concerto n° 27.mp3">No. 27 in B flat major, KV 595 (Allegro - Larghetto - Allegro)</option>
                     </select>
-                    
-                    <!-- Progress & Timeline Slider -->
+
                     <div class="music-progress-wrapper">
-                        <input type="range" id="mozart-progress" class="music-slider" min="0" max="100" value="0" disabled>
+                        <input type="range" id="mozart-progress" class="music-slider" min="0" max="100" value="0" disabled aria-label="Parça konumu">
                         <div class="music-time-row">
                             <span id="mozart-time-current">00:00</span>
                             <span id="mozart-time-total">00:00</span>
                         </div>
                     </div>
 
-                    <!-- Play Control Button -->
                     <div class="music-controls-row">
-                        <button id="mozart-play-btn" class="music-play-btn" disabled>
+                        <button id="mozart-play-btn" class="music-play-btn" disabled aria-label="Çal / durdur">
                             <span class="btn-icon">▶</span>
                         </button>
                     </div>
@@ -121,266 +211,271 @@
                 </div>
             </section>
 
-            <!-- Visitor Counter Widget -->
-            <section class="visitor-widget">
-                <div class="section-bar" data-i18n="visitor_header">:: ZİYARETÇİ ::</div>
-                <div class="visitor-display">
-                    <img src="https://count.getloli.com/get/@AhmetArvasBlog?theme=moebooru" alt="Ziyaretçi Sayacı">
+            <!-- Ziyaretçi -->
+            <section class="sd-panel">
+                <h3 class="sd-panel-title" data-i18n="visitor_header">Ziyaretçi</h3>
+                <div class="sd-panel-body visitor-display">
+                    <img src="https://count.getloli.com/get/@AhmetArvasBlog?theme=moebooru" alt="Ziyaretçi sayacı">
                     <span class="visitor-caption" data-i18n="visitor_desc">Site yeniden yüklenince bile artıyor :(</span>
                 </div>
             </section>
 
-            <!-- Shoutbox Widget -->
-            <section class="shoutbox-widget">
-                <div class="section-bar" style="text-align: center;" data-i18n="shoutbox_header">:: SHOUTBOX ::</div>
-                <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
+            <!-- Shoutbox -->
+            <section class="sd-panel sd-tool-shout">
+                <h3 class="sd-panel-title" data-i18n="shoutbox_header">Okuyucu notları (shoutbox)</h3>
+                <div class="sd-panel-body">
                     <div class="shoutbox-posts" id="shoutbox-area">
-                        <span style="color:#999;" data-i18n="loading">Bağlanıyor...</span>
+                        <span style="color:var(--sd-text-faint);" data-i18n="loading">Bağlanıyor...</span>
                     </div>
                     <form id="sb-form" class="shoutbox-inputs">
                         <div class="shoutbox-input-row">
-                            <input type="text" id="sb-name" class="shoutbox-field" style="width: 80px;" placeholder="İsim" data-i18n-placeholder="shoutbox_placeholder_name" required>
+                            <input type="text" id="sb-name" class="shoutbox-field" style="width: 110px;" placeholder="İsim" data-i18n-placeholder="shoutbox_placeholder_name" required>
                             <input type="text" id="sb-msg" class="shoutbox-field" style="flex-grow: 1;" placeholder="Mesaj..." data-i18n-placeholder="shoutbox_placeholder_msg" required>
                         </div>
-                        <button type="submit" class="sb-btn btn-shoutbox" data-i18n="send_btn">GÖNDER!</button>
+                        <button type="submit" class="btn-shoutbox" data-i18n="send_btn">GÖNDER</button>
                     </form>
                 </div>
             </section>
 
-            <!-- Interactive Action Controls (Theme & Language Switch) -->
-            <section class="action-controls">
-                <button id="lang-toggle-btn" onclick="toggleLanguage()" class="action-btn">EN</button>
-                <button id="theme-toggle-btn" onclick="toggleTheme()" class="action-btn">☾</button>
-            </section>
-
-        </aside>
-
-        <!-- RIGHT CONTENT (Scrollable Main Panel) -->
-        <main class="right-content">
-            
-            <!-- Welcome Header Block -->
-            <header class="right-header">
-                <h1 class="site-title" data-i18n="welcome_message">HOŞGELDİNİZ</h1>
-                <p class="site-subtitle" data-i18n="welcome_sub">kişisel blog</p>
-            </header>
-
-            <!-- Dynamic Content Injected here -->
-            {{ content }}
-
-            <!-- Footer -->
-            <footer class="simple-footer">
-                <span data-i18n="footer_text">C10H16N5O13P3 ile tasarlandı</span> | Ahmet Arvas © 2026
-            </footer>
-
-        </main>
-
+        </div>
     </div>
+</section>
 
-    <!-- SCRIPTS & FIREBASE -->
-    <script src="/assets/js/lang.js"></script>
-    <script type="module">
-        // 1. Clock & Date Dynamic Updater
-        function updateClock() {
-            const clockEl = document.getElementById('clock');
-            const dateEl = document.getElementById('date');
-            if (!clockEl || !dateEl) return;
-            const now = new Date();
-            
-            clockEl.innerText = now.toLocaleTimeString(currentLang === 'tr' ? 'tr-TR' : 'en-US', {
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false
-            });
+<!-- ==================== FOOTER ==================== -->
+<footer class="sd-footer" role="contentinfo">
+    <div class="sd-footer-inner">
+        <div class="sd-footer-mark">
+            {% if brand_logo_file %}
+            <img src="{{ site.brand_logo }}" alt="" class="gh-logo-img" style="height: 58px; width: auto;">
+            {% else %}
+            <svg viewBox="0 0 54 54" role="img" aria-label="{{ site.brand_name | default: site.title }}">
+                <circle cx="27" cy="27" r="25" fill="none" stroke="var(--sd-orange)" stroke-width="2"/>
+                <path d="M27 11 L38.5 43 H32.9 L27 25.6 L21.1 43 H15.5 Z" fill="var(--sd-orange)"/>
+                <rect x="20.5" y="33" width="13" height="2.6" fill="var(--sd-bg)"/>
+            </svg>
+            {% endif %}
+        </div>
 
-            const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
-            const dateStr = now.toLocaleDateString(currentLang === 'tr' ? 'tr-TR' : 'en-US', dateOptions);
-            dateEl.innerText = dateStr.toUpperCase();
+        <div class="sd-footer-body">
+            <ul class="sd-footer-links">
+                <li><a href="/hakkimda/" data-i18n="footer_about">Bu arşiv hakkında</a></li>
+                <li><a href="/search/" data-i18n="search">Arama</a></li>
+                <li><a href="/arsiv/" data-i18n="archive">Arşiv</a></li>
+                <li><a href="/feed.xml" data-i18n="footer_feed">RSS akışı</a></li>
+                <li><a href="/sitemap.xml">Site haritası</a></li>
+                <li><a href="mailto:{{ site.author.email }}" data-i18n="footer_contact">İletişim</a></li>
+                <li><a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener">GitHub</a></li>
+            </ul>
+            <p class="sd-footer-copy">
+                <span data-i18n="footer_text">C10H16N5O13P3 ile tasarlandı</span> &bull;
+                Bu sitedeki tüm içerik &copy; {{ 'now' | date: "%Y" }} {{ site.author.name }}. Kaynak göstererek alıntılayabilirsiniz.
+                <span data-i18n="footer_disclaimer">Arayüz, akademik yayın veri tabanlarının görsel diline bir selam olarak tasarlanmıştır; herhangi bir yayınevi ile bağlantısı yoktur.</span>
+            </p>
+        </div>
+
+        <div class="sd-footer-actions">
+            <button id="lang-toggle-btn" onclick="toggleLanguage()" class="sd-action-btn" title="Dil / Language">EN</button>
+            <button id="theme-toggle-btn" onclick="toggleTheme()" class="sd-action-btn" title="Tema">☾</button>
+        </div>
+    </div>
+</footer>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script src="/assets/js/lang.js"></script>
+<script src="/assets/js/sd.js"></script>
+<script type="module">
+    // 1. Saat & tarih
+    function updateClock() {
+        const clockEl = document.getElementById('clock');
+        const dateEl = document.getElementById('date');
+        if (!clockEl || !dateEl) return;
+        const now = new Date();
+        const lang = (typeof currentLang !== 'undefined' && currentLang === 'en') ? 'en-US' : 'tr-TR';
+
+        clockEl.innerText = now.toLocaleTimeString(lang, {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        });
+
+        const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+        dateEl.innerText = now.toLocaleDateString(lang, dateOptions).toUpperCase();
+    }
+    window.updateClock = updateClock;
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // 2. Mozart oynatıcı
+    const mozartSelect = document.getElementById('mozart-select');
+    const mozartPlayBtn = document.getElementById('mozart-play-btn');
+    const mozartTimeCurrent = document.getElementById('mozart-time-current');
+    const mozartTimeTotal = document.getElementById('mozart-time-total');
+    const mozartProgress = document.getElementById('mozart-progress');
+    const mozartAudio = document.getElementById('mozart-audio');
+    const mozartTrackTitle = document.getElementById('mozart-track-title');
+
+    if (mozartSelect && mozartPlayBtn && mozartTimeCurrent && mozartTimeTotal && mozartProgress && mozartAudio) {
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "00:00";
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         }
-        window.updateClock = updateClock;
-        setInterval(updateClock, 1000);
-        updateClock();
 
-        // Mozart Audio Player Logic
-        const mozartSelect = document.getElementById('mozart-select');
-        const mozartPlayBtn = document.getElementById('mozart-play-btn');
-        const mozartTimeCurrent = document.getElementById('mozart-time-current');
-        const mozartTimeTotal = document.getElementById('mozart-time-total');
-        const mozartProgress = document.getElementById('mozart-progress');
-        const mozartAudio = document.getElementById('mozart-audio');
-        const mozartTrackTitle = document.getElementById('mozart-track-title');
-
-        if (mozartSelect && mozartPlayBtn && mozartTimeCurrent && mozartTimeTotal && mozartProgress && mozartAudio) {
-            function formatTime(seconds) {
-                if (isNaN(seconds)) return "00:00";
-                const mins = Math.floor(seconds / 60);
-                const secs = Math.floor(seconds % 60);
-                return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-            }
-
-            mozartSelect.addEventListener('change', () => {
-                const selectedFile = mozartSelect.value;
-                if (selectedFile) {
-                    mozartAudio.src = `/assets/music/${selectedFile}`;
-                    mozartPlayBtn.disabled = false;
-                    mozartProgress.disabled = false;
-                    mozartPlayBtn.classList.remove('playing');
-                    mozartPlayBtn.innerHTML = '<span class="btn-icon">▶</span>';
-                    mozartTimeCurrent.innerText = "00:00";
-                    mozartTimeTotal.innerText = "00:00";
-                    mozartProgress.value = 0;
-
-                    // Extract a clean track title from option text
-                    const selectedOptionText = mozartSelect.options[mozartSelect.selectedIndex].text;
-                    const cleanTitle = selectedOptionText.split(' (')[0];
-                    mozartTrackTitle.innerText = cleanTitle;
-                }
-            });
-
-            mozartPlayBtn.addEventListener('click', () => {
-                if (mozartAudio.paused) {
-                    mozartAudio.play();
-                    mozartPlayBtn.classList.add('playing');
-                    mozartPlayBtn.innerHTML = '<span class="btn-icon">⏸</span>';
-                } else {
-                    mozartAudio.pause();
-                    mozartPlayBtn.classList.remove('playing');
-                    mozartPlayBtn.innerHTML = '<span class="btn-icon">▶</span>';
-                }
-            });
-
-            mozartAudio.addEventListener('timeupdate', () => {
-                if (mozartAudio.duration) {
-                    const percent = (mozartAudio.currentTime / mozartAudio.duration) * 100;
-                    mozartProgress.value = percent;
-                    mozartTimeCurrent.innerText = formatTime(mozartAudio.currentTime);
-                    mozartTimeTotal.innerText = formatTime(mozartAudio.duration);
-                }
-            });
-
-            mozartAudio.addEventListener('loadedmetadata', () => {
-                mozartTimeTotal.innerText = formatTime(mozartAudio.duration);
-            });
-
-            mozartProgress.addEventListener('input', () => {
-                if (mozartAudio.duration) {
-                    const seekTime = (mozartProgress.value / 100) * mozartAudio.duration;
-                    mozartAudio.currentTime = seekTime;
-                }
-            });
-            
-            mozartAudio.addEventListener('ended', () => {
+        mozartSelect.addEventListener('change', () => {
+            const selectedFile = mozartSelect.value;
+            if (selectedFile) {
+                mozartAudio.src = `/assets/music/${selectedFile}`;
+                mozartPlayBtn.disabled = false;
+                mozartProgress.disabled = false;
                 mozartPlayBtn.classList.remove('playing');
                 mozartPlayBtn.innerHTML = '<span class="btn-icon">▶</span>';
+                mozartTimeCurrent.innerText = "00:00";
+                mozartTimeTotal.innerText = "00:00";
                 mozartProgress.value = 0;
-            });
-        }
 
-        // 2. Firebase Imports
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
-        import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-        // 3. Config
-        const firebaseConfig = {
-          apiKey: "AIzaSyDqRF27KZDPaqkfmL5twF_ZfhULarFGJmA",
-          authDomain: "mywebsite-6c85a.firebaseapp.com",
-          projectId: "mywebsite-6c85a",
-          storageBucket: "mywebsite-6c85a.firebasestorage.app",
-          messagingSenderId: "40740255090",
-          appId: "1:40740255090:web:431cc19c0287d78a0c99eb",
-          measurementId: "G-5LRBSW6C82"
-        };
-
-        // 4. Initialize
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-
-        // 5. Shoutbox Logic
-        const sbArea = document.getElementById('shoutbox-area');
-        const sbForm = document.getElementById('sb-form');
-        const sbName = document.getElementById('sb-name');
-        const sbMsg = document.getElementById('sb-msg');
-
-        let allMessages = [];
-        let displayLimit = 20;
-
-        let lastSentTime = 0;        // Anti-spam timer
-        const SPAM_COOLDOWN = 5000;  // 5 seconds cooldown
-
-        async function initFirebase() {
-            await signInAnonymously(auth);
-
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    const q = collection(db, 'shoutbox_v2');
-                    onSnapshot(q, (snapshot) => {
-                        allMessages = [];
-                        snapshot.forEach(doc => allMessages.push(doc.data()));
-                        allMessages.sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
-                        renderShoutbox();
-                    });
-                }
-            });
-        }
-
-        function renderShoutbox() {
-            if (allMessages.length === 0) { 
-                sbArea.innerHTML = '<span style="color:#666">Sessiz...</span>'; 
-                return; 
+                const selectedOptionText = mozartSelect.options[mozartSelect.selectedIndex].text;
+                mozartTrackTitle.innerText = selectedOptionText.split(' (')[0];
             }
+        });
 
-            sbArea.innerHTML = "";
-            const visibleMessages = allMessages.slice(0, displayLimit);
+        mozartPlayBtn.addEventListener('click', () => {
+            if (mozartAudio.paused) {
+                mozartAudio.play();
+                mozartPlayBtn.classList.add('playing');
+                mozartPlayBtn.innerHTML = '<span class="btn-icon">⏸</span>';
+            } else {
+                mozartAudio.pause();
+                mozartPlayBtn.classList.remove('playing');
+                mozartPlayBtn.innerHTML = '<span class="btn-icon">▶</span>';
+            }
+        });
 
-            visibleMessages.forEach(m => {
-                const div = document.createElement('div'); 
-                div.className = 'shout-msg';
-                
-                const name = (m.name || 'Anon').replace(/</g, "&lt;");
-                const text = (m.text || '').replace(/</g, "&lt;");
-                
-                let formattedDate = "";
-                if (m.timestamp && m.timestamp.seconds) {
-                    const d = new Date(m.timestamp.seconds * 1000);
-                    formattedDate = `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}.${d.getFullYear()} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
-                } else {
-                    formattedDate = "--/--/----";
-                }
-                
-                div.innerHTML = `
-                    <span class="shout-time">${formattedDate}</span>
-                    <span class="shout-author">${name}:</span>
-                    <span class="shout-text">${text}</span>
-                `;
-                sbArea.appendChild(div);
-            });
+        mozartAudio.addEventListener('timeupdate', () => {
+            if (mozartAudio.duration) {
+                mozartProgress.value = (mozartAudio.currentTime / mozartAudio.duration) * 100;
+                mozartTimeCurrent.innerText = formatTime(mozartAudio.currentTime);
+                mozartTimeTotal.innerText = formatTime(mozartAudio.duration);
+            }
+        });
 
-            // Scroll to the top of the ledger (where newest messages are)
-            sbArea.scrollTop = 0;
+        mozartAudio.addEventListener('loadedmetadata', () => {
+            mozartTimeTotal.innerText = formatTime(mozartAudio.duration);
+        });
 
-            if (allMessages.length > displayLimit) {
-                const loadMoreBtn = document.createElement('button');
-                loadMoreBtn.innerText = "Devamını Göster ▼";
-                loadMoreBtn.className = "btn-shoutbox";
-                loadMoreBtn.style.cssText = "width: 100%; padding: 6px; font-size: 10px; margin-top: 10px;";
-                loadMoreBtn.onclick = () => {
-                    displayLimit += 20;
+        mozartProgress.addEventListener('input', () => {
+            if (mozartAudio.duration) {
+                mozartAudio.currentTime = (mozartProgress.value / 100) * mozartAudio.duration;
+            }
+        });
+
+        mozartAudio.addEventListener('ended', () => {
+            mozartPlayBtn.classList.remove('playing');
+            mozartPlayBtn.innerHTML = '<span class="btn-icon">▶</span>';
+            mozartProgress.value = 0;
+        });
+    }
+
+    // 3. Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+    import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDqRF27KZDPaqkfmL5twF_ZfhULarFGJmA",
+      authDomain: "mywebsite-6c85a.firebaseapp.com",
+      projectId: "mywebsite-6c85a",
+      storageBucket: "mywebsite-6c85a.firebasestorage.app",
+      messagingSenderId: "40740255090",
+      appId: "1:40740255090:web:431cc19c0287d78a0c99eb",
+      measurementId: "G-5LRBSW6C82"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+
+    // 4. Shoutbox
+    const sbArea = document.getElementById('shoutbox-area');
+    const sbForm = document.getElementById('sb-form');
+    const sbName = document.getElementById('sb-name');
+    const sbMsg = document.getElementById('sb-msg');
+
+    let allMessages = [];
+    let displayLimit = 20;
+    let lastSentTime = 0;
+    const SPAM_COOLDOWN = 5000;
+
+    async function initFirebase() {
+        await signInAnonymously(auth);
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const q = collection(db, 'shoutbox_v2');
+                onSnapshot(q, (snapshot) => {
+                    allMessages = [];
+                    snapshot.forEach(doc => allMessages.push(doc.data()));
+                    allMessages.sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
                     renderShoutbox();
-                };
-                sbArea.appendChild(loadMoreBtn);
+                });
             }
+        });
+    }
+
+    function renderShoutbox() {
+        if (!sbArea) return;
+        if (allMessages.length === 0) {
+            sbArea.innerHTML = '<span style="color:var(--sd-text-faint)">Sessiz...</span>';
+            return;
         }
 
+        sbArea.innerHTML = "";
+        allMessages.slice(0, displayLimit).forEach(m => {
+            const div = document.createElement('div');
+            div.className = 'shout-msg';
+
+            const name = (m.name || 'Anon').replace(/</g, "&lt;");
+            const text = (m.text || '').replace(/</g, "&lt;");
+
+            let formattedDate = "--/--/----";
+            if (m.timestamp && m.timestamp.seconds) {
+                const d = new Date(m.timestamp.seconds * 1000);
+                formattedDate = `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}.${d.getFullYear()} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+            }
+
+            div.innerHTML = `
+                <span class="shout-time">${formattedDate}</span>
+                <span class="shout-author">${name}:</span>
+                <span class="shout-text">${text}</span>
+            `;
+            sbArea.appendChild(div);
+        });
+
+        sbArea.scrollTop = 0;
+
+        if (allMessages.length > displayLimit) {
+            const loadMoreBtn = document.createElement('button');
+            loadMoreBtn.innerText = "Devamını Göster ▼";
+            loadMoreBtn.className = "btn-retro";
+            loadMoreBtn.style.cssText = "width: 100%; margin-top: 10px;";
+            loadMoreBtn.onclick = () => {
+                displayLimit += 20;
+                renderShoutbox();
+            };
+            sbArea.appendChild(loadMoreBtn);
+        }
+    }
+
+    if (sbForm) {
         sbForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const now = Date.now();
             const timeDiff = now - lastSentTime;
-            
+
             if (timeDiff < SPAM_COOLDOWN) {
                 const remaining = Math.ceil((SPAM_COOLDOWN - timeDiff) / 1000);
                 alert(`Hop! Çok hızlısın. Lütfen ${remaining} saniye bekle.`);
@@ -388,40 +483,38 @@
             }
 
             const user = auth.currentUser;
-            if(!user || !sbName.value || !sbMsg.value) return;
-            
-            const btn = document.querySelector('.btn-shoutbox');
+            if (!user || !sbName.value || !sbMsg.value) return;
+
+            const btn = sbForm.querySelector('.btn-shoutbox');
             const originalText = btn.innerText;
-            
+
             btn.disabled = true;
             btn.innerText = "Yollanıyor...";
-            btn.style.opacity = "0.6";
-            
+
             try {
                 await addDoc(collection(db, 'shoutbox_v2'), {
-                    name: sbName.value, 
-                    text: sbMsg.value, 
-                    timestamp: serverTimestamp(), 
+                    name: sbName.value,
+                    text: sbMsg.value,
+                    timestamp: serverTimestamp(),
                     uid: user.uid
                 });
-                
-                sbMsg.value = ''; 
-                sbArea.scrollTop = 0;
-                lastSentTime = Date.now(); 
 
-            } catch(err) { 
-                console.error("Hata:", err); 
+                sbMsg.value = '';
+                sbArea.scrollTop = 0;
+                lastSentTime = Date.now();
+            } catch (err) {
+                console.error("Hata:", err);
                 alert("Hata: Mesaj gönderilemedi.");
             } finally {
                 setTimeout(() => {
                     btn.disabled = false;
                     btn.innerText = originalText;
-                    btn.style.opacity = "1";
                 }, 1000);
             }
         });
+    }
 
-        initFirebase();
-    </script>
+    initFirebase();
+</script>
 </body>
 </html>

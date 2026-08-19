@@ -2,59 +2,113 @@
 layout: default
 title: Hakkımda
 permalink: /hakkimda/
+description: Ahmet Arvas — Abdullah Gül Üniversitesi Elektrik & Elektronik Mühendisliği öğrencisi; gömülü sistemler, EEG ve roketçilik üzerine çalışıyor.
 ---
 
-<div class="section-bar" style="margin-bottom: 25px;">
-    <span data-i18n="id_card">ID_CARD: AHMET_ARVAS</span>
-</div>
+<div class="sd-container">
 
-<div style="width: 100%; padding: 25px; border: 1px solid var(--border-color); background-color: var(--card-bg); border-radius: 6px; box-shadow: 0 2px 8px rgba(61, 49, 46, 0.02);">
-    
-    <div style="display: flex; flex-wrap: wrap; gap: 25px; align-items: flex-start; margin-bottom: 30px;">
-        
-        <div style="flex: 1;">
-            <h2 style="margin-top: 0; font-family: var(--font-header); font-size: 24px; color: var(--accent-color); font-weight: 700; border-bottom: 1.5px solid var(--border-color); display: inline-block; padding-bottom: 6px; margin-bottom: 12px;">
-                Ahmet Arvas
-            </h2>
-            <p style="line-height: 1.7; font-family: var(--font-body); font-size: 15px; color: var(--text-main);">
-                <b>Abdullah Gül Üniversitesi (AGÜ)</b><br>
-                <span data-i18n="bio_title">Elektrik & Elektronik Mühendisliği öğrencisi.</span>
-            </p>
-            <p style="line-height: 1.7; font-family: var(--font-body); font-size: 14.5px; color: var(--text-main); margin-top: 15px; border-left: 2px solid var(--accent-color); padding-left: 10px;">
-                <b>Şu an ilgi alanım:</b><br>
-                <span>Computer-Brain Interface (CBI), EEG Sinyal Ölçümü ve Gelişmiş Gömülü Sistem Teknolojileri.</span>
-            </p>
-        </div>
+    <ol class="sd-breadcrumb">
+        <li><a href="/" data-i18n="home">Ana Sayfa</a></li>
+        <li aria-current="page" data-i18n="about">Hakkımda</li>
+    </ol>
+
+    <div class="sd-layout">
+
+        <section>
+            <header class="sd-article-head">
+                <p class="sd-dochead" data-i18n="dochead_profile">Yazar profili</p>
+                <h1 class="sd-article-title">Ahmet Arvas</h1>
+                <p class="sd-authors">
+                    <span class="sd-author">Elektrik &amp; Elektronik Mühendisliği öğrencisi</span>
+                </p>
+                <p class="sd-affil">Abdullah Gül Üniversitesi (AGÜ) &bull; Kayseri, Türkiye</p>
+                <p class="sd-doi">iletişim: ahmet.arvas@agu.edu.tr</p>
+
+                <div class="sd-article-actions">
+                    <a class="sd-btn sd-btn-sm" href="https://github.com/kermichiones" target="_blank" rel="noopener">GitHub</a>
+                    <a class="sd-btn sd-btn-secondary sd-btn-sm" href="mailto:ahmet.arvas@agu.edu.tr" data-i18n="footer_contact">İletişim</a>
+                    <a class="sd-btn sd-btn-secondary sd-btn-sm" href="/arsiv/" data-i18n="archive">Arşiv</a>
+                </div>
+            </header>
+
+            <section class="sd-abstract">
+                <h2 data-i18n="abstract">Özet</h2>
+                <p>
+                    Elektrik-elektronik mühendisliği öğrencisiyim. Şu anki ilgi odağım
+                    <strong>bilgisayar-beyin arayüzleri (CBI)</strong>, <strong>EEG sinyal ölçümü</strong> ve
+                    <strong>gelişmiş gömülü sistem teknolojileri</strong>. Bu arşivde mühendislik notlarımı,
+                    projelerimi ve zaman zaman denemelerimi yayımlıyorum.
+                </p>
+            </section>
+
+            <div class="sd-body">
+                <h2>Araştırma ve çalışma alanları</h2>
+                <p>
+                    Donanım tarafında devre tasarımından üretime, yazılım tarafında gömülü uygulamalara
+                    kadar uçtan uca çalışmayı seviyorum. Aşağıdaki başlıklar hem yetkinlik hem de merak
+                    alanlarımı özetliyor.
+                </p>
+
+                <h3>Donanım ve yetenekler</h3>
+                <ul>
+                    <li>Altium Designer ile PCB tasarımı ve üretimi</li>
+                    <li>SolidWorks ile 3B mekanik tasarım</li>
+                    <li>Gömülü sistemler (STM32, ESP32, Arduino, RP2040)</li>
+                    <li>EEG cihazları ve biyomedikal donanım</li>
+                </ul>
+
+                <h3>İlgi alanları</h3>
+                <ul>
+                    <li>Mikoloji (mantar bilimi)</li>
+                    <li>Doğa ve yaban hayatı</li>
+                    <li>Model roketçilik</li>
+                    <li>Felsefe ve davranış üzerine okumalar</li>
+                </ul>
+
+                <blockquote>
+                    “Hayatta en hakiki mürşit ilimdir.”<br>
+                    — M. Kemal Atatürk
+                </blockquote>
+            </div>
+        </section>
+
+        <aside aria-label="Profil bilgileri">
+            <section class="sd-panel">
+                <div class="sd-panel-title" data-i18n="profile_panel">Profil</div>
+                <div class="sd-panel-body" style="text-align: center;">
+                    <img src="/assets/images/profile.png" alt="Ahmet Arvas"
+                         style="width: 130px; height: 130px; object-fit: cover; border: 1px solid var(--sd-border); border-radius: 50%;">
+                    <p style="margin-top: 12px; font-size: .875rem; color: var(--sd-text-muted);">
+                        Ahmet Arvas<br>
+                        <span style="color: var(--sd-text-faint);">AGÜ &bull; EEM</span>
+                    </p>
+                </div>
+            </section>
+
+            <section class="sd-panel">
+                <div class="sd-panel-title" data-i18n="record_info">Künye</div>
+                <div class="sd-panel-body">
+                    <dl>
+                        <dt data-i18n="info_editor">Yürütücü</dt><dd>Ahmet Arvas</dd>
+                        <dt>Kurum</dt><dd>AGÜ</dd>
+                        <dt>Alan</dt><dd>EEM / gömülü sistemler</dd>
+                        <dt data-i18n="info_lang">Dil</dt><dd>Türkçe, English</dd>
+                    </dl>
+                </div>
+            </section>
+
+            <section class="sd-panel">
+                <div class="sd-panel-title" data-i18n="quick_links">Hızlı bağlantılar</div>
+                <div class="sd-panel-body">
+                    <ul class="sd-panel-list">
+                        <li><a href="/arsiv/" data-i18n="archive">Arşiv</a></li>
+                        <li><a href="/projeler/" data-i18n="projects">Projeler</a></li>
+                        <li><a href="/search/" data-i18n="search_advanced">Gelişmiş arama</a></li>
+                        <li><a href="/feed.xml" data-i18n="footer_feed">RSS akışı</a></li>
+                    </ul>
+                </div>
+            </section>
+        </aside>
+
     </div>
-
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-top: 25px;">
-        
-        <div style="border: 1px solid var(--border-color); border-radius: 5px; padding: 15px; background: rgba(226, 215, 195, 0.05);">
-            <b style="background: var(--accent-color); color: var(--bg-color); padding: 4px 8px; font-size: 11px; font-family: var(--font-header); font-weight: 700; letter-spacing: 1px; border-radius: 3px; display: inline-block; margin-bottom: 15px;" data-i18n="hardware_header">DONANIM & YETENEKLER</b>
-            <ul style="font-size: 14.5px; list-style: square; padding-left: 20px; color: var(--text-main); line-height: 1.8;">
-                <li>Altium Designer ile PCB Tasarım & Üretimi</li>
-                <li>Solidworks ile 3D Mekanik Tasarım</li>
-                <li>Gömülü Sistemler (STM32, ESP32, Arduino)</li>
-                <li>EEG Cihazları ve Biyomedikal Donanımlar</li>
-            </ul>
-        </div>
-
-        <div style="border: 1px solid var(--border-color); border-radius: 5px; padding: 15px; background: rgba(226, 215, 195, 0.05);">
-            <b style="background: var(--accent-color); color: var(--bg-color); padding: 4px 8px; font-size: 11px; font-family: var(--font-header); font-weight: 700; letter-spacing: 1px; border-radius: 3px; display: inline-block; margin-bottom: 15px;" data-i18n="interests_header">İLGİ ALANLARI</b>
-            <ul style="font-size: 14.5px; list-style: circle; padding-left: 20px; color: var(--text-main); line-height: 1.8;">
-                <li>Mikoloji (Mantar Bilimi)</li>
-                <li>Doğa ve Yaban Hayatı</li>
-                <li>Model Roketçilik</li>
-            </ul>
-        </div>
-
-    </div>
-
-    <br>
-    
-    <div style="background: rgba(226, 215, 195, 0.25); border: 1.5px double var(--border-color); border-radius: 5px; padding: 15px; font-style: italic; text-align: center; margin-top: 20px; font-family: var(--font-body); color: var(--text-main); font-size: 14.5px;">
-        "Hayatta en hakiki mürşit ilimdir." <br>
-        — <span style="font-weight: bold; color: var(--accent-color);">M. Kemal Atatürk</span>
-    </div>
-
 </div>

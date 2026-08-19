@@ -2,48 +2,126 @@
 layout: default
 ---
 
-<div>
-    <div class="section-bar" style="margin-bottom: 25px;">
-        <span data-i18n="all_records">ARCHIVE</span>
-    </div>
+{% assign all_content = site.posts | concat: site.projects | sort: 'date' | reverse %}
 
-    <div style="padding: 10px 0;">
-        
-        {% assign blog_posts = site.posts %}
-        {% assign projects = site.projects %}
-        {% assign films = site.films %}
-        
-        {% assign all_content = blog_posts | concat: projects | concat: films | sort: 'date' | reverse %}
+<div class="sd-container">
 
-        <ul class="nav-links" style="font-family: var(--font-body); font-size: 14px; gap: 0;">
+    <ol class="sd-breadcrumb">
+        <li><a href="/" data-i18n="home">Ana Sayfa</a></li>
+        <li aria-current="page" data-i18n="archive">Arşiv</li>
+    </ol>
+
+    <div class="sd-layout sd-layout-facets" id="sd-archive">
+
+        <!-- ============ FİLTRELER ============ -->
+        <aside aria-label="Arşiv filtreleri">
+            <h2 class="sd-refine-title" data-i18n="refine_search">Arşivi daralt</h2>
+
+            <div class="sd-field" style="margin-bottom: 14px;">
+                <label for="sd-archive-search" data-i18n="filter_in_titles">Başlık ve etiketlerde ara</label>
+                <input type="search" id="sd-archive-search" placeholder="terim girin...">
+            </div>
+
+            <div class="sd-facet">
+                <h3 data-i18n="content_type">İçerik türü</h3>
+                <label><input type="checkbox" data-archive-facet value="posts"> <span data-i18n="col_posts_short">Yazı</span>
+                    <span class="sd-facet-count">{{ site.posts | size }}</span></label>
+                <label><input type="checkbox" data-archive-facet value="projects"> <span data-i18n="projects">Proje</span>
+                    <span class="sd-facet-count">{{ site.projects | size }}</span></label>
+            </div>
+
+            <div style="padding: 14px 0;">
+                <span class="sd-chip" id="sd-archive-letter-badge" style="display: none; margin-bottom: 10px;"></span>
+                <button type="button" class="sd-btn sd-btn-secondary sd-btn-sm" id="sd-archive-clear" style="width: 100%;" data-i18n="clear_filters">Filtreleri temizle</button>
+            </div>
+
+            <section class="sd-panel">
+                <h2 class="sd-panel-title" data-i18n="quick_links">Hızlı bağlantılar</h2>
+                <div class="sd-panel-body">
+                    <ul class="sd-panel-list">
+                        <li><a href="/search/" data-i18n="search_advanced">Gelişmiş arama</a></li>
+                        <li><a href="/aylik/" data-i18n="monthly">Aylık dizin</a></li>
+                        <li><a href="/projeler/" data-i18n="projects">Projeler</a></li>
+                        <li><a href="/feed.xml" data-i18n="footer_feed">RSS akışı</a></li>
+                    </ul>
+                </div>
+            </section>
+        </aside>
+
+        <!-- ============ KAYITLAR ============ -->
+        <section>
+            <div class="sd-results-head">
+                <h1 class="sd-results-count" id="sd-archive-count"><span>{{ all_content | size }}</span> kayıt</h1>
+                <div class="sd-results-tools">
+                    <span data-i18n="sorted_newest">Tarihe göre, en yeni önce</span>
+                </div>
+            </div>
+
+            <div class="sd-empty" id="sd-archive-empty" style="display: none; margin-top: 20px;">
+                <strong data-i18n="no_records">Bu filtrelerle kayıt bulunamadı.</strong><br>
+                <span data-i18n="no_records_hint">Filtreleri temizleyin veya farklı bir terim deneyin.</span>
+            </div>
+
+            {% assign year_list = "" %}
             {% for item in all_content %}
-            <li style="border-bottom: 1px solid var(--border-color); padding: 12px 0; display: flex; justify-content: space-between; align-items: center; list-style: none;">
-                
-                <span>
-                    {% if item.collection == 'projects' %}
-                        <span style="color: var(--bg-color); background: var(--accent-color); padding: 2px 6px; font-family: 'Inter', sans-serif; font-size: 9px; margin-right: 8px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">[PROJ]</span>
-                    {% elsif item.collection == 'films' %}
-                        <span style="color: var(--bg-color); background: var(--accent-color); padding: 2px 6px; font-family: 'Inter', sans-serif; font-size: 9px; margin-right: 8px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; opacity: 0.85;">[FILM]</span>
-                    {% else %}
-                        <span style="color: var(--text-main); background: var(--border-color); padding: 2px 6px; font-family: 'Inter', sans-serif; font-size: 9px; margin-right: 8px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">[BLOG]</span>
-                    {% endif %}
-
-                    <a href="{{ item.url }}" style="border: none; background: transparent; color: var(--text-main); font-weight: 600; text-decoration: none;">
-                        {{ item.title }}
-                    </a>
-                </span>
-
-                <span style="color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 11px; white-space: nowrap; margin-left: 10px; letter-spacing: 0.5px;">
-                    {{ item.date | date: "%Y.%m.%d" }}
-                </span>
-
-            </li>
+                {% capture y %}{{ item.date | date: "%Y" }}{% endcapture %}
+                {% unless year_list contains y %}{% assign year_list = year_list | append: y | append: "," %}{% endunless %}
             {% endfor %}
-        </ul>
-        
-        {% if all_content.size == 0 %}
-            <div style="text-align: center; color: var(--accent-color); font-family: var(--font-header); font-weight: 700; margin-top: 30px;" data-i18n="empty_directory">[!] EMPTY DIRECTORY</div>
-        {% endif %}
+            {% assign years = year_list | split: "," %}
+
+            {% for year in years %}
+            <div class="sd-vol-group" data-archive-group id="yil-{{ year }}">
+                <div class="sd-vol-head">
+                    <h3>{{ year }} <span style="font-weight: 400; color: var(--sd-text-muted);" data-i18n="volume">cildi</span></h3>
+                    <span class="sd-vol-count">
+                        {% assign count = 0 %}
+                        {% for item in all_content %}{% capture iy %}{{ item.date | date: "%Y" }}{% endcapture %}{% if iy == year %}{% assign count = count | plus: 1 %}{% endif %}{% endfor %}
+                        {{ count }} kayıt
+                    </span>
+                </div>
+
+                <ul class="sd-result-list">
+                    {% for item in all_content %}
+                    {% capture item_year %}{{ item.date | date: "%Y" }}{% endcapture %}
+                    {% if item_year == year %}
+                    {% assign item_type = item.collection | default: 'posts' %}
+                    <li class="sd-result"
+                        data-archive-row
+                        data-type="{{ item_type }}"
+                        data-title="{{ item.title | escape }}"
+                        data-tags="{{ item.tags | join: ' ' }} {{ item.categories | join: ' ' }}">
+
+                        <span class="sd-result-thumb">
+                            {% if item.image %}<img src="{{ item.image }}" alt="">{% elsif item_type == 'projects' %}⚙{% else %}¶{% endif %}
+                        </span>
+
+                        <div class="sd-result-main">
+                            <h4 class="sd-result-title"><a href="{{ item.url }}">{{ item.title }}</a></h4>
+                            <div class="sd-result-meta">
+                                {% if item_type == 'projects' %}
+                                <span class="sd-chip sd-chip-proj">Proje</span>
+                                {% else %}
+                                <span class="sd-chip sd-chip-blog">Blog</span>
+                                {% endif %}
+                                <span>{{ item.date | date: "%d.%m.%Y" }}</span>
+                                <span>{{ site.author.name }}</span>
+                            </div>
+                            <p class="sd-result-snippet">
+                                {% if item.description %}{{ item.description | strip_html | truncatewords: 26 }}
+                                {% else %}{{ item.content | strip_html | truncatewords: 26 }}{% endif %}
+                            </p>
+                        </div>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+
+            {% if all_content.size == 0 %}
+            <div class="sd-empty"><strong data-i18n="empty_directory">Arşiv boş.</strong></div>
+            {% endif %}
+        </section>
 
     </div>
 </div>

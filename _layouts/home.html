@@ -2,94 +2,242 @@
 layout: default
 ---
 
-<!-- Blog Loop -->
-<div>
-    <div class="section-bar">
-        <span class="pixel-icon"></span> <span data-i18n="diary_entries">DIARY ENTRIES</span>
-    </div>
+{% assign latest_post = site.posts.first %}
+{% assign all_items = site.posts | concat: site.projects | sort: 'date' | reverse %}
 
-    {% for post in site.posts limit:10 %}
-    <div class="post-card-home">
-        <!-- Post Header -->
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
-            <div>
-                <h3 style="font-size: 18px; margin: 0 0 5px 0; color: var(--accent-pink);">
-                    <a href="{{ post.url }}" style="border-bottom: none; color: inherit;">
-                        {{ post.title }}
-                    </a>
-                </h3>
-                <span style="font-size: 12px; font-family: var(--font-code); color: #666;">
-                    {{ post.date | date: "%Y-%m-%d" }}
-                </span>
+<!-- ==================== BANNER CAROUSEL ==================== -->
+<section class="sd-carousel" data-sd-carousel aria-label="Öne çıkan içerikler">
+    <div class="sd-slides">
+
+        <div class="sd-slide is-active" role="tabpanel" id="sd-panel-0" aria-labelledby="sd-tab-0">
+            <div class="sd-slide-inner" style="background-image: url('/assets/images/ogrenci_roketi_tamamlanmis.png');">
+                <div class="sd-container">
+                    <div class="sd-slide-content">
+                        <span class="sd-slide-kicker" data-i18n="banner_1_kicker">Ana koleksiyon</span>
+                        <h2 class="sd-slide-title" data-i18n="banner_1_title">Yazmayı bırakma, aramayı kolaylaştır.</h2>
+                        <p class="sd-slide-text" data-i18n="banner_1_text">
+                            Elektrik-elektronik mühendisliği, roketçilik, gömülü sistemler ve felsefe üzerine
+                            kişisel notlar; hepsi tek yerde ve tam metin aranabilir.
+                        </p>
+                        <a class="sd-btn" href="/arsiv/" data-i18n="banner_1_cta">Arşive göz at</a>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Excerpt -->
-        <div style="font-size: 14px; line-height: 1.6; margin-bottom: 10px;">
-            {{ post.excerpt | strip_html | truncatewords: 30 }}
+        <div class="sd-slide" role="tabpanel" id="sd-panel-1" aria-labelledby="sd-tab-1">
+            <div class="sd-slide-inner" style="background-image: url('/assets/images/Yuuri%20AI%20Keychain.png');">
+                <div class="sd-container">
+                    <div class="sd-slide-content">
+                        <span class="sd-slide-kicker" data-i18n="banner_2_kicker">Projeler</span>
+                        <h2 class="sd-slide-title" data-i18n="banner_2_title">Masaüstünde başlayan donanım denemeleri</h2>
+                        <p class="sd-slide-text" data-i18n="banner_2_text">
+                            Yapım aşamaları, devre notları ve sonuçlarıyla birlikte belgelenen küçük ölçekli
+                            donanım ve yazılım projeleri.
+                        </p>
+                        <a class="sd-btn" href="/projeler/" data-i18n="banner_2_cta">Projeleri gör</a>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Read More Button -->
-        <div style="text-align: right;">
-            <a href="{{ post.url }}" class="btn-retro" style="border-color: var(--accent-pink); font-size: 12px;" data-i18n="read_more">
-                READ MORE
-            </a>
+        {% if latest_post %}
+        <div class="sd-slide" role="tabpanel" id="sd-panel-2" aria-labelledby="sd-tab-2">
+            <div class="sd-slide-inner" style="background-image: linear-gradient(135deg, #2b2b2b, #4a3524);">
+                <div class="sd-container">
+                    <div class="sd-slide-content">
+                        <span class="sd-slide-kicker" data-i18n="banner_3_kicker">Son yayınlanan</span>
+                        <h2 class="sd-slide-title">{{ latest_post.title }}</h2>
+                        <p class="sd-slide-text">{{ latest_post.excerpt | strip_html | truncatewords: 28 }}</p>
+                        <a class="sd-btn" href="{{ latest_post.url }}" data-i18n="banner_3_cta">Tam metni oku</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    {% endfor %}
+        {% endif %}
 
-    {% if site.posts.size > 10 %}
-    <div style="text-align: center; margin-bottom: 30px;">
-        <a href="/aylik/" class="btn-retro" style="width: 100%; text-align: center; border-color: var(--accent-pink);" data-i18n="view_all_posts">
-            VIEW ALL ENTRIES &raquo;
-        </a>
     </div>
-    {% endif %}
+
+    <ul class="sd-carousel-indicators" role="tablist" aria-label="Banner seçimi">
+        <li><button type="button" role="tab" id="sd-tab-0" data-sd-slide-index="0" aria-controls="sd-panel-0" aria-selected="true"><span class="sd-dot-bar"></span><span data-i18n="banner_1_tab">Koleksiyon</span></button></li>
+        <li><button type="button" role="tab" id="sd-tab-1" data-sd-slide-index="1" aria-controls="sd-panel-1" aria-selected="false" tabindex="-1"><span class="sd-dot-bar"></span><span data-i18n="banner_2_tab">Projeler</span></button></li>
+        {% if latest_post %}
+        <li><button type="button" role="tab" id="sd-tab-2" data-sd-slide-index="2" aria-controls="sd-panel-2" aria-selected="false" tabindex="-1"><span class="sd-dot-bar"></span><span data-i18n="banner_3_tab">Son yazı</span></button></li>
+        {% endif %}
+    </ul>
+</section>
+
+<!-- ==================== EXPLORE ==================== -->
+<div class="sd-container">
+
+    <h1 class="sd-page-title" data-i18n="explore_title">Bu arşivdeki yazıları, notları ve projeleri keşfedin</h1>
+
+    <nav class="sd-tabs" aria-label="Koleksiyonlar">
+        <a href="#yazilar" data-i18n="col_posts">Yazılar (Blog)</a>
+        <a href="#projeler" data-i18n="col_projects">Projeler</a>
+        <a href="/aylik/" data-i18n="nav_volumes">Ciltler (aylık)</a>
+        <a href="/arsiv/" data-i18n="archive">Tüm arşiv</a>
+        <a href="/search/" data-i18n="search">Arama</a>
+    </nav>
+
+    <!-- ---------- Yazılar ---------- -->
+    <section class="sd-subject" id="yazilar" aria-label="Yazılar">
+        <div>
+            <h2 class="sd-subject-title" data-i18n="col_posts">Yazılar (Blog)</h2>
+            <p class="sd-subject-side-label" data-i18n="browse_by_year">Yıla göre göz at:</p>
+            <ul class="sd-subject-list">
+                {% assign year_list = "" %}
+                {% for post in site.posts %}
+                    {% capture y %}{{ post.date | date: "%Y" }}{% endcapture %}
+                    {% unless year_list contains y %}{% assign year_list = year_list | append: y | append: "," %}{% endunless %}
+                {% endfor %}
+                {% assign years = year_list | split: "," %}
+                {% for year in years %}
+                <li><a href="/aylik/#yil-{{ year }}">{{ year }}</a></li>
+                {% endfor %}
+                <li><a href="/aylik/" data-i18n="monthly">Aylık dizin</a></li>
+            </ul>
+            <a class="sd-cta" href="/arsiv/?type=posts" data-i18n="browse_all_posts">Tüm yazıları listele</a>
+        </div>
+
+        <div>
+            <p class="sd-subject-desc" data-i18n="posts_desc">
+                Mühendislik notları, gözlem denemeleri ve günlük kayıtlar. Her kayıt tarihiyle
+                birlikte arşivlenir; tam metin arama ile geçmiş notlara ulaşabilirsiniz.
+            </p>
+
+            <div class="sd-cols">
+                <div>
+                    <h3 class="sd-col-title" data-i18n="featured_records">Öne çıkan kayıtlar</h3>
+                    <ul class="sd-citation-list">
+                        {% for post in site.posts limit: 3 %}
+                        <li class="sd-citation">
+                            <a class="sd-citation-title" href="{{ post.url }}">{{ post.title }}</a>
+                            <div class="sd-citation-meta">
+                                {{ site.author.name }} &bull; {{ post.date | date: "%d.%m.%Y" }}
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="sd-col-title" data-i18n="recent_records">Son eklenenler</h3>
+                    <ul class="sd-citation-list">
+                        {% for item in all_items limit: 3 %}
+                        <li class="sd-citation">
+                            <a class="sd-citation-title" href="{{ item.url }}">{{ item.title }}</a>
+                            <div class="sd-citation-meta">
+                                {% if item.collection == 'projects' %}Proje{% else %}Yazı{% endif %}
+                                &bull; {{ item.date | date: "%d.%m.%Y" }}
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <p style="margin-top: 22px;">
+                <a class="sd-btn sd-btn-secondary sd-btn-sm" href="/search/" data-i18n="search_in_collection">Bu koleksiyonda ara</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- ---------- Projeler ---------- -->
+    <section class="sd-subject" id="projeler" aria-label="Projeler">
+        <div>
+            <h2 class="sd-subject-title" data-i18n="projects">Projeler</h2>
+            <p class="sd-subject-side-label" data-i18n="browse_titles">Başlıklar:</p>
+            <ul class="sd-subject-list">
+                {% for project in site.projects %}
+                <li><a href="{{ project.url }}">{{ project.title | truncate: 42 }}</a></li>
+                {% endfor %}
+                {% if site.projects.size == 0 %}
+                <li style="color: var(--sd-text-faint);">Henüz kayıt yok</li>
+                {% endif %}
+            </ul>
+            <a class="sd-cta" href="/projeler/" data-i18n="browse_all_projects">Tüm projeleri listele</a>
+        </div>
+
+        <div>
+            <p class="sd-subject-desc" data-i18n="projects_desc_long">
+                Donanım ve yazılım denemeleri: yapım aşamaları, kullanılan malzemeler, ölçümler ve
+                karşılaşılan sorunlarla birlikte belgelenmiş kayıtlar.
+            </p>
+
+            <div class="sd-cols">
+                <div>
+                    <h3 class="sd-col-title" data-i18n="latest_projects">Güncel projeler</h3>
+                    <ul class="sd-citation-list">
+                        {% assign sorted_projects = site.projects | sort: 'date' | reverse %}
+                        {% for project in sorted_projects limit: 3 %}
+                        <li class="sd-citation">
+                            <a class="sd-citation-title" href="{{ project.url }}">{{ project.title }}</a>
+                            <div class="sd-citation-meta">
+                                {{ project.date | date: "%d.%m.%Y" }}
+                                {% if project.description %} &bull; {{ project.description | strip_html | truncatewords: 12 }}{% endif %}
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="sd-col-title" data-i18n="archive_stats">Arşiv istatistikleri</h3>
+                    <ul class="sd-panel-list">
+                        <li><strong>{{ site.posts | size }}</strong> <span data-i18n="stat_posts">yazı kaydı</span></li>
+                        <li><strong>{{ site.projects | size }}</strong> <span data-i18n="stat_projects">proje kaydı</span></li>
+                        <li><strong>{{ all_items | size }}</strong> <span data-i18n="stat_total">toplam kayıt</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <p style="margin-top: 22px;">
+                <a class="sd-btn sd-btn-secondary sd-btn-sm" href="/projeler/" data-i18n="examine_btn">İncele</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- ---------- Harf dizini ---------- -->
+    <nav class="sd-letters" aria-label="Başlığa göre göz at">
+        <h2 data-i18n="browse_by_letter">Başlığa göre göz at:</h2>
+        <ul>
+            {% assign letters = "A,B,C,Ç,D,E,F,G,H,I,İ,J,K,L,M,N,O,Ö,P,R,S,Ş,T,U,Ü,V,Y,Z" | split: "," %}
+            {% for letter in letters %}
+            <li><a href="/arsiv/?letter={{ letter | url_encode }}">{{ letter }}</a></li>
+            {% endfor %}
+        </ul>
+    </nav>
+
 </div>
 
-<!-- Projects Section -->
-<div style="margin-top: 30px;">
-    <div class="section-bar">
-        <span class="pixel-icon"></span> <span data-i18n="projects_header">PROJECTS</span>
-    </div>
-    
-    {% for project in site.projects limit:10 %}
-    <div class="project-card-home">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-            <div>
-                <h3 style="font-size: 18px; margin-bottom: 5px; color: var(--accent-cool);">
-                    <a href="{{ project.url }}" style="border-bottom: none; color: inherit;">
-                        {{ project.title }}
-                    </a>
-                </h3>
-                <span style="font-size: 12px; font-family: var(--font-code); color: #666;">
-                    {{ project.date | date: "%Y-%m-%d" }}
-                </span>
-            </div>
-            {% if project.image %}
-            <div style="width: 50px; height: 50px; border: 1px solid var(--accent-cool); overflow: hidden;">
-                <img src="{{ project.image }}" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            {% endif %}
+<!-- ==================== ALT BİLGİ KOLONLARI ==================== -->
+<div class="sd-container">
+    <div class="sd-extra-cols">
+        <div>
+            <h2 data-i18n="footer_col_about">Bu arşiv hakkında</h2>
+            <ul>
+                <li><a href="/hakkimda/" data-i18n="about">Hakkımda</a></li>
+                <li><a href="mailto:{{ site.author.email }}" data-i18n="footer_contact">İletişim</a></li>
+                <li><a href="/feed.xml" data-i18n="footer_feed">RSS akışı</a></li>
+            </ul>
         </div>
-        
-        <p style="font-size: 14px; margin-top: 10px; margin-bottom: 10px;">
-            {{ project.description }}
-        </p>
-
-        <div style="text-align: right;">
-            <a href="{{ project.url }}" class="btn-retro" style="border-color: var(--accent-cool); font-size: 12px;">
-                VIEW PROJECT
-            </a>
+        <div>
+            <h2 data-i18n="footer_col_explore">Keşfet</h2>
+            <ul>
+                <li><a href="/search/" data-i18n="search_advanced">Gelişmiş arama</a></li>
+                <li><a href="/aylik/" data-i18n="monthly">Aylık dizin</a></li>
+                <li><a href="/arsiv/" data-i18n="archive">Arşiv</a></li>
+                <li><a href="/projeler/" data-i18n="projects">Projeler</a></li>
+            </ul>
+        </div>
+        <div>
+            <h2 data-i18n="footer_col_links">Bağlantılar</h2>
+            <ul>
+                <li><a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a href="https://twitter.com/{{ site.twitter_username }}" target="_blank" rel="noopener">X / Twitter</a></li>
+                <li><a href="https://www.agu.edu.tr" target="_blank" rel="noopener">{{ site.institution }}</a></li>
+            </ul>
         </div>
     </div>
-    {% endfor %}
-
-    {% if site.projects.size > 10 %}
-    <div style="text-align: center; margin-bottom: 30px;">
-        <a href="/projeler/" class="btn-retro" style="width: 100%; text-align: center; border-color: var(--accent-cool);" data-i18n="view_all_projects">
-            VIEW ALL PROJECTS &raquo;
-        </a>
-    </div>
-    {% endif %}
 </div>

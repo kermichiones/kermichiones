@@ -2,61 +2,60 @@
 layout: post
 title: "{{title}}"
 date: {{date}}
-description: "Projenin ne işe yaradığına dair 1-2 cümlelik kısa özet..."
+description: "Projenin ne ise yaradigina dair 1-2 cumlelik ozet; makale sayfasinda 'Ozet' olarak gorunur."
 image: /assets/images/proje_kapak_resmi.png
+tags: [donanim, gomulu-sistem]
+repo: https://github.com/kermichiones/proje-repo-adi
+highlights:
+  - "Projenin cozdugu temel problem."
+  - "Kullanilan ana donanim ve yaklasim."
+  - "Elde edilen sonuc."
 ---
 
-<div class="highlight-header">🚀 PROJE MOTTO / ALINTI</div>
+<div class="highlight-header">Proje motto</div>
 
 > "There's no reason to hurry when we're on the earth that moves."
-> — *Motto / İlham Veren Alıntı*
 
-[**🔗 GitHub'da Proje Kodlarını İnceleyin!**](https://github.com/kermichiones/proje-repo-adi)
+[**Proje kodlarini GitHub'da inceleyin**](https://github.com/kermichiones/proje-repo-adi)
 
----
+## Proje hakkinda
 
-## 🛠️ Proje Hakkında
-<p class="drop-cap">B bu projeyi tasarlama amacım, kullanılan teknolojiler ve genel donanım/yazılım mimarisi... Projenin arkasındaki motivasyon ve karşılaşılan temel zorlukların nasıl çözüldüğü buraya gelecek.</p>
+<p class="drop-cap">Bu projeyi tasarlama amacim, kullanilan teknolojiler ve genel donanim/yazilim mimarisi. Projenin arkasindaki motivasyon ve karsilasilan temel zorluklarin nasil cozuldugu buraya gelir.</p>
 
 <div class="academic-card">
-    <div class="academic-card-header">📋 PROJE ÖZETİ</div>
-    Donanım mimarisi ve yazılım akışı tamamen el yapımı olup, Model B temasıyla tam uyumlu şekilde hazırlanmıştır.
+    <div class="academic-card-header">Proje ozeti</div>
+    Donanim mimarisi ve yazilim akisi tamamen el yapimidir.
 </div>
 
----
+## Donanim bilesenleri
 
-## 📦 Donanım Bileşenleri (Hardware)
-Burada projenizde kullandığınız fiziksel kartları listeleyebilirsiniz:
+*   **Mikrokontrolcu:** `Raspberry Pi Pico W` veya `ESP32`
+*   **Ekran:** `1.44" ST7735 TFT LCD`
+*   **Sensorler:** ...
+*   **Guc kaynagi:** ...
 
-*   **Mikrokontrolcü:** `Raspberry Pi Pico W` veya `ESP32`
-*   **Ekran:** `1.44" ST7735 TFT LCD Display`
-*   **Sensörler:** ...
-*   **Güç Kaynağı:** ...
+![Gelistirilen donanimin fiziksel prototipi.](/assets/images/proje_gorseli.png)
 
-<figure class="clean-figure">
-    <img src="/assets/images/proje_gorseli.png" alt="Proje Donanım Şeması">
-    <figcaption>Geliştirilen donanımın fiziksel prototip veya şematik görünümü.</figcaption>
-</figure>
-
----
-
-## 💻 Yazılım ve Geliştirme Süreci
-Projeyi geliştirirken takip ettiğiniz aşamaları ve kronolojiyi göstermek için aşağıdaki estetik zaman çizelgesini kullanabilirsiniz:
+## Yazilim ve gelistirme sureci
 
 <div class="academic-timeline">
     <div class="timeline-item">
-        <div class="timeline-date">AŞAMA 1 — DONANIM ARAŞTIRMASI</div>
-        <div class="timeline-title">Fiziksel Devrenin Kurulması</div>
-        <p>Raspberry Pi Pico W pin şemaları incelenerek SPI ekran bağlantıları yapıldı ve test sinyali gönderildi.</p>
+        <div class="timeline-date">Asama 1 — donanim arastirmasi</div>
+        <div class="timeline-title">Fiziksel devrenin kurulmasi</div>
+        <p>Pin semalari incelenerek SPI ekran baglantilari yapildi ve test sinyali gonderildi.</p>
     </div>
     <div class="timeline-item">
-        <div class="timeline-date">AŞAMA 2 — YAZILIM KODLAMASI</div>
-        <div class="timeline-title">Notion API Bağlantısı</div>
-        <p>Notion takviminden etkinlikleri çekmek için Python / C++ tabanlı bir arka plan servisi yazıldı.</p>
+        <div class="timeline-date">Asama 2 — yazilim kodlamasi</div>
+        <div class="timeline-title">API baglantisi</div>
+        <p>Etkinlikleri cekmek icin arka plan servisi yazildi.</p>
     </div>
     <div class="timeline-item">
-        <div class="timeline-date">AŞAMA 3 — TEST & MONTAJ</div>
-        <div class="timeline-title">Kutulama ve Yayına Alma</div>
-        <p>3D yazıcı ile basılan gövdeye montaj tamamlanarak mobil cihaz olarak anahtarlığa bağlandı.</p>
+        <div class="timeline-date">Asama 3 — test ve montaj</div>
+        <div class="timeline-title">Kutulama ve yayina alma</div>
+        <p>3B yazici ile basilan govdeye montaj tamamlandi.</p>
     </div>
 </div>
+
+## Sonuc
+
+Elde edilen sonuclar, olcumler ve sonraki adimlar.

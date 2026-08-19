@@ -2,61 +2,120 @@
 layout: default
 ---
 
-<div>
-    <div class="section-bar" style="margin-bottom: 25px;">
-        <span data-i18n="monthly_logs">MONTHLY LOGS</span>
-    </div>
+<div class="sd-container">
 
-    <div style="padding: 10px 0;">
-        {% for post in site.posts %}
-            
-            {% capture current_year %}{{ post.date | date: "%Y" }}{% endcapture %}
-            {% capture current_month %}{{ post.date | date: "%m" }}{% endcapture %}
-            
-            {% capture next_year %}{{ post.next.date | date: "%Y" }}{% endcapture %}
-            {% capture next_month %}{{ post.next.date | date: "%m" }}{% endcapture %}
+    <ol class="sd-breadcrumb">
+        <li><a href="/" data-i18n="home">Ana Sayfa</a></li>
+        <li aria-current="page" data-i18n="nav_volumes">Ciltler ve sayılar</li>
+    </ol>
 
-            {% if current_month != next_month or current_year != next_year %}
-                
-                <div style="background: var(--card-bg); border: 1px solid var(--border-color); font-family: var(--font-header); color: var(--accent-color); font-weight: 700; border-radius: 4px; padding: 8px 14px; margin-top: 35px; margin-bottom: 15px; font-size: 13.5px; letter-spacing: 0.5px;">
-                    📂 
-                    {% case current_month %}
-                        {% when '01' %}<span data-i18n="jan">JAN (Ocak)</span>
-                        {% when '02' %}<span data-i18n="feb">FEB (Şubat)</span>
-                        {% when '03' %}<span data-i18n="mar">MAR (Mart)</span>
-                        {% when '04' %}<span data-i18n="apr">APR (Nisan)</span>
-                        {% when '05' %}<span data-i18n="may">MAY (Mayıs)</span>
-                        {% when '06' %}<span data-i18n="jun">JUN (Haziran)</span>
-                        {% when '07' %}<span data-i18n="jul">JUL (Temmuz)</span>
-                        {% when '08' %}<span data-i18n="aug">AUG (Ağustos)</span>
-                        {% when '09' %}<span data-i18n="sep">SEP (Eylül)</span>
-                        {% when '10' %}<span data-i18n="oct">OCT (Ekim)</span>
-                        {% when '11' %}<span data-i18n="nov">NOV (Kasım)</span>
-                        {% when '12' %}<span data-i18n="dec">DEC (Aralık)</span>
-                    {% endcase %}
-                    {{ current_year }}
+    <div class="sd-layout">
+
+        <section>
+            <div class="sd-results-head">
+                <h1 class="sd-results-count"><span>{{ site.posts | size }}</span> <span data-i18n="stat_posts">yazı kaydı</span></h1>
+                <div class="sd-results-tools"><span data-i18n="grouped_by_month">Yıl ve aya göre gruplanmış</span></div>
+            </div>
+
+            {% assign year_list = "" %}
+            {% for post in site.posts %}
+                {% capture y %}{{ post.date | date: "%Y" }}{% endcapture %}
+                {% unless year_list contains y %}{% assign year_list = year_list | append: y | append: "," %}{% endunless %}
+            {% endfor %}
+            {% assign years = year_list | split: "," %}
+
+            {% for year in years %}
+            <div id="yil-{{ year }}" style="padding-top: 26px;">
+                <h2 style="font-size: 1.25rem; padding-bottom: 8px; border-bottom: 2px solid var(--sd-orange); margin-bottom: 6px;">
+                    {{ year }} &mdash; <span style="font-weight: 400; color: var(--sd-text-muted);" data-i18n="volume">cildi</span>
+                </h2>
+
+                {% assign month_list = "" %}
+                {% for post in site.posts %}
+                    {% capture py %}{{ post.date | date: "%Y" }}{% endcapture %}
+                    {% if py == year %}
+                        {% capture m %}{{ post.date | date: "%m" }}{% endcapture %}
+                        {% unless month_list contains m %}{% assign month_list = month_list | append: m | append: "," %}{% endunless %}
+                    {% endif %}
+                {% endfor %}
+                {% assign months = month_list | split: "," %}
+
+                {% for month in months %}
+                <div class="sd-vol-group">
+                    <div class="sd-vol-head">
+                        <h3>
+                            {% case month %}
+                                {% when '01' %}<span data-i18n="jan">Ocak</span>
+                                {% when '02' %}<span data-i18n="feb">Şubat</span>
+                                {% when '03' %}<span data-i18n="mar">Mart</span>
+                                {% when '04' %}<span data-i18n="apr">Nisan</span>
+                                {% when '05' %}<span data-i18n="may">Mayıs</span>
+                                {% when '06' %}<span data-i18n="jun">Haziran</span>
+                                {% when '07' %}<span data-i18n="jul">Temmuz</span>
+                                {% when '08' %}<span data-i18n="aug">Ağustos</span>
+                                {% when '09' %}<span data-i18n="sep">Eylül</span>
+                                {% when '10' %}<span data-i18n="oct">Ekim</span>
+                                {% when '11' %}<span data-i18n="nov">Kasım</span>
+                                {% when '12' %}<span data-i18n="dec">Aralık</span>
+                            {% endcase %}
+                            {{ year }}
+                        </h3>
+                        <span class="sd-vol-count">
+                            {% assign mcount = 0 %}
+                            {% for post in site.posts %}
+                                {% capture py %}{{ post.date | date: "%Y" }}{% endcapture %}
+                                {% capture pm %}{{ post.date | date: "%m" }}{% endcapture %}
+                                {% if py == year and pm == month %}{% assign mcount = mcount | plus: 1 %}{% endif %}
+                            {% endfor %}
+                            {{ mcount }} <span data-i18n="record">kayıt</span>
+                        </span>
+                    </div>
+
+                    <ul class="sd-vol-list">
+                        {% for post in site.posts %}
+                            {% capture py %}{{ post.date | date: "%Y" }}{% endcapture %}
+                            {% capture pm %}{{ post.date | date: "%m" }}{% endcapture %}
+                            {% if py == year and pm == month %}
+                            <li>
+                                <span class="sd-vol-date">{{ post.date | date: "%d.%m.%Y" }}</span>
+                                <a href="{{ post.url }}">{{ post.title }}</a>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
                 </div>
-                
-                <ul class="nav-links" style="padding-left: 5px; gap: 10px;">
-            {% endif %}
+                {% endfor %}
+            </div>
+            {% endfor %}
 
-            <li style="margin-bottom: 8px; list-style: none; display: flex; align-items: center;">
-                <span style="font-size: 11px; color: var(--text-muted); margin-right: 10px; font-family: 'Inter', sans-serif; letter-spacing: 0.5px; font-weight: 600;">
-                    [{{ post.date | date: "%d" }}]
-                </span>
-                <a href="{{ post.url }}" style="color: var(--text-main); font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent;" onmouseenter="this.style.color='var(--accent-color)'; this.style.borderBottomColor='var(--accent-color)';" onmouseleave="this.style.color='var(--text-main)'; this.style.borderBottomColor='transparent';">
-                    {{ post.title }}
-                </a>
-            </li>
-
-            {% capture prev_year %}{{ post.previous.date | date: "%Y" }}{% endcapture %}
-            {% capture prev_month %}{{ post.previous.date | date: "%m" }}{% endcapture %}
-            
-            {% if current_month != prev_month or current_year != prev_year %}
-                </ul>
+            {% if site.posts.size == 0 %}
+            <div class="sd-empty"><strong data-i18n="empty_directory">Kayıt yok.</strong></div>
             {% endif %}
-            
-        {% endfor %}
+        </section>
+
+        <aside aria-label="Dizin bilgileri">
+            <section class="sd-panel">
+                <h2 class="sd-panel-title" data-i18n="volumes_panel">Ciltler</h2>
+                <div class="sd-panel-body">
+                    <ul class="sd-panel-list">
+                        {% for year in years %}
+                        <li><a href="#yil-{{ year }}">{{ year }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </section>
+
+            <section class="sd-panel">
+                <h2 class="sd-panel-title" data-i18n="quick_links">Hızlı bağlantılar</h2>
+                <div class="sd-panel-body">
+                    <ul class="sd-panel-list">
+                        <li><a href="/arsiv/" data-i18n="archive">Tüm arşiv</a></li>
+                        <li><a href="/search/" data-i18n="search_advanced">Gelişmiş arama</a></li>
+                        <li><a href="/projeler/" data-i18n="projects">Projeler</a></li>
+                    </ul>
+                </div>
+            </section>
+        </aside>
 
     </div>
 </div>

@@ -2,45 +2,212 @@
 layout: default
 ---
 
-<article class="article-container">
-    
-    <header class="article-header">
-        <h1 class="article-title">{{ page.title }}</h1>
-        <div class="article-meta">
-            <span>📅 {{ page.date | date: "%Y-%m-%d" }}</span>
-            {% if page.tags.size > 0 or page.categories.size > 0 %}
-            <span style="margin: 0 10px;">|</span>
-            <span>
-                {% for tag in page.tags %}
-                #{{ tag }} 
-                {% endfor %}
-                {% for cat in page.categories %}
-                #{{ cat }} 
-                {% endfor %}
-            </span>
-            {% endif %}
-        </div>
-    </header>
+{% assign words = content | number_of_words %}
+{% assign minutes = words | divided_by: 180 | plus: 1 %}
+{% assign record_id = page.url | replace: '/', '' | replace: '.html', '' %}
+{% assign current_url = page.url %}
+{% if page.collection == 'projects' %}
+    {% assign pool = site.projects | sort: 'date' | reverse %}
+    {% assign kind_label = 'Proje' %}
+    {% assign kind_parent = '/projeler/' %}
+{% else %}
+    {% assign pool = site.posts %}
+    {% assign kind_label = 'Yazı' %}
+    {% assign kind_parent = '/arsiv/' %}
+{% endif %}
 
-    <div class="post-content">
-        {{ content }}
+<!-- ==================== YAPIŞIK ÜST ŞERİT ==================== -->
+<div class="sd-sticky-bar" id="sd-sticky-bar" aria-hidden="true">
+    <div class="sd-sticky-inner">
+        <span class="sd-sticky-title">{{ page.title }}</span>
+        <button type="button" class="sd-btn sd-btn-sm" onclick="window.print()" data-i18n="action_pdf">PDF indir</button>
+        <span class="sd-progress" id="sd-progress"></span>
     </div>
+</div>
 
-</article>
+<!-- ==================== DERGİ BANDI ==================== -->
+<div class="sd-journal-bar">
+    <div class="sd-container sd-journal-inner">
+        {% assign brand_logo_file = site.static_files | where: "path", site.brand_logo | first %}
+        <div class="sd-journal-cover" aria-hidden="true">
+            {% if brand_logo_file %}
+            <img src="{{ site.brand_logo }}" alt="" class="gh-logo-img">
+            {% else %}
+            <svg viewBox="0 0 54 54">
+                <path d="M27 11 L38.5 43 H32.9 L27 25.6 L21.1 43 H15.5 Z" fill="var(--sd-orange)"/>
+                <rect x="20.5" y="33" width="13" height="2.6" fill="var(--sd-bg)"/>
+            </svg>
+            {% endif %}
+            <span>{{ page.date | date: "%Y" }}</span>
+        </div>
 
-<!-- Navigation -->
-<div style="display: flex; justify-content: space-between; margin-top: 40px; margin-bottom: 40px; padding: 0 10px;">
-    {% if page.previous.url %}
-    <a href="{{ page.previous.url }}" class="btn-retro">
-        &laquo; {{ page.previous.title | truncate: 25 }}
-    </a>
-    {% else %}
-    <span></span>
-    {% endif %}
+        <div class="sd-journal-text">
+            <a class="sd-journal-name" href="/arsiv/">{{ site.brand_name | default: site.title }}</a>
+            <p class="sd-journal-meta">
+                <span data-i18n="volume_label">Cilt</span> {{ page.date | date: "%Y" }},
+                <span data-i18n="issue_label">Sayı</span> {{ page.date | date: "%-m" }},
+                {{ page.date | date: "%B %Y" }}
+                &bull; {{ kind_label }}
+            </p>
+        </div>
 
-    {% if page.next.url %}
-    <a href="{{ page.next.url }}" class="btn-retro">
-        {{ page.next.title | truncate: 25 }} &raquo;
-    </a>
-    {% endif %}
+        <div class="sd-journal-actions">
+            <button type="button" class="sd-btn sd-btn-sm" onclick="window.print()" title="Yazdır veya PDF olarak kaydet" data-i18n="action_pdf">PDF indir</button>
+            <button type="button" class="sd-btn sd-btn-secondary sd-btn-sm" data-sd-share data-i18n="action_share">Paylaş</button>
+            <button type="button" class="sd-btn sd-btn-secondary sd-btn-sm" data-sd-copy="sd-citation-text" data-i18n="action_cite">Alıntıla</button>
+        </div>
+    </div>
+</div>
+
+<div class="sd-container">
+
+    <ol class="sd-breadcrumb">
+        <li><a href="/" data-i18n="home">Ana Sayfa</a></li>
+        <li><a href="{{ kind_parent }}">{% if page.collection == 'projects' %}<span data-i18n="projects">Projeler</span>{% else %}<span data-i18n="col_posts">Yazılar (Blog)</span>{% endif %}</a></li>
+        <li><a href="/aylik/#yil-{{ page.date | date: '%Y' }}">{{ page.date | date: "%Y" }}</a></li>
+        <li aria-current="page">{{ page.title | truncate: 40 }}</li>
+    </ol>
+
+    <div class="sd-article-layout">
+
+        <!-- ============ ANAHAT ============ -->
+        <nav class="sd-outline" id="sd-outline" aria-label="Makale anahattı">
+            <h2 data-i18n="outline">İçerik</h2>
+            <ol id="sd-outline-list">
+                <li><a href="#sd-abstract" data-i18n="abstract">Özet</a></li>
+            </ol>
+
+            <div class="sd-outline-group" id="sd-figure-group" hidden>
+                <h3 data-i18n="figures">Şekiller</h3>
+                <ol id="sd-figure-list"></ol>
+            </div>
+
+            <div class="sd-outline-group">
+                <h3 data-i18n="record_info">Künye</h3>
+                <p style="font-size: .78rem; color: var(--sd-text-muted); line-height: 1.5;">
+                    {{ page.date | date: "%d.%m.%Y" }}<br>
+                    {{ words }} <span data-i18n="info_words_short">sözcük</span> &bull; ~{{ minutes }} dk<br>
+                    {{ kind_label }}
+                </p>
+            </div>
+        </nav>
+
+        <!-- ============ MAKALE ============ -->
+        <article class="sd-article">
+            <header class="sd-article-head">
+                {% if page.collection == 'projects' %}
+                <p class="sd-dochead" data-i18n="dochead_project">Proje &bull; teknik kayıt</p>
+                {% else %}
+                <p class="sd-dochead" data-i18n="dochead_post">Yazı &bull; kişisel not</p>
+                {% endif %}
+
+                <h1 class="sd-article-title">{{ page.title }}</h1>
+
+                <p class="sd-authors">
+                    <a class="sd-author" href="/hakkimda/">{{ page.author | default: site.author.name }}</a><sup>a</sup>
+                </p>
+                <p class="sd-affil"><sup>a</sup> {{ site.institution }}, Kayseri, Türkiye</p>
+                <p class="sd-doi">
+                    <a href="{{ page.url }}">{{ site.url | remove: 'https://' }}{{ page.url }}</a> &bull;
+                    <span data-i18n="published_label">yayın</span>: {{ page.date | date: "%d %B %Y" }}
+                </p>
+            </header>
+
+            {% if page.highlights %}
+            <section class="sd-highlights">
+                <h2 data-i18n="highlights">Öne çıkanlar</h2>
+                <ul>
+                    {% for item in page.highlights %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </section>
+            {% endif %}
+
+            <section class="sd-abstract" id="sd-abstract">
+                <h2 data-i18n="abstract">Özet</h2>
+                <p>{{ page.description | default: page.excerpt | strip_html | truncatewords: 65 }}</p>
+            </section>
+
+            {% assign keywords = page.tags | concat: page.categories %}
+            {% if keywords.size > 0 %}
+            <div class="sd-keywords">
+                <span class="sd-keywords-label" data-i18n="keywords">Anahtar kelimeler:</span>
+                {% for kw in keywords %}
+                <a class="sd-keyword-plain" href="/search/?qs={{ kw | url_encode }}">{{ kw }}</a>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="sd-body" id="sd-article-body">
+                {{ content }}
+            </div>
+
+            <hr class="sd-section-rule">
+
+            <section class="sd-panel" style="margin-top: 28px;">
+                <h2 class="sd-panel-title" data-i18n="cite_this">Bu kaydı alıntıla</h2>
+                <div class="sd-panel-body">
+                    <p id="sd-citation-text" style="font-size: .875rem; font-family: var(--sd-serif);">
+                        {{ site.author.name }} ({{ page.date | date: "%Y" }}). {{ page.title }}.
+                        <em>{{ site.url | remove: 'https://' }}</em>,
+                        {{ page.date | date: "%Y" }}({{ page.date | date: "%-m" }}). {{ site.url }}{{ page.url }}
+                    </p>
+                    <p style="margin-top: 10px;">
+                        <button type="button" class="sd-btn sd-btn-secondary sd-btn-sm" data-sd-copy="sd-citation-text" data-i18n="action_cite">Alıntıla</button>
+                    </p>
+                </div>
+            </section>
+
+            <nav class="sd-pager" aria-label="Kayıtlar arasında gezinme">
+                {% if page.previous.url %}
+                <a class="sd-pager-item" href="{{ page.previous.url }}">
+                    <span class="sd-pager-label" data-i18n="prev_record">Önceki kayıt</span>
+                    <span class="sd-pager-title">{{ page.previous.title }}</span>
+                </a>
+                {% else %}<span></span>{% endif %}
+
+                {% if page.next.url %}
+                <a class="sd-pager-item sd-pager-next" href="{{ page.next.url }}">
+                    <span class="sd-pager-label" data-i18n="next_record">Sonraki kayıt</span>
+                    <span class="sd-pager-title">{{ page.next.title }}</span>
+                </a>
+                {% endif %}
+            </nav>
+        </article>
+
+        <!-- ============ ÖNERİLER ============ -->
+        <aside class="sd-reco" aria-label="Önerilen kayıtlar">
+            <section class="sd-panel">
+                <h2 class="sd-panel-title" data-i18n="recommended">Önerilen kayıtlar</h2>
+                <div class="sd-panel-body">
+                    {% assign others = pool | where_exp: "p", "p.url != current_url" %}
+                    {% for other in others limit: 4 %}
+                    <div class="sd-reco-item">
+                        <a href="{{ other.url }}">{{ other.title }}</a>
+                        <span>{{ other.date | date: "%d.%m.%Y" }}</span>
+                    </div>
+                    {% endfor %}
+                    {% if others.size == 0 %}
+                    <p style="font-size: .8125rem; color: var(--sd-text-faint);" data-i18n="no_records">Başka kayıt yok.</p>
+                    {% endif %}
+                    <p style="margin-top: 12px;"><a class="sd-cta" href="/arsiv/" data-i18n="archive">Tüm arşiv</a></p>
+                </div>
+            </section>
+
+            <section class="sd-panel">
+                <h2 class="sd-panel-title" data-i18n="search_panel">Arşivde ara</h2>
+                <div class="sd-panel-body">
+                    <form action="/search/" method="get" role="search">
+                        <div class="sd-field">
+                            <label for="side-qs" class="u-hide-visually">Arama terimi</label>
+                            <input type="search" id="side-qs" name="qs" placeholder="terim girin...">
+                        </div>
+                        <button type="submit" class="sd-btn sd-btn-sm" style="margin-top: 10px; width: 100%;" data-i18n="search_btn">Ara</button>
+                    </form>
+                </div>
+            </section>
+        </aside>
+
+    </div>
 </div>

@@ -2,38 +2,83 @@
 layout: default
 ---
 
-<div>
-    <div class="section-bar" style="margin-bottom: 25px;">
-        <span data-i18n="projects_header">PROJECTS (Projeler)</span>
-    </div>
+{% assign sorted_projects = site.projects | sort: 'date' | reverse %}
 
-    <div style="padding: 10px 0;">
-        <p data-i18n="projects_desc" style="font-style: italic; color: var(--text-muted); margin-bottom: 30px;">Geliştirdiğim bazı oyunlar ve web projeleri:</p>
-        
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px;">
-            
-            {% for project in site.projects %} 
-            <div style="background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 6px; box-shadow: 0 2px 8px rgba(61, 49, 46, 0.02); padding: 15px; display: flex; flex-direction: column; gap: 12px; transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseenter="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 15px rgba(61, 49, 46, 0.05)';" onmouseleave="this.style.transform='none'; this.style.boxShadow='0 2px 8px rgba(61, 49, 46, 0.02)';">
-                <!-- Image Area -->
-                <div style="background: var(--bg-color); height: 120px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); border-radius: 4px; overflow: hidden;">
-                    {% if project.image %}
-                    <img src="{{ project.image }}" style="width: 100%; height: 100%; object-fit: cover; filter: sepia(15%) contrast(98%); border: none; padding: 0;">
-                    {% else %}
-                    <span style="font-size: 32px; filter: grayscale(40%);">⚡</span>
-                    {% endif %}
-                </div>
-                
-                <!-- Content -->
-                <h4 style="margin: 0; font-family: var(--font-header); font-size: 16px; font-weight: 700; color: var(--text-main);">{{ project.title }}</h4>
-                <p style="font-size: 13.5px; line-height: 1.5; color: var(--text-muted); margin: 0; flex-grow: 1;">{{ project.description }}</p>
-                
-                <!-- Button -->
-                <a href="{{ project.url }}" class="btn-retro" style="text-align: center; width: 100%; padding: 6px 0;" data-i18n="examine_btn">
-                    İNCELE
-                </a>
+<div class="sd-container">
+
+    <ol class="sd-breadcrumb">
+        <li><a href="/" data-i18n="home">Ana Sayfa</a></li>
+        <li aria-current="page" data-i18n="projects">Projeler</li>
+    </ol>
+
+    <div class="sd-layout">
+
+        <section>
+            <div class="sd-results-head">
+                <h1 class="sd-results-count"><span>{{ sorted_projects | size }}</span> <span data-i18n="stat_projects">proje kaydı</span></h1>
+                <div class="sd-results-tools"><span data-i18n="sorted_newest">Tarihe göre, en yeni önce</span></div>
             </div>
-            {% endfor %}
-            
-        </div>
+
+            <p style="font-size: .9375rem; color: var(--sd-text-muted); padding: 14px 0 20px;" data-i18n="projects_desc_long">
+                Donanım ve yazılım denemeleri: yapım aşamaları, kullanılan malzemeler, ölçümler ve
+                karşılaşılan sorunlarla birlikte belgelenmiş kayıtlar.
+            </p>
+
+            <ul class="sd-result-list">
+                {% for project in sorted_projects %}
+                <li class="sd-result">
+                    <span class="sd-result-index">{{ forloop.index }}</span>
+                    <span class="sd-result-thumb">
+                        {% if project.image %}<img src="{{ project.image }}" alt="">{% else %}⚙{% endif %}
+                    </span>
+                    <div class="sd-result-main">
+                        <h2 class="sd-result-title"><a href="{{ project.url }}">{{ project.title }}</a></h2>
+                        <div class="sd-result-meta">
+                            <span class="sd-chip sd-chip-proj">Proje</span>
+                            <span>{{ project.date | date: "%d.%m.%Y" }}</span>
+                            <span>{{ site.author.name }}</span>
+                        </div>
+                        <p class="sd-result-snippet">
+                            {% if project.description %}{{ project.description | strip_html | truncatewords: 34 }}
+                            {% else %}{{ project.content | strip_html | truncatewords: 34 }}{% endif %}
+                        </p>
+                        <div class="sd-result-links">
+                            <a href="{{ project.url }}" data-i18n="view_full_text">Tam metni görüntüle</a>
+                            {% if project.repo %}<a href="{{ project.repo }}" target="_blank" rel="noopener">Kaynak kod</a>{% endif %}
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+
+            {% if sorted_projects.size == 0 %}
+            <div class="sd-empty"><strong data-i18n="empty_directory">Kayıt yok.</strong></div>
+            {% endif %}
+        </section>
+
+        <aside aria-label="Koleksiyon bilgileri">
+            <section class="sd-panel">
+                <h2 class="sd-panel-title" data-i18n="collection_info">Koleksiyon bilgisi</h2>
+                <div class="sd-panel-body">
+                    <dl>
+                        <dt data-i18n="info_type">Tür</dt><dd data-i18n="projects">Proje</dd>
+                        <dt data-i18n="stat_projects">Kayıt</dt><dd>{{ sorted_projects | size }}</dd>
+                        <dt data-i18n="info_editor">Yürütücü</dt><dd>{{ site.author.name }}</dd>
+                    </dl>
+                </div>
+            </section>
+
+            <section class="sd-panel">
+                <h2 class="sd-panel-title" data-i18n="quick_links">Hızlı bağlantılar</h2>
+                <div class="sd-panel-body">
+                    <ul class="sd-panel-list">
+                        <li><a href="/arsiv/?type=projects" data-i18n="archive">Arşivde göster</a></li>
+                        <li><a href="/search/?pub=projects" data-i18n="search_in_collection">Bu koleksiyonda ara</a></li>
+                        <li><a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener">GitHub</a></li>
+                    </ul>
+                </div>
+            </section>
+        </aside>
+
     </div>
 </div>
