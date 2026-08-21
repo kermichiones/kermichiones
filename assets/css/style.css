@@ -46,6 +46,9 @@
      en yakin serbest esdegerlerle eslestirildi. */
   --sd-sans: 'Open Sans', 'Noto Sans', 'Fira Sans', 'Segoe UI', Arial, Helvetica, sans-serif;
   --sd-serif: 'Source Serif 4', 'Noto Serif', Georgia, 'Times New Roman', serif;
+  /* Marka: Frutiger tescillidir ve web'de sunulamaz; kurulu ise kullanilir,
+     degilse en yakin serbest esdeger (Hind) devreye girer. */
+  --sd-brand-font: 'Frutiger', 'Frutiger LT Pro', 'Frutiger Neue LT Pro', 'Hind', 'Segoe UI', sans-serif;
   --sd-ui-line-height: calc(1em + 8px);
   --sd-mono: 'SFMono-Regular', Consolas, 'Courier New', monospace;
 
@@ -178,7 +181,7 @@ h4 { font-size: 1rem; }
 .gh-branding {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 13px;
   text-decoration: none;
   color: inherit;
   flex-shrink: 0;
@@ -188,14 +191,20 @@ h4 { font-size: 1rem; }
 .gh-wordmark {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  padding-top: 1px;
   line-height: 1.05;
 }
 .gh-wordmark-main {
-  font-size: 1.45rem;
-  font-weight: 700;
-  letter-spacing: -.02em;
+  font-family: var(--sd-brand-font);
+  font-size: 1.625rem;
+  font-weight: 600;
+  letter-spacing: -.005em;
+  line-height: 1;
   color: var(--sd-orange);
   white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 .gh-wordmark-sub {
   font-size: .625rem;
@@ -1356,7 +1365,7 @@ a.sd-keyword:hover { border-color: var(--sd-orange); color: var(--sd-orange); te
 @media (max-width: 620px) {
   :root { --sd-header-h: 56px; }
   .gh-logo { height: 38px; }
-  .gh-wordmark-main { font-size: 1.2rem; }
+  .gh-wordmark-main { font-size: 1.25rem; }
   .sd-search-inputs { grid-template-columns: 1fr; gap: 12px; }
   .sd-search-actions { flex-direction: column-reverse; align-items: stretch; gap: 12px; }
   .sd-search-actions .sd-btn { width: 100%; }
@@ -1450,7 +1459,7 @@ a.sd-keyword:hover { border-color: var(--sd-orange); color: var(--sd-orange); te
 }
 .sd-journal-text { min-width: 0; flex: 1; }
 .sd-journal-name {
-  font-family: var(--sd-serif);
+  font-family: var(--sd-brand-font);
   font-size: 1.0625rem;
   font-weight: 600;
   color: var(--sd-link);
@@ -1742,11 +1751,10 @@ a.sd-keyword:hover { border-color: var(--sd-orange); color: var(--sd-orange); te
   display: block;
   object-fit: contain;
 }
-.gh-branding .gh-wordmark-main { font-size: 1.5rem; letter-spacing: -.015em; }
 .gh-branding .gh-wordmark { justify-content: center; }
 .sd-journal-cover .gh-logo-img { height: 40px; }
 [data-theme="dark"] .gh-logo-img { filter: invert(1) brightness(1.15); }
 @media (max-width: 620px) {
   .gh-logo-img { height: 42px; }
-  .gh-branding .gh-wordmark-main { font-size: 1.2rem; }
+  .gh-branding .gh-wordmark-main { font-size: 1.25rem; }
 }
