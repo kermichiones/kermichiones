@@ -616,26 +616,8 @@
         return entries;
     }
 
-    function buildOutline(entries) {
-        var list = document.getElementById('sd-outline-list');
-        if (!list) return [];
-
-        entries.forEach(function (e) {
-            var li = document.createElement('li');
-            if (!e.major) li.className = 'sd-outline-sub';
-            var a = document.createElement('a');
-            a.href = '#' + e.id;
-            a.textContent = e.label + ' ' + e.text;
-            li.appendChild(a);
-            list.appendChild(li);
-        });
-
-        return Array.prototype.slice.call(list.querySelectorAll('a'));
-    }
-
     function wrapFigures(body) {
         var images = Array.prototype.slice.call(body.querySelectorAll('img'));
-        var figures = [];
 
         images.forEach(function (img, i) {
             if (img.closest('.sd-figure')) return;
@@ -651,48 +633,10 @@
             caption.appendChild(document.createTextNode(img.getAttribute('alt') || 'Kayda ait görsel.'));
 
             // Gorseli, varsa kendi sarmalayicisindan ayirip figure icine tasi
-            var host = img.parentNode;
-            host.insertBefore(figure, img);
+            img.parentNode.insertBefore(figure, img);
             figure.appendChild(img);
             figure.appendChild(caption);
-
-            figures.push({ id: figure.id, label: 'Şekil ' + (i + 1) });
         });
-
-        if (figures.length) {
-            var group = document.getElementById('sd-figure-group');
-            var list = document.getElementById('sd-figure-list');
-            if (group && list) {
-                group.hidden = false;
-                figures.forEach(function (f) {
-                    var li = document.createElement('li');
-                    var a = document.createElement('a');
-                    a.href = '#' + f.id;
-                    a.textContent = f.label;
-                    li.appendChild(a);
-                    list.appendChild(li);
-                });
-            }
-        }
-    }
-
-    function initScrollSpy(links) {
-        if (!links.length || !('IntersectionObserver' in window)) return;
-
-        var targets = links.map(function (a) {
-            return document.getElementById(a.getAttribute('href').slice(1));
-        }).filter(Boolean);
-
-        var observer = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (!entry.isIntersecting) return;
-                links.forEach(function (a) {
-                    a.classList.toggle('is-current', a.getAttribute('href') === '#' + entry.target.id);
-                });
-            });
-        }, { rootMargin: '-90px 0px -70% 0px', threshold: 0 });
-
-        targets.forEach(function (t) { observer.observe(t); });
     }
 
     function initStickyBar(article) {
@@ -722,14 +666,8 @@
         var body = document.getElementById('sd-article-body');
         if (!body) return;
 
-        var entries = numberSections(body);
-        var links = buildOutline(entries);
+        numberSections(body);
         wrapFigures(body);
-
-        var outlineLinks = Array.prototype.slice.call(
-            document.querySelectorAll('#sd-outline-list a, #sd-figure-list a')
-        );
-        initScrollSpy(outlineLinks.length ? outlineLinks : links);
 
         var article = document.querySelector('.sd-article');
         if (article) initStickyBar(article);

@@ -1476,58 +1476,10 @@ a.sd-keyword:hover { border-color: var(--sd-orange); color: var(--sd-orange); te
 /* --- Yapisi: anahat | makale | oneriler --- */
 .sd-article-layout {
   display: grid;
-  grid-template-columns: 210px minmax(0, 1fr) 250px;
+  grid-template-columns: minmax(0, 1fr) 250px;
   gap: 34px;
   align-items: start;
   padding: 22px 0 56px;
-}
-
-/* --- Anahat (outline) --- */
-.sd-outline {
-  position: sticky;
-  top: calc(var(--sd-header-h) + 14px);
-  max-height: calc(100vh - var(--sd-header-h) - 40px);
-  overflow-y: auto;
-  padding-right: 6px;
-  font-size: .75rem;
-}
-.sd-outline h2 {
-  font-size: .6875rem;
-  text-transform: uppercase;
-  letter-spacing: .09em;
-  color: var(--sd-text-muted);
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--sd-border);
-  margin-bottom: 10px;
-}
-.sd-outline ol { list-style: none; }
-.sd-outline li { margin-bottom: 2px; }
-.sd-outline a {
-  display: block;
-  padding: 5px 8px 5px 10px;
-  color: var(--sd-text);
-  border-left: 3px solid transparent;
-  line-height: 1.35;
-}
-.sd-outline a:hover { color: var(--sd-link); text-decoration: none; background: var(--sd-bg-alt); }
-.sd-outline a.is-current {
-  border-left-color: var(--sd-orange);
-  color: var(--sd-link);
-  background: var(--sd-bg-alt);
-  font-weight: 500;
-}
-.sd-outline .sd-outline-sub a { padding-left: 22px; font-size: .75rem; color: var(--sd-text-muted); }
-.sd-outline-group {
-  margin-top: 18px;
-  padding-top: 12px;
-  border-top: 1px solid var(--sd-border);
-}
-.sd-outline-group h3 {
-  font-size: .6875rem;
-  text-transform: uppercase;
-  letter-spacing: .09em;
-  color: var(--sd-text-muted);
-  margin-bottom: 8px;
 }
 
 /* --- Makale --- */
@@ -1646,20 +1598,11 @@ a.sd-keyword:hover { border-color: var(--sd-orange); color: var(--sd-orange); te
 }
 
 @media (max-width: 1180px) {
-  .sd-article-layout { grid-template-columns: 190px minmax(0, 1fr); }
-  .sd-reco { grid-column: 1 / -1; }
-  .sd-reco .sd-panel { max-width: 100%; }
+  .sd-article-layout { grid-template-columns: minmax(0, 1fr) 230px; }
 }
 
 @media (max-width: 860px) {
   .sd-article-layout { grid-template-columns: 1fr; gap: 22px; }
-  .sd-outline {
-    position: static;
-    max-height: none;
-    border: 1px solid var(--sd-border);
-    padding: 12px 14px;
-    background: var(--sd-bg-alt);
-  }
   .sd-journal-actions { flex-wrap: wrap; }
   .sd-journal-inner { flex-wrap: wrap; }
 }

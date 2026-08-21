@@ -70,28 +70,6 @@ layout: default
 
     <div class="sd-article-layout">
 
-        <!-- ============ ANAHAT ============ -->
-        <nav class="sd-outline" id="sd-outline" aria-label="Makale anahattı">
-            <h2 data-i18n="outline">İçerik</h2>
-            <ol id="sd-outline-list">
-                <li><a href="#sd-abstract" data-i18n="abstract">Özet</a></li>
-            </ol>
-
-            <div class="sd-outline-group" id="sd-figure-group" hidden>
-                <h3 data-i18n="figures">Şekiller</h3>
-                <ol id="sd-figure-list"></ol>
-            </div>
-
-            <div class="sd-outline-group">
-                <h3 data-i18n="record_info">Künye</h3>
-                <p style="font-size: .78rem; color: var(--sd-text-muted); line-height: 1.5;">
-                    {{ page.date | date: "%d.%m.%Y" }}<br>
-                    {{ words }} <span data-i18n="info_words_short">sözcük</span> &bull; ~{{ minutes }} dk<br>
-                    {{ kind_label }}
-                </p>
-            </div>
-        </nav>
-
         <!-- ============ MAKALE ============ -->
         <article class="sd-article">
             <header class="sd-article-head">
@@ -178,6 +156,18 @@ layout: default
 
         <!-- ============ ÖNERİLER ============ -->
         <aside class="sd-reco" aria-label="Önerilen kayıtlar">
+            <section class="sd-panel">
+                <h2 class="sd-panel-title" data-i18n="record_info">Kayıt bilgileri</h2>
+                <div class="sd-panel-body">
+                    <dl>
+                        <dt data-i18n="info_type">Tür</dt><dd>{{ kind_label }}</dd>
+                        <dt data-i18n="info_date">Yayın tarihi</dt><dd>{{ page.date | date: "%d.%m.%Y" }}</dd>
+                        <dt data-i18n="info_words">Sözcük</dt><dd>{{ words }}</dd>
+                        <dt data-i18n="info_reading">Okuma</dt><dd>~{{ minutes }} dk</dd>
+                    </dl>
+                </div>
+            </section>
+
             <section class="sd-panel">
                 <h2 class="sd-panel-title" data-i18n="recommended">Önerilen kayıtlar</h2>
                 <div class="sd-panel-body">
