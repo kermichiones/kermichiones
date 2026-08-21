@@ -5,67 +5,53 @@ layout: default
 {% assign latest_post = site.posts.first %}
 {% assign all_items = site.posts | concat: site.projects | sort: 'date' | reverse %}
 
-<!-- ==================== BANNER CAROUSEL ==================== -->
-<section class="sd-carousel" data-sd-carousel aria-label="Öne çıkan içerikler">
+<!-- ==================== SON KAYITLAR ŞERİDİ ==================== -->
+{% if all_items.size > 0 %}
+<section class="sd-carousel" data-sd-carousel aria-label="Son kayıtlar">
     <div class="sd-slides">
-
-        <div class="sd-slide is-active" role="tabpanel" id="sd-panel-0" aria-labelledby="sd-tab-0">
-            <div class="sd-slide-inner" style="background-image: url('/assets/images/ogrenci_roketi_tamamlanmis.png');">
+        {% for item in all_items limit: 4 %}
+        <div class="sd-slide{% if forloop.first %} is-active{% endif %}" role="tabpanel"
+             id="sd-panel-{{ forloop.index0 }}" aria-labelledby="sd-tab-{{ forloop.index0 }}">
+            <div class="sd-slide-inner">
                 <div class="sd-container">
-                    <div class="sd-slide-content">
-                        <span class="sd-slide-kicker" data-i18n="banner_1_kicker">Ana koleksiyon</span>
-                        <h2 class="sd-slide-title" data-i18n="banner_1_title">Yazmayı bırakma, aramayı kolaylaştır.</h2>
-                        <p class="sd-slide-text" data-i18n="banner_1_text">
-                            Elektrik-elektronik mühendisliği, roketçilik, gömülü sistemler ve felsefe üzerine
-                            kişisel notlar; hepsi tek yerde ve tam metin aranabilir.
-                        </p>
-                        <a class="sd-btn" href="/arsiv/" data-i18n="banner_1_cta">Arşive göz at</a>
-                    </div>
+                    <span class="sd-slide-kicker">
+                        {% if forloop.first %}<span data-i18n="latest_record">Son yayınlanan</span>
+                        {% elsif item.collection == 'projects' %}<span data-i18n="projects">Projeler</span>
+                        {% else %}<span data-i18n="col_posts_short">Yazı</span>{% endif %}
+                    </span>
+                    <h2 class="sd-slide-title"><a href="{{ item.url }}">{{ item.title }}</a></h2>
+                    <p class="sd-slide-meta">
+                        {{ site.author.name }} &bull; {{ item.date | date: "%d.%m.%Y" }}
+                        &bull; {% if item.collection == 'projects' %}Proje{% else %}Yazı{% endif %}
+                    </p>
+                    <p class="sd-slide-text">
+                        {% if item.description %}{{ item.description | strip_html | truncatewords: 26 }}
+                        {% else %}{{ item.content | strip_html | truncatewords: 26 }}{% endif %}
+                    </p>
+                    <a class="sd-cta" href="{{ item.url }}" data-i18n="view_full_text">Tam metni görüntüle</a>
                 </div>
             </div>
         </div>
-
-        <div class="sd-slide" role="tabpanel" id="sd-panel-1" aria-labelledby="sd-tab-1">
-            <div class="sd-slide-inner" style="background-image: url('/assets/images/Yuuri%20AI%20Keychain.png');">
-                <div class="sd-container">
-                    <div class="sd-slide-content">
-                        <span class="sd-slide-kicker" data-i18n="banner_2_kicker">Projeler</span>
-                        <h2 class="sd-slide-title" data-i18n="banner_2_title">Masaüstünde başlayan donanım denemeleri</h2>
-                        <p class="sd-slide-text" data-i18n="banner_2_text">
-                            Yapım aşamaları, devre notları ve sonuçlarıyla birlikte belgelenen küçük ölçekli
-                            donanım ve yazılım projeleri.
-                        </p>
-                        <a class="sd-btn" href="/projeler/" data-i18n="banner_2_cta">Projeleri gör</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {% if latest_post %}
-        <div class="sd-slide" role="tabpanel" id="sd-panel-2" aria-labelledby="sd-tab-2">
-            <div class="sd-slide-inner" style="background-image: linear-gradient(135deg, #2b2b2b, #4a3524);">
-                <div class="sd-container">
-                    <div class="sd-slide-content">
-                        <span class="sd-slide-kicker" data-i18n="banner_3_kicker">Son yayınlanan</span>
-                        <h2 class="sd-slide-title">{{ latest_post.title }}</h2>
-                        <p class="sd-slide-text">{{ latest_post.excerpt | strip_html | truncatewords: 28 }}</p>
-                        <a class="sd-btn" href="{{ latest_post.url }}" data-i18n="banner_3_cta">Tam metni oku</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% endif %}
-
+        {% endfor %}
     </div>
 
-    <ul class="sd-carousel-indicators" role="tablist" aria-label="Banner seçimi">
-        <li><button type="button" role="tab" id="sd-tab-0" data-sd-slide-index="0" aria-controls="sd-panel-0" aria-selected="true"><span class="sd-dot-bar"></span><span data-i18n="banner_1_tab">Koleksiyon</span></button></li>
-        <li><button type="button" role="tab" id="sd-tab-1" data-sd-slide-index="1" aria-controls="sd-panel-1" aria-selected="false" tabindex="-1"><span class="sd-dot-bar"></span><span data-i18n="banner_2_tab">Projeler</span></button></li>
-        {% if latest_post %}
-        <li><button type="button" role="tab" id="sd-tab-2" data-sd-slide-index="2" aria-controls="sd-panel-2" aria-selected="false" tabindex="-1"><span class="sd-dot-bar"></span><span data-i18n="banner_3_tab">Son yazı</span></button></li>
-        {% endif %}
+    <ul class="sd-carousel-indicators" role="tablist" aria-label="Kayıt seçimi">
+        {% for item in all_items limit: 4 %}
+        <li>
+            <button type="button" role="tab" id="sd-tab-{{ forloop.index0 }}"
+                    data-sd-slide-index="{{ forloop.index0 }}"
+                    aria-controls="sd-panel-{{ forloop.index0 }}"
+                    aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                    {% unless forloop.first %}tabindex="-1"{% endunless %}
+                    aria-label="{{ item.title | escape }}">
+                <span class="sd-dot-bar"></span>
+                <span>{{ item.date | date: "%d.%m.%Y" }}</span>
+            </button>
+        </li>
+        {% endfor %}
     </ul>
 </section>
+{% endif %}
 
 <!-- ==================== EXPLORE ==================== -->
 <div class="sd-container">

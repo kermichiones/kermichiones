@@ -9,7 +9,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300..700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="/assets/css/style.css">
@@ -101,7 +101,7 @@
                 <div class="sd-field sd-suggest-wrap">
                     <label for="qs" data-i18n="search_terms_label">Bu terimleri içeren kayıtları bul</label>
                     <input type="search" id="qs" name="qs" autocomplete="off" spellcheck="false"
-                           placeholder="anahtar kelime, başlık, cümle..."
+                           placeholder=""
                            data-i18n-placeholder="search_terms_ph"
                            role="combobox" aria-expanded="false" aria-autocomplete="list"
                            aria-controls="qs-suggest" value="{{ page.prefill_qs }}">
@@ -119,17 +119,17 @@
 
                 <div class="sd-field">
                     <label for="authors" data-i18n="search_author_label">Yazar / etiket</label>
-                    <input type="text" id="authors" name="authors" placeholder="{{ site.author.name }}"
+                    <input type="text" id="authors" name="authors" placeholder=""
                            autocomplete="off">
                 </div>
             </div>
 
             <div class="sd-search-actions">
-                <a class="sd-advanced" href="/search/" data-i18n="search_advanced">Gelişmiş arama ve filtreler</a>
                 <button type="submit" class="sd-btn" aria-label="Aramayı gönder">
                     <svg viewBox="0 0 100 128" aria-hidden="true" focusable="false"><path d="M19.22 76.91c-5.84-5.84-9.05-13.6-9.05-21.85s3.21-16.01 9.05-21.85c5.84-5.83 13.59-9.05 21.85-9.05 8.25 0 16.01 3.22 21.84 9.05 5.84 5.84 9.05 13.6 9.05 21.85s-3.21 16.01-9.05 21.85c-5.83 5.83-13.59 9.05-21.84 9.05-8.26 0-16.01-3.22-21.85-9.05zm80.33 29.6L73.23 80.19c5.61-7.15 8.68-15.9 8.68-25.13 0-10.91-4.25-21.17-11.96-28.88-7.72-7.71-17.97-11.96-28.88-11.96S19.9 18.47 12.19 26.18C4.47 33.89.22 44.15.22 55.06s4.25 21.17 11.97 28.88C19.9 91.65 30.16 95.9 41.07 95.9c9.23 0 17.98-3.07 25.13-8.68l26.32 26.32 7.03-7.03"/></svg>
                     <span data-i18n="search_btn">Ara</span>
                 </button>
+                <a class="sd-advanced" href="/search/" data-i18n="search_advanced">Gelişmiş arama ve filtreler</a>
             </div>
         </form>
     </div>

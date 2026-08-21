@@ -1,13 +1,11 @@
 // Theme handling
-const themeStorageKey = 'site_theme';
+const themeStorageKey = 'sd_theme';
 const defaultTheme = 'light';
 
 function getPreferredTheme() {
+    // Varsayilan her zaman beyaz; koyu tema yalnizca kullanici acikca sectiyse
     const storedTheme = localStorage.getItem(themeStorageKey);
-    if (storedTheme) {
-        return storedTheme;
-    }
-    return 'light';
+    return storedTheme === 'dark' ? 'dark' : defaultTheme;
 }
 
 function setTheme(theme) {
