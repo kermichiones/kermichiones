@@ -1678,6 +1678,28 @@ a.sd-keyword:hover { border-color: var(--sd-orange); color: var(--sd-orange); te
   .gh-branding .gh-wordmark-main { font-size: 1.125rem; }
 }
 
+/* --------------------------------------------------------------------------
+   Dar ekranda baslik tasmasi
+   Marka blogu flex-shrink:0 idi ve marka yazisi nowrap; 375 px'te satirin
+   icerigi 366 px olup 335 px'lik alana sigmiyor, sayfa yatay kayiyordu.
+   Cozum: marka kucule bilsin ve gerekirse yazi ucnokta ile kesilsin, ayrica
+   bosluklar biraz daraltilsin. Amblem kucultulmez, sadece yazi kisalir.
+   -------------------------------------------------------------------------- */
+@media (max-width: 620px) {
+  .gh-main { gap: 8px; padding: 0 14px; }
+  .gh-branding { flex-shrink: 1; min-width: 0; gap: 9px; }
+  .gh-logo { flex-shrink: 0; }
+  .gh-wordmark { min-width: 0; }
+  .gh-wordmark-main { overflow: hidden; text-overflow: ellipsis; }
+  .gh-tools { gap: 2px; }
+  .gh-icon-btn { padding: 7px 6px; }
+}
+@media (max-width: 380px) {
+  .gh-main { gap: 6px; padding: 0 10px; }
+  .gh-branding { gap: 7px; }
+  .gh-branding .gh-wordmark-main { font-size: 1rem; }
+}
+
 /* ==========================================================================
    Piksel sahne (yuruyen ikili)
    --------------------------------------------------------------------------
@@ -1798,10 +1820,10 @@ a.sd-keyword:hover { border-color: var(--sd-orange); color: var(--sd-orange); te
   --pxs-frame-in: rgba(60, 38, 18, .38);
 
   box-sizing: content-box;         /* kenarlik ic olculeri kisaltmasin */
-  width: calc(100% - 40px);        /* dar ekranda kenara yapismasin */
+  width: 100%;                     /* .sd-footer-inner zaten yatay padding veriyor */
   max-width: calc(var(--sw) * var(--px));
   height: calc(96 * var(--px));
-  margin: 4px auto 26px;
+  margin: 16px 0 18px;             /* baglanti listesinin hemen altinda */
 
   /* "baska bir dunyaya bakan pencere": yuvarlak ahsap cerceve, kalkik golge.
      overflow:hidden (.pxs) yuvarlak koseleri kirptigi icin sahne tasmaz. */

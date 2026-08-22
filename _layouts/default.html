@@ -244,27 +244,6 @@
 <!-- ==================== FOOTER ==================== -->
 <footer class="sd-footer" role="contentinfo">
 
-    <!-- Iki dukkan ve aralarindaki yol: dekoratif, ekran okuyucudan gizli -->
-    <div class="pxs pxs-stage" id="couple-scene" aria-hidden="true">
-      <span class="pxs-world">
-        <span class="pxs-layer pxs-ground">
-            <img src="/assets/images/sprites/ground.png" alt="" width="204" height="96">
-        </span>
-        <span class="pxs-layer pxs-dusts"></span>
-        <span class="pxs-layer pxs-actors">
-            <span class="pxs-actor pxs-him"></span>
-            <span class="pxs-actor pxs-her"></span>
-        </span>
-        <span class="pxs-layer pxs-props">
-            <img class="pxs-prop" src="/assets/images/sprites/shop-him.png" alt=""
-                 width="60" height="84" style="left: 0;">
-            <img class="pxs-prop" src="/assets/images/sprites/shop-her.png" alt=""
-                 width="60" height="84" style="left: calc(144 * var(--px));">
-        </span>
-        <span class="pxs-layer pxs-hearts"></span>
-      </span>
-    </div>
-
     <div class="sd-footer-inner">
         <div class="sd-footer-mark">
             {% if brand_logo_file %}
@@ -278,6 +257,7 @@
             {% endif %}
         </div>
 
+
         <div class="sd-footer-body">
             <ul class="sd-footer-links">
                 <li><a href="/hakkimda/" data-i18n="footer_about">Bu arşiv hakkında</a></li>
@@ -288,6 +268,27 @@
                 <li><a href="mailto:{{ site.author.email }}" data-i18n="footer_contact">İletişim</a></li>
                 <li><a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener">GitHub</a></li>
             </ul>
+
+            <!-- Iki dukkan ve aralarindaki yol: dekoratif, ekran okuyucudan gizli -->
+            <div class="pxs pxs-stage" id="couple-scene" aria-hidden="true">
+              <span class="pxs-world">
+                <span class="pxs-layer pxs-ground">
+                    <img src="/assets/images/sprites/ground.png" alt="" width="204" height="96">
+                </span>
+                <span class="pxs-layer pxs-dusts"></span>
+                <span class="pxs-layer pxs-actors">
+                    <span class="pxs-actor pxs-him"></span>
+                    <span class="pxs-actor pxs-her"></span>
+                </span>
+                <span class="pxs-layer pxs-props">
+                    <img class="pxs-prop" src="/assets/images/sprites/shop-him.png" alt=""
+                         width="60" height="84" style="left: 0;">
+                    <img class="pxs-prop" src="/assets/images/sprites/shop-her.png" alt=""
+                         width="60" height="84" style="left: calc(144 * var(--px));">
+                </span>
+                <span class="pxs-layer pxs-hearts"></span>
+              </span>
+            </div>
             <p class="sd-footer-copy">
                 <span data-i18n="footer_text">C10H16N5O13P3 ile tasarlandı</span> &bull;
                 Bu sitedeki tüm içerik &copy; {{ 'now' | date: "%Y" }} {{ site.author.name }}. Kaynak göstererek alıntılayabilirsiniz.
