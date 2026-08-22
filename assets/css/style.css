@@ -1677,3 +1677,161 @@ a.sd-keyword:hover { border-color: var(--sd-orange); color: var(--sd-orange); te
   .gh-logo-img { height: 42px; }
   .gh-branding .gh-wordmark-main { font-size: 1.125rem; }
 }
+
+/* ==========================================================================
+   Piksel sahne (yuruyen ikili)
+   --------------------------------------------------------------------------
+   Tum ic olculer "oyun pikseli" cinsinden; --px bir oyun pikselinin kac css
+   pikseline denk geldigini soyler, --feet ise ayak hattinin sahne tabanindan
+   yuksekligini. Kurallar sahneden bagimsiz, olcek bu iki degiskenden gelir.
+   ========================================================================== */
+.pxs {
+  position: relative;
+  overflow: hidden;                /* dar ekranda kenarlardan kirpar */
+  display: flex;
+  justify-content: center;         /* kirpma iki yandan esit olsun */
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+/* Sabit genislikte "dunya": sahne bundan darsa kenarlardan kirpilir, icerik
+   ezilmez. Tum katmanlar bunun icinde konumlanir. */
+.pxs-world {
+  position: relative;
+  flex: 0 0 auto;
+  width: calc(var(--sw) * var(--px));
+  height: 100%;
+}
+.pxs img,
+.pxs-actor,
+.pxs-heart,
+.pxs-dust {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: pixelated;
+  -ms-interpolation-mode: nearest-neighbor;
+}
+
+/* --- katmanlar: zemin -> toz -> karakterler -> dukkanlar -> kalpler --- */
+.pxs-layer { position: absolute; inset: 0; pointer-events: none; }
+.pxs-ground  { z-index: 1; }
+.pxs-dusts   { z-index: 2; }
+.pxs-actors  { z-index: 3; }
+.pxs-props   { z-index: 4; }
+.pxs-hearts  { z-index: 5; }
+
+.pxs-ground img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* Dukkan cepheleri: ikisi de 60x84 oyun pikseli. Genislik/yukseklik --px ile
+   olceklenmeli, yoksa goruntu kendi dogal 60x84 css pikselinde kalir. */
+.pxs-prop {
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: calc(60 * var(--px));
+  height: calc(84 * var(--px));
+}
+
+.pxs-actor {
+  position: absolute;
+  left: 0;
+  bottom: calc(var(--feet) * var(--px));
+  width: calc(16 * var(--px));
+  height: calc(32 * var(--px));
+  background-repeat: no-repeat;
+  background-size: calc(64 * var(--px)) calc(128 * var(--px));
+  background-position: calc(-2 * 16 * var(--px)) 0;   /* one bakan dik durus */
+  will-change: transform;
+}
+.pxs-him { background-image: url("/assets/images/sprites/ahmet.png"); }
+.pxs-her { background-image: url("/assets/images/sprites/sevgili.png"); }
+
+/* --- ayak bastikca cikan kucuk toz bulutu --- */
+.pxs-dust {
+  position: absolute;
+  bottom: calc(var(--feet) * var(--px));
+  width: calc(4 * var(--px));
+  height: calc(3 * var(--px));
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 3' shape-rendering='crispEdges'%3E%3Cg fill='%23a59c90'%3E%3Crect x='1' width='2' height='1'/%3E%3Crect y='1' width='4' height='1'/%3E%3Crect x='1' y='2' width='2' height='1'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / 100% 100%;
+  opacity: 0;
+  animation: pxs-dust-puff 560ms steps(5, end) forwards;
+}
+@keyframes pxs-dust-puff {
+  0%   { opacity: .50; transform: translate(0, 0) scale(.5); }
+  45%  { opacity: .38; transform: translate(calc(var(--dust-dx, 0px) * .5),
+                                           calc(var(--px) * -1.5)) scale(1); }
+  100% { opacity: 0;   transform: translate(var(--dust-dx, 0px),
+                                           calc(var(--px) * -3)) scale(1.25); }
+}
+
+/* --- kalp --- */
+.pxs-heart {
+  position: absolute;
+  bottom: calc((var(--feet) + 14) * var(--px));
+  width: calc(var(--heart-w) * var(--px));
+  aspect-ratio: 7 / 6;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 6' shape-rendering='crispEdges'%3E%3Cg fill='%23d93b52'%3E%3Crect x='1' width='2' height='1'/%3E%3Crect x='4' width='2' height='1'/%3E%3Crect y='1' width='7' height='1'/%3E%3Crect y='2' width='7' height='1'/%3E%3Crect x='1' y='3' width='5' height='1'/%3E%3Crect x='2' y='4' width='3' height='1'/%3E%3Crect x='3' y='5' width='1' height='1'/%3E%3C/g%3E%3Crect x='1' y='1' width='1' height='1' fill='%23ffa8b8'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+  opacity: 0;
+  animation: pxs-heart-rise 2400ms steps(10, end) forwards;
+}
+@keyframes pxs-heart-rise {
+  0%   { opacity: 0; transform: translateY(calc(var(--px) *  2)) scale(.35); }
+  16%  { opacity: 1; transform: translateY(0) scale(1); }
+  60%  { opacity: 1; transform: translateY(calc(var(--px) * -6)) scale(1); }
+  100% { opacity: 0; transform: translateY(calc(var(--px) * -10)) scale(1); }
+}
+.pxs.is-static .pxs-heart { animation: none; opacity: 1;
+                            transform: translateY(calc(var(--px) * -7)); }
+.pxs.is-static .pxs-dust  { display: none; }
+
+/* ==========================================================================
+   Footer sahnesi (204x96 oyun px, 3x; darda 2x)
+   ========================================================================== */
+.pxs-stage {
+  --px: 3px;
+  --sw: 204;
+  --feet: 35;                      /* yolun uzeri: taban + 35 oyun px */
+  --pxs-radius: 18px;
+  --pxs-frame: #c49a6c;            /* ahsap cerceve, acik tema */
+  --pxs-frame-in: rgba(60, 38, 18, .38);
+
+  box-sizing: content-box;         /* kenarlik ic olculeri kisaltmasin */
+  width: calc(100% - 40px);        /* dar ekranda kenara yapismasin */
+  max-width: calc(var(--sw) * var(--px));
+  height: calc(96 * var(--px));
+  margin: 4px auto 26px;
+
+  /* "baska bir dunyaya bakan pencere": yuvarlak ahsap cerceve, kalkik golge.
+     overflow:hidden (.pxs) yuvarlak koseleri kirptigi icin sahne tasmaz. */
+  border: 3px solid var(--pxs-frame);
+  border-radius: var(--pxs-radius);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .55) inset,
+              0 10px 26px -10px rgba(0, 0, 0, .45),
+              0 2px 6px rgba(0, 0, 0, .12);
+}
+/* Ic halka ve ustten yumusak golge: sahne cukurda duruyormus gibi okunsun.
+   Ayri bir katman, cunku inset box-shadow konumlanmis cocuklarin altinda kalir. */
+.pxs-stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  border-radius: calc(var(--pxs-radius) - 3px);
+  box-shadow: inset 0 0 0 1px var(--pxs-frame-in),
+              inset 0 16px 30px -16px rgba(0, 0, 0, .40),
+              inset 0 -10px 22px -14px rgba(0, 0, 0, .28);
+}
+[data-theme="dark"] .pxs-stage {
+  --pxs-frame: #7a5836;
+  --pxs-frame-in: rgba(0, 0, 0, .55);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .10) inset,
+              0 10px 30px -10px rgba(0, 0, 0, .70),
+              0 2px 6px rgba(0, 0, 0, .35);
+}
+@media (max-width: 820px) {
+  .pxs-stage { --px: 2px; --pxs-radius: 14px; border-width: 2px; }
+  .pxs-stage::after { border-radius: calc(var(--pxs-radius) - 2px); }
+}
