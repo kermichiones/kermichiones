@@ -11,11 +11,9 @@ highlights:
 
 <p class="drop-cap">Giris paragrafinizin ilk harfi otomatik olarak buyuk ve turuncu goruntulenir. Devam eden metni buraya yazabilirsiniz.</p>
 
-Yazinin geri kalanini standart markdown ile yazabilirsiniz. `##` ile actiginiz basliklar makale sayfasinda **otomatik olarak numaralandirilir** (1., 2., ...) ve sol taraftaki "Icerik" anahatinda listelenir.
+Yazinin geri kalanini standart markdown ile yazabilirsiniz. Basliklara, altyazilara ve numaralara siz karar verirsiniz; site metne hicbir sey eklemez.
 
 ## Ilk bolum
-
-Alt basliklar (`###`) 1.1., 1.2. seklinde numaralanir.
 
 ### Alt bolum
 
@@ -23,11 +21,11 @@ Metin, gorsel ve tablolari serbestce kullanabilirsiniz.
 
 ## Gorseller
 
-Markdown ile eklenen her gorsel otomatik olarak "Sekil n." basligi alir; `alt` metni sekil aciklamasi olarak kullanilir:
+Duz gorsel:
 
-![Sekil aciklamasi buraya yazilir, altyazi olarak gorunur.](/assets/images/resim_adi.png)
+![](/assets/images/resim_adi.png)
 
-Kendi altyazinizi yazmak isterseniz:
+Altyazi eklemek isterseniz:
 
 <figure class="clean-figure">
     <img src="/assets/images/resim_adi.png" alt="Aciklama metni">

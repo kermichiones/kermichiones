@@ -583,62 +583,8 @@
 
 
     /* ---------------------------------------------------------------------
-       7) Makale okuma gorunumu: bolum numaralari, anahat, sekiller, serit
+       7) Makale okuma gorunumu: yalnizca yapisik ust serit
        --------------------------------------------------------------------- */
-    function slugify(text, fallback) {
-        var slug = normalize(text).replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-        return slug || fallback;
-    }
-
-    function numberSections(body) {
-        var headings = Array.prototype.slice.call(body.querySelectorAll('h2, h3'));
-        var major = 0, minor = 0;
-        var entries = [];
-
-        headings.forEach(function (h) {
-            var isMajor = h.tagName === 'H2';
-            if (isMajor) { major++; minor = 0; } else { minor++; }
-            if (!isMajor && major === 0) { major = 1; }
-
-            var label = isMajor ? major + '.' : major + '.' + minor + '.';
-            if (!h.querySelector('.sd-sec-num')) {
-                var num = document.createElement('span');
-                num.className = 'sd-sec-num';
-                num.textContent = label;
-                h.insertBefore(num, h.firstChild);
-            }
-            if (!h.id) {
-                h.id = 'bolum-' + slugify(h.textContent.replace(label, ''), label.replace(/\./g, '-'));
-            }
-            entries.push({ id: h.id, label: label, text: h.textContent.replace(label, '').trim(), major: isMajor });
-        });
-
-        return entries;
-    }
-
-    function wrapFigures(body) {
-        var images = Array.prototype.slice.call(body.querySelectorAll('img'));
-
-        images.forEach(function (img, i) {
-            if (img.closest('.sd-figure')) return;
-
-            var figure = document.createElement('figure');
-            figure.className = 'sd-figure';
-            figure.id = 'sekil-' + (i + 1);
-
-            var caption = document.createElement('figcaption');
-            var strong = document.createElement('strong');
-            strong.textContent = 'Şekil ' + (i + 1) + '. ';
-            caption.appendChild(strong);
-            caption.appendChild(document.createTextNode(img.getAttribute('alt') || 'Kayda ait görsel.'));
-
-            // Gorseli, varsa kendi sarmalayicisindan ayirip figure icine tasi
-            img.parentNode.insertBefore(figure, img);
-            figure.appendChild(img);
-            figure.appendChild(caption);
-        });
-    }
-
     function initStickyBar(article) {
         var bar = document.getElementById('sd-sticky-bar');
         var progress = document.getElementById('sd-progress');
@@ -663,14 +609,9 @@
     }
 
     function initArticle() {
-        var body = document.getElementById('sd-article-body');
-        if (!body) return;
-
-        numberSections(body);
-        wrapFigures(body);
-
+        // Yazi govdesine hicbir sey eklenmez; yalnizca yapisik ust serit calisir.
         var article = document.querySelector('.sd-article');
-        if (article) initStickyBar(article);
+        if (article && document.getElementById('sd-article-body')) initStickyBar(article);
     }
 
     /* ---------------------------------------------------------------------

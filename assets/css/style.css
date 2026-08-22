@@ -1519,31 +1519,6 @@ a.sd-keyword:hover { border-color: var(--sd-orange); color: var(--sd-orange); te
   margin-bottom: .55em;
 }
 .sd-body h3 { font-size: .9375rem; font-weight: 500; margin-top: 1.6em; }
-.sd-sec-num { color: var(--sd-text-muted); font-weight: 600; margin-right: .5em; }
-
-/* Sekiller */
-.sd-figure {
-  margin: 1.8em 0;
-  border-top: 1px solid var(--sd-border-soft);
-  border-bottom: 1px solid var(--sd-border-soft);
-  padding: 16px 0;
-}
-.sd-figure img {
-  display: block;
-  margin: 0 auto 10px;
-  border: 0;
-  padding: 0;
-  max-width: 100%;
-}
-.sd-figure figcaption {
-  font-family: var(--sd-sans);
-  font-size: .75rem;
-  line-height: 1.5;
-  color: var(--sd-text-muted);
-  text-align: left;
-}
-.sd-figure figcaption strong { color: var(--sd-text); }
-.sd-fig-actions { margin-top: 6px; font-size: .6875rem; }
 
 /* Yapisal ayirici (SD makalelerindeki bolum cizgisi) */
 .sd-section-rule { border: 0; border-top: 1px solid var(--sd-border); margin: 2.4em 0 0; }

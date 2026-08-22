@@ -82,9 +82,8 @@ layout: default
                 <h1 class="sd-article-title">{{ page.title }}</h1>
 
                 <p class="sd-authors">
-                    <a class="sd-author" href="/hakkimda/">{{ page.author | default: site.author.name }}</a><sup>a</sup>
+                    <a class="sd-author" href="/hakkimda/">{{ page.author | default: site.author.name }}</a>
                 </p>
-                <p class="sd-affil"><sup>a</sup> {{ site.institution }}, Kayseri, Türkiye</p>
                 <p class="sd-doi">
                     <a href="{{ page.url }}">{{ site.url | remove: 'https://' }}{{ page.url }}</a> &bull;
                     <span data-i18n="published_label">yayın</span>: {{ page.date | date: "%d %B %Y" }}
@@ -102,10 +101,12 @@ layout: default
             </section>
             {% endif %}
 
+            {% if page.description %}
             <section class="sd-abstract" id="sd-abstract">
                 <h2 data-i18n="abstract">Özet</h2>
-                <p>{{ page.description | default: page.excerpt | strip_html | truncatewords: 65 }}</p>
+                <p>{{ page.description }}</p>
             </section>
+            {% endif %}
 
             {% assign keywords = page.tags | concat: page.categories %}
             {% if keywords.size > 0 %}

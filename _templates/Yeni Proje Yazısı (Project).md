@@ -34,7 +34,7 @@ highlights:
 *   **Sensorler:** ...
 *   **Guc kaynagi:** ...
 
-![Gelistirilen donanimin fiziksel prototipi.](/assets/images/proje_gorseli.png)
+![](/assets/images/proje_gorseli.png)
 
 ## Yazilim ve gelistirme sureci
 
